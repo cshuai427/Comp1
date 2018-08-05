@@ -4,3 +4,6 @@ If Current version is 1.7.2
 *If you make a major change, please increase the first number. Ex: 2.0.0
 
 More rules and information on the "semver.org".
+
+NPM website
+https://docs.npmjs.com/getting-started/fixing-npm-permissions

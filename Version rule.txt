@@ -2,3 +2,5 @@ If Current version is 1.7.2
 *The third number is path number. If some bugs have been fixed and no new function updated, please increase the path number. Ex: 1.7.3
 *If you update a new feature for the software and it is a minor update, please increase the second number. Ex: 1.8.3
 *If you make a major change, please increase the first number. Ex: 2.0.0
+
+More rules and information on the "semver.org".

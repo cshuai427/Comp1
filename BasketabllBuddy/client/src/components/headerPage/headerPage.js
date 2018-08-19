@@ -8,8 +8,8 @@ class HeaderPage extends Component{
             <header>
         <ul>
         <li><img src = { logo } alt="logo" /></li>
-        <li><a class="active" href="#home">Home</a></li>
-        <li><a href="">Event</a></li>
+        <li><a className="active" href="/">Home</a></li>
+        <li><a href="/event/post">Event</a></li>
         <li><a href="">Account</a></li>
         </ul>
             </header>

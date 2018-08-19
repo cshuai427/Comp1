@@ -6,8 +6,13 @@ class HomeAccountPage extends Component {
         return(
 
                 <div>
+
+                    <h3>My account</h3>
                     <img width="100" height="50" alt="avatar"/>
-                    <h2>name</h2>
+                    <h3>Username123</h3>
+                    <h3>Post 20</h3>
+                    <h3>Friend 10</h3>
+                    <a  href="/">Edit</a>
                 </div>
 
 

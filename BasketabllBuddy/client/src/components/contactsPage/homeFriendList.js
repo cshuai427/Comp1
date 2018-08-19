@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 
-class HomepageRight1 extends Component {
+class HomeFriendList extends Component {
 
     render(){
         return(
@@ -16,4 +16,4 @@ class HomepageRight1 extends Component {
     }
 
 }
-export default HomepageRight1;
+export default HomeFriendList;

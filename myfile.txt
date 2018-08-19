@@ -1,8 +1,0 @@
-Once upon a time
-hello world
-<<<<<<< HEAD
-add one line -t
-=======
-catherine
->>>>>>> 5c6aed7a4e73ea5988fb6356d424c2f65c6e3d80
-

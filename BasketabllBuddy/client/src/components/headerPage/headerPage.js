@@ -9,7 +9,7 @@ class HeaderPage extends Component{
                 <tr>
                     <td><img src={Logo} width='180px' height='50px'/></td>
                 <td width="20%">  Home  </td>
-                <td width="20%">  Event  </td>
+                    <td width="20%">  <a href="/event/post">Event</a>  </td>
                 <td width="20%">  Account  </td>
                 </tr>
             </header>

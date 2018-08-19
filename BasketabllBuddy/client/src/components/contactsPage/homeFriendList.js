@@ -7,7 +7,11 @@ class HomeFriendList extends Component {
         return(
 
             <div>
-              <h1>Friend list</h1>
+                 <h2>Online Chat</h2>
+
+                 <p><img src="/" alt="avatar"/> Tom 123</p>
+                <p><img src="/" alt="avatar"/> Peter 456</p>
+                <p><img src="/" alt="avatar"/> Taylor</p>
             </div>
 
 

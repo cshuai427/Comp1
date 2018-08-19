@@ -10,6 +10,7 @@ class HomeEventPage extends Component {
                 <div className="App-middle">
 
                     <h1>Basketball Meetup Events</h1>
+                    <hr />
                     <div>
                     <form method="get">
                         <img src={ basketball1 } width="200" height="100"  />

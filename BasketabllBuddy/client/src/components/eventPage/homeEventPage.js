@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class HomepageMiddle extends Component {
+class HomeEventPage extends Component {
 
     render(){
         return(
@@ -18,4 +18,4 @@ class HomepageMiddle extends Component {
     }
 
 }
-export default HomepageMiddle;
+export default HomeEventPage;

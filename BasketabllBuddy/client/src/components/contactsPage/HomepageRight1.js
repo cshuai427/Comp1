@@ -7,7 +7,7 @@ class HomepageRight1 extends Component {
         return(
 
             <div>
-              <h1>Friden</h1>
+              <h1>Friend list</h1>
             </div>
 
 

@@ -26,9 +26,8 @@ class App extends Component {
 
             <div>
                 <Route exact path="/" component={HomeEventPage}/>
-                <Route exact path="/home" component={HomeEventPage}/>
-                <Route exact path="/home/event/post" component={EventPostPage}/>
-                <Route exact path="/home/event/commit" component={EventCommitPage}/>
+                <Route exact path="/event/post" component={EventPostPage}/>
+                <Route exact path="/event/commit" component={EventCommitPage}/>
             </div>
             <div className="App-right"> <HomePageRight /> </div>
 

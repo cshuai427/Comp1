@@ -10,7 +10,7 @@ class App extends Component {
   render() {
     return (
         <div>
-            <div className="App-header">    <HeaderPage /></div>
+            <div className="App-header"> <HeaderPage /></div>
             <div className="App-left"> <HomePageLeft /> </div>
             <div className="App-middle"> <HomeEventPage/> </div>
             <div className="App-right"> <HomePageRight /> </div>

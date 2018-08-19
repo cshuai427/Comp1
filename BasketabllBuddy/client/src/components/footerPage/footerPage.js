@@ -4,11 +4,9 @@ import React, {Component} from 'react';
 class FooterPage extends Component {
     render(){
         return(
-                /* shuai, fix this css
-                <td>
-            <img src={Logo}/>
-                */
-          <h1>Cpoyright © 2018 BasketballBuddy</h1>
+               <footer>
+                   Copyright &copy; {new Date().getFullYear()} Basketball Buddy
+               </footer>
         );
 
 

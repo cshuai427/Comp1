@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-class HomepageLeft extends Component {
+class HomeAccountPage extends Component {
 
     render(){
         return(
 
                 <div>
-                    <img width="100" height="50" />
+                    <img width="100" height="50" alt="avatar"/>
                     <h2>name</h2>
                 </div>
 
@@ -16,4 +16,4 @@ class HomepageLeft extends Component {
     }
 
 }
-export default HomepageLeft;
+export default HomeAccountPage;

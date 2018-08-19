@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
-import "../../Img/logo.jpg"
+import logo from "../../Img/logo.png";
 
 class HeaderPage extends Component{
     render()
     {
         return(
             <header>
-                <tr>
-                    <td><img src = "../../Img/logo.jpg" alt="logo" /></td>
-                <td>Home</td>
-                <td>Event</td>
-                <td>Account</td>
-                </tr>
+        <ul>
+        <li><img src = { logo } alt="logo" /></li>
+        <li><a class="active" href="#home">Home</a></li>
+        <li><a href="">Event</a></li>
+        <li><a href="">Account</a></li>
+        </ul>
             </header>
         )
 

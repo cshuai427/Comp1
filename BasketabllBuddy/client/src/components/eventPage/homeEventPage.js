@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import basketball1 from "../../Img/basketball1.jpeg";
-import basketball2 from "../../Img/basketball2.jpeg";
+import basketball2 from "../../Img/basketball2.jpg";
 
 class HomeEventPage extends Component {
 

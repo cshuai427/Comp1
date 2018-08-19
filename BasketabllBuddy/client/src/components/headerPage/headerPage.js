@@ -5,12 +5,14 @@ class HeaderPage extends Component{
     render()
     {
         return(
-            <tr>
-                <img src = "../../Img/logo.jpg" alt="logo" />
+            <header>
+                <tr>
+                    <td><img src = "../../Img/logo.jpg" alt="logo" /></td>
                 <td>Home</td>
                 <td>Event</td>
                 <td>Account</td>
-            </tr>
+                </tr>
+            </header>
         )
 
     }

@@ -5,19 +5,19 @@
    padding:25px;
  }
 .App-left{
-  width: 10%;
+  width: 20%;
   height: 700px;
   background-color: #C5E9F3;
   float: left;
 }
 .App-right{
-  width: 10%;
+  width: 15%;
   height: 700px;
   background-color: #C5E9F3;
   float: right;
 }
 .App-middle{
-  width: 80%;
+  width: 65%;
   height: 700px;
   background-color: #F7575d;
   float: left;}

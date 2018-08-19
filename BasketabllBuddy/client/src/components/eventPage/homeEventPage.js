@@ -5,7 +5,7 @@ class HomeEventPage extends Component {
     render(){
         return(
 
-                <div>
+                <div className="App-middle">
 
                     <h1>Basketball Meetup Events</h1>
                     <div>

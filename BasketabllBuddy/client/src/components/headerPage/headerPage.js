@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import "../../Img/logo.jpg"
+import Logo from '../../Img/logo.jpg';
 
 class HeaderPage extends Component{
     render()
@@ -7,10 +7,10 @@ class HeaderPage extends Component{
         return(
             <header>
                 <tr>
-                    <td><img src = "../../Img/logo.jpg" alt="logo" /></td>
-                <td>Home</td>
-                <td>Event</td>
-                <td>Account</td>
+                    <td><img src={Logo} width='180px' height='50px'/></td>
+                <td width="20%">  Home  </td>
+                <td width="20%">  Event  </td>
+                <td width="20%">  Account  </td>
                 </tr>
             </header>
         )

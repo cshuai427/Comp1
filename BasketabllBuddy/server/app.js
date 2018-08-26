@@ -42,8 +42,8 @@ require('./config/passport')(passport);
 
 
 // Use routes
-app.use('/users', users);
-app.use('/profile', profile);
+app.use('/api/users', users);
+app.use('/api/profile', profile);
 //app.use('/posts', posts);
 
 

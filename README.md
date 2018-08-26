@@ -26,7 +26,7 @@ npm start
   - Only include one React component per file.
     - However, multiple [Stateless, or Pure, Components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions) are allowed per file. eslint: [`react/no-multi-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-multi-comp.md#ignorestateless).
   - Always use JSX syntax.
-  - Do not use `React.createElement` unless you're initializing the app from a file that is not JSX.
+  - Do not use `React.createElement` unless you're initializing the server from a file that is not JSX.
 
 ## Mixins
 
@@ -95,7 +95,7 @@ npm start
 
   - **Props Naming**: Avoid using DOM component prop names for different purposes.
 
-    > Why? People expect props like `style` and `className` to mean one specific thing. Varying this API for a subset of your app makes the code less readable and less maintainable, and may cause bugs.
+    > Why? People expect props like `style` and `className` to mean one specific thing. Varying this API for a subset of your server makes the code less readable and less maintainable, and may cause bugs.
 
     ```jsx
     // bad

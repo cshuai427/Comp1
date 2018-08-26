@@ -5,8 +5,6 @@ module.exports = function validationProfileInput(data) {
     let errors = {};
 
     data.nikeName = !isEmpty(data.nikeName) ? data.nikeName : '';
-    data.status = !isEmpty(data.status) ? data.status : '';
-    data.skills = !isEmpty(data.skills) ? data.skills : '';
 
 
     if(!validator.isLength(data.nikeName, { min: 2, max: 40}))

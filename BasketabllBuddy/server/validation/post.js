@@ -23,13 +23,28 @@ module.exports = function validationPost(data) {
         errors.eventTitle = 'Title field is required';
     }
 
+
+    //mark: need be test
+    if(!validator.isInt(data.eventPeopleNumber)){
+        errors.eventPeopleNumber = 'People number field should be number';
+    }
+    //
+
     if(validator.isEmpty(data.eventPeopleNumber)){
         errors.eventPeopleNumber = 'People number field is required';
     }
 
+
+
     if(validator.isEmpty(data.eventLocation)){
         errors.eventLocation = 'Location field is required';
     }
+
+    //mark: need be test
+    if(!validator.isBoolean(data.haveBall)){
+        errors.haveBall = 'HaveBall field should be boolean';
+    }
+    //
 
     if(validator.isEmpty(data.haveBall)){
         errors.haveBall = 'Ball field is required';

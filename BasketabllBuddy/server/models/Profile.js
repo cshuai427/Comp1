@@ -7,11 +7,6 @@ const ProfileSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'users'
     },
-    nikeName: {
-        type: String,
-        required: true,
-        max: 40
-    },
     interests: {
         type: [String]
     },

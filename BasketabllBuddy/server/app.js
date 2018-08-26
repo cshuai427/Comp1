@@ -9,7 +9,7 @@ const createError = require('http-errors');
 
 //import route
 const users = require('./routes/api/users');
-//const posts = require('./routes/api/posts');
+const posts = require('./routes/api/posts');
 const profile = require('./routes/api/profile');
 
 var app = express();
@@ -44,7 +44,7 @@ require('./config/passport')(passport);
 // Use routes
 app.use('/api/users', users);
 app.use('/api/profile', profile);
-//app.use('/posts', posts);
+app.use('/posts', posts);
 
 
 

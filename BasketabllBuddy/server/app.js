@@ -1,28 +1,63 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var eventRouter = require('./routes/event');
+const express = require ('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const passport = require('passport');
+const createError = require('http-errors');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var app = express();
+
+
+//import route
+const users = require('./route/api/users');
+const posts = require('./routes/api/posts');
+const profile = require('./routes/api/profile');
+
+const app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/index', indexRouter);
-app.use('/users', usersRouter);
-app.use('/event', eventRouter);
+
+//Body parser middleware
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+
+//DB config
+const db = require('./config/keys').mongoURI;
+
+
+// Connect to MongoDB
+mongoose.
+connect(db).
+then(() => console.log('MongoDB connected')).
+catch(err => console.log(err));
+
+
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport config
+
+require('./config/passport')(passport);
+
+
+
+
+// Use routes
+app.use('/api/users', users);
+app.use('/api/profile', profile);
+app.use('/api/posts', posts);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

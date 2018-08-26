@@ -36,7 +36,7 @@ router.post('/register', (req, res)=> {
 
     // Check the user email from database
     User.findOne({ email: req.body.email})
-        .then(user =>{
+        .then(user => {
             if(user){
                 // If user use a existing email to register
                 errors.email = 'Email already exists';
@@ -58,7 +58,7 @@ router.post('/register', (req, res)=> {
                 });
 
                 bcrypt.genSalt(10, (err, salt) =>{
-                    bcrypt.hash(newUser.password, salt, (err, hash) =>{
+                    bcrypt.hash(newUser.password, salt, (err, hash) => {
                         if(err) throw err;
                         newUser.password = hash;
                         newUser.save()
@@ -88,7 +88,7 @@ router.post('/login', (req, res) => {
 
     // Find user by email
 
-    User.findOne({email})
+    User.findOne({ email })
         .then(user => {
             // Check for user
             if(!user){
@@ -108,7 +108,7 @@ router.post('/login', (req, res) => {
                             payload,
                             keys.secretOrKey,
                             { expiresIn: 7200},
-                            (err, token) =>{
+                            (err, token) => {
                                 res.json({
                                     success: true,
                                     token: 'BasketballBuddy' + token
@@ -129,7 +129,7 @@ router.post('/login', (req, res) => {
 router.get(
     '/current',
     passport.authenticate('jwt', {session: false}),
-    (req, res)=>{
+    (req, res) => {
         res.json({
             id: req.user.id,
             name: req.user.name,

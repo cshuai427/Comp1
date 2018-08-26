@@ -4,26 +4,15 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const createError = require('http-errors');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
 
 
 
 //import route
-const users = require('./route/api/users');
-const posts = require('./routes/api/posts');
+const users = require('./routes/api/users');
+//const posts = require('./routes/api/posts');
 const profile = require('./routes/api/profile');
 
-const app = express();
-
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-app.use(logger('dev'));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+var app = express();
 
 
 //Body parser middleware
@@ -37,9 +26,9 @@ const db = require('./config/keys').mongoURI;
 
 // Connect to MongoDB
 mongoose.
-connect(db).
-then(() => console.log('MongoDB connected')).
-catch(err => console.log(err));
+    connect(db).
+    then(() => console.log('MongoDB connected')).
+    catch(err => console.log(err));
 
 
 // Passport middleware
@@ -53,9 +42,9 @@ require('./config/passport')(passport);
 
 
 // Use routes
-app.use('/api/users', users);
-app.use('/api/profile', profile);
-app.use('/api/posts', posts);
+app.use('/users', users);
+app.use('/profile', profile);
+//app.use('/posts', posts);
 
 
 

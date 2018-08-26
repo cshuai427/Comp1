@@ -16,7 +16,7 @@ const PostSchema = new Schema({
         required: true
     },
     eventPeopleNumber: {
-        type: String,
+        type: Number,
         required: true
     },
     eventLocation: {

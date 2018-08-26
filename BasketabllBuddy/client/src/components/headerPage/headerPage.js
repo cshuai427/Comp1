@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import logo from "../../Img/logo.png";
+import {Link} from 'react-router-dom';
 
 class HeaderPage extends Component{
     render()
@@ -11,6 +12,8 @@ class HeaderPage extends Component{
         <li><a className="active" href="/">Home</a></li>
         <li><a href="/event/post">Event</a></li>
         <li><a href="">Account</a></li>
+            <li><a href="/login">login</a></li>
+            <li><a href="/register">Register</a></li>
         </ul>
             </header>
         )

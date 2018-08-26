@@ -13,6 +13,8 @@ import HomePageRight from "./components/contactsPage/homeFriendList";
 import FooterPage from "./components/footerPage/footerPage";
 import EventPostPage from "./components/evenPostPage/eventPostPage";
 import EventCommitPage from "./components/evenPostPage/eventCommitPage";
+import Login from './components/auth/Login';
+import Register from './components/auth/register';
 
 
 class App extends Component {
@@ -28,6 +30,10 @@ class App extends Component {
                 <Route exact path="/" component={HomeEventPage}/>
                 <Route exact path="/event/post" component={EventPostPage}/>
                 <Route exact path="/event/commit" component={EventCommitPage}/>
+                <Route exact path="/login" component={Login}/>
+                <Route exact path="/register" component={Register}/>
+
+
             </div>
             <div className="App-right"> <HomePageRight /> </div>
 

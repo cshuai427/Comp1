@@ -15,7 +15,7 @@ const PostSchema = new Schema({
         type: String,
         required: true
     },
-    eventPeople: {
+    eventPeopleNumber: {
         type: String,
         required: true
     },
@@ -31,8 +31,9 @@ const PostSchema = new Schema({
         type: Date,
         required: true
     },
-    name: {
-        type: String
+    eventOverStatus: {
+        type: Boolean,
+        default: false
     },
     avatar: {
         type: String
@@ -55,7 +56,7 @@ const PostSchema = new Schema({
                 type: String,
                 required: true
             },
-            name: {
+            title: {
                 type: String
             },
             avatar: {

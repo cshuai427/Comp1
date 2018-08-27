@@ -1,12 +1,25 @@
 # Comp1
 exercise for Comp1
 <br>
-Front-end local:3000
-<br>
-Back-end local:5000---- not finish
+```jsx
+Front-end URL:http://local:3000/
+```
 <br>
 run react fron-end in client 
+```jsx
+cd BasketballBuddy/client
 npm start
+```
+<br>
+```jsx
+Back-end URL:http://local:5000/
+```
+<br>
+run whole website 
+```jsx
+cd BasketballBuddy/server
+npm run dev
+```
 <br>
 # React/JSX Style Guide
 ## Table of Contents

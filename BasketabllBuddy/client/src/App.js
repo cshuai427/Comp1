@@ -6,15 +6,15 @@ import { BrowserRouter as Router, Route} from 'react-router-dom';
 import './App.css';
 
 //import components
-import HeaderPage from "./components/headerPage/headerPage";
-import HomePageLeft from "./components/accountPage/homeAccountPage";
-import HomeEventPage from "./components/eventPage/homeEventPage";
-import HomePageRight from "./components/contactsPage/homeFriendList";
-import FooterPage from "./components/footerPage/footerPage";
-import EventPostPage from "./components/evenPostPage/eventPostPage";
-import EventCommitPage from "./components/evenPostPage/eventCommitPage";
-import Login from './components/auth/Login';
-import Register from './components/auth/register';
+import Header from "./components/header/Header";
+import HomePageLeft from "./components/account/Account";
+import EventPage from "./components/event/EventPage";
+import HomePageRight from "./components/contacts/FriendList";
+import Footer from "./components/footer/Footer";
+import PostPage from "./components/evenPost/PostPage";
+import CommitPage from "./components/evenPost/CommitPage";
+import Login from './components/authorization/Login';
+import Register from './components/authorization/Register';
 
 
 class App extends Component {
@@ -22,14 +22,14 @@ class App extends Component {
     return (
         <Router>
         <div>
-            <div className="App-header"> <HeaderPage /></div>
+            <div className="App-header"> <Header /></div>
 
             <div className="App-left"> <HomePageLeft /> </div>
 
             <div>
-                <Route exact path="/" component={HomeEventPage}/>
-                <Route exact path="/event/post" component={EventPostPage}/>
-                <Route exact path="/event/commit" component={EventCommitPage}/>
+                <Route exact path="/" component={EventPage}/>
+                <Route exact path="/event/post" component={PostPage}/>
+                <Route exact path="/event/commit" component={CommitPage}/>
                 <Route exact path="/login" component={Login}/>
                 <Route exact path="/register" component={Register}/>
 
@@ -37,7 +37,7 @@ class App extends Component {
             </div>
             <div className="App-right"> <HomePageRight /> </div>
 
-            <div className="App-footer"> <FooterPage /> </div>
+            <div className="App-footer"> <Footer /> </div>
 
         </div>
         </Router>

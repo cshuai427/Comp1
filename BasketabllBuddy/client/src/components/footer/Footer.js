@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 //import Logo from '../../Img/logo.jpg';
 
-class FooterPage extends Component {
+class Footer extends Component {
     render(){
         return(
                <footer>
@@ -13,4 +13,4 @@ class FooterPage extends Component {
     }
 }
 
-export default FooterPage;
+export default Footer;

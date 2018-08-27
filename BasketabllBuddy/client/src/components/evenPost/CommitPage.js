@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class EventCommitPage extends Component{
+class CommitPage extends Component{
     render() {
         return (
             <div className="App-middle">
@@ -51,4 +51,4 @@ class EventCommitPage extends Component{
     }
 }
 
-export default EventCommitPage;
+export default CommitPage;

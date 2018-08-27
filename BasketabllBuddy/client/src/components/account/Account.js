@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class HomeAccountPage extends Component {
+class Account extends Component {
 
     render(){
         return(
@@ -19,4 +19,4 @@ class HomeAccountPage extends Component {
     }
 
 }
-export default HomeAccountPage;
+export default Account;

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import logo from "../../Img/logo.png";
 import {Link} from 'react-router-dom';
 
-class HeaderPage extends Component{
+class Header extends Component{
     render()
     {
         return(
@@ -23,4 +23,4 @@ class HeaderPage extends Component{
 
 }
 
-export default HeaderPage;
+export default Header;

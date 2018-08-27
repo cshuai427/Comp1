@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class EventPostPage extends Component{
+class PostPage extends Component{
     render() {
         return (
             <div className="App-middle">
@@ -58,4 +58,4 @@ class EventPostPage extends Component{
     }
 }
 
-export default EventPostPage;
+export default PostPage;

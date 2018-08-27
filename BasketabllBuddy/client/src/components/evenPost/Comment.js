@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class CommitPage extends Component{
+class Comment extends Component{
     render() {
         return (
             <div className="App-middle">
@@ -51,4 +51,4 @@ class CommitPage extends Component{
     }
 }
 
-export default CommitPage;
+export default Comment;

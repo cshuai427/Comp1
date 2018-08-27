@@ -8,11 +8,11 @@ import './App.css';
 //import components
 import Header from "./components/header/Header";
 import HomePageLeft from "./components/account/Account";
-import EventPage from "./components/event/EventPage";
+import Event from "./components/event/Event";
 import HomePageRight from "./components/contacts/FriendList";
 import Footer from "./components/footer/Footer";
-import PostPage from "./components/evenPost/PostPage";
-import CommitPage from "./components/evenPost/CommitPage";
+import Post from "./components/evenPost/Post";
+import Comment from "./components/evenPost/Comment";
 import Login from './components/authorization/Login';
 import Register from './components/authorization/Register';
 
@@ -27,9 +27,9 @@ class App extends Component {
             <div className="App-left"> <HomePageLeft /> </div>
 
             <div>
-                <Route exact path="/" component={EventPage}/>
-                <Route exact path="/event/post" component={PostPage}/>
-                <Route exact path="/event/commit" component={CommitPage}/>
+                <Route exact path="/" component={Event}/>
+                <Route exact path="/event/post" component={Post}/>
+                <Route exact path="/event/commit" component={Comment}/>
                 <Route exact path="/login" component={Login}/>
                 <Route exact path="/register" component={Register}/>
 

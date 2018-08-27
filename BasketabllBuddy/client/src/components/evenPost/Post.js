@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class PostPage extends Component{
+class Post extends Component{
     render() {
         return (
             <div className="App-middle">
@@ -58,4 +58,4 @@ class PostPage extends Component{
     }
 }
 
-export default PostPage;
+export default Post;

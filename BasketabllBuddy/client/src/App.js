@@ -10,6 +10,15 @@ import './App.css';
 
 
 //import components
+<<<<<<< HEAD
+import Header from "./components/header/Header";
+import HomePageLeft from "./components/account/Account";
+import Event from "./components/event/Event";
+import HomePageRight from "./components/contacts/FriendList";
+import Footer from "./components/footer/Footer";
+import Post from "./components/evenPost/Post";
+import Comment from "./components/evenPost/Comment";
+=======
 import Header from './components/header/Header';
 import HomePageLeft from './components/account/Account';
 import EventPage from './components/event/EventPage';
@@ -17,6 +26,7 @@ import HomePageRight from './components/contacts/FriendList';
 import Footer from './components/footer/Footer';
 import PostPage from './components/evenPost/PostPage';
 import CommitPage from './components/evenPost/CommitPage';
+>>>>>>> master
 import Login from './components/authorization/Login';
 import Register from './components/authorization/Registration';
 import  {PropTypes} from 'prop-types';
@@ -29,8 +39,17 @@ if(localStorage.jwtToken){
     setAuthtoken(localStorage.jwtToken);
     const decoded =jwt_decode(localStorage.jwtToken);
 
+<<<<<<< HEAD
+            <div>
+                <Route exact path="/" component={Event}/>
+                <Route exact path="/event/post" component={Post}/>
+                <Route exact path="/event/commit" component={Comment}/>
+                <Route exact path="/login" component={Login}/>
+                <Route exact path="/register" component={Register}/>
+=======
     store.dispatch(setCurrentUser(decoded));
     const currentTime =Date.now() /1000;
+>>>>>>> master
 
     if( decoded.exp<currentTime){
         store.dispatch(logoutUser());

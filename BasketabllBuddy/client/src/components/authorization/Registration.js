@@ -15,15 +15,15 @@ class Registration extends Component {
          password:'',
          password2:'',
          errors:{}
-     }
+     };
      this.onChange= this.onChange.bind(this);
      this.onSubmit= this.onSubmit.bind(this);
 
  }
-    // componentDidMount(){
-    //     if(this.props.auth.isAuthenticated){
-    //         this.props.history.push('/dashboard');
-    //     }}
+    componentDidMount(){
+        if(this.props.auth.isAuthenticated){
+            this.props.history.push('/dashboard');
+        }}
  componentWillReceiveProps(nextProps){
      if(nextProps.errors){
          this.setState({errors:nextProps.errors});
@@ -61,8 +61,8 @@ this.props.registerUser(newUser,this.props.history);
                                 <div className="form-group">
                                     <input
                                         type="text"
-                                        className={classnames('form-control form-control-lg',{'is-invalid': errors.name} )}                                       placeholder="Name"
-                                        name="name"
+                                        className={classnames('form-control form-control-lg',{'is-invalid': errors.name} )}
+
                                         value={this.state.name}
                                         onChange={this.onChange}
                                     />
@@ -73,7 +73,7 @@ this.props.registerUser(newUser,this.props.history);
                                 <div className="form-group">
                                     <input
                                         type="email"
-                                        className={classnames('form-control form-control-lg',{'is-invalid': errors.email} )}                                       placeholder="Name"
+                                        className={classnames('form-control form-control-lg',{'is-invalid': errors.email} )}
                                         placeholder="Email Address"
                                         name="email"
                                        value={this.state.email}
@@ -88,7 +88,7 @@ this.props.registerUser(newUser,this.props.history);
                                 <div className="form-group">
                                     <input
                                         type="password"
-                                        className={classnames('form-control form-control-lg',{'is-invalid': errors.password} )}                                       placeholder="Name"
+                                        className={classnames('form-control form-control-lg',{'is-invalid': errors.password} )}
                                         placeholder="Password"
                                         name="password"
                                         value={this.state.password}
@@ -100,7 +100,7 @@ this.props.registerUser(newUser,this.props.history);
                                 <div className="form-group">
                                     <input
                                         type="password"
-                                        className={classnames('form-control form-control-lg',{'is-invalid': errors.password2} )}                                       placeholder="Name"
+                                        className={classnames('form-control form-control-lg',{'is-invalid': errors.password2} )}
                                         placeholder="Confirm Password"
                                         name="password2"
                                        value={this.state.password2}
@@ -119,11 +119,11 @@ this.props.registerUser(newUser,this.props.history);
         );
     }
 }
-SignUp.protoTypes={
+Registration.protoTypes={
     registerUser:PropTypes.func.isRequired,
     auth:PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
-}
+};
 const mapStateToProps=state=>({
     auth:state.auth,
     errors: state.errors

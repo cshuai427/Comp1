@@ -1,6 +1,3 @@
-
-
-
 import React, { Component }  from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
@@ -20,10 +17,10 @@ class Login extends Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
-// componentDidMount(){
-//         if(this.props.auth.isAuthenticated){
-//     this.props.history.push('/dashboard');
-// }}
+componentDidMount(){
+        if(this.props.auth.isAuthenticated){
+    this.props.history.push('/dashboard');
+}}
     componentWillReceiveProps(nextProps){
         if (nextProps.auth.isAuthenticated){
             this.props.history.push('/dashboard');
@@ -48,7 +45,7 @@ this.props.loginUser(userData);}
     }
 
     render() {
-        const {errors} =this.state
+        const {errors} =this.state;
 
         return (
             <div className="login">
@@ -63,7 +60,7 @@ this.props.loginUser(userData);}
                                 <div className="form-group">
                                     <input
                                         type="email"
-                                        className={classnames('form-control form-control-lg',{'is-invalid': errors.email} )}                                       placeholder="Name"
+                                        className={classnames('form-control form-control-lg', {'is-invalid': errors.email} )}
                                         placeholder="Email Address"
                                         name="email"
                                         value={this.state.email}
@@ -75,7 +72,7 @@ this.props.loginUser(userData);}
                                 <div className="form-group">
                                     <input
                                         type="password"
-                                        className={classnames('form-control form-control-lg',{'is-invalid': errors.password} )}                                       placeholder="Name"
+                                        className={classnames('form-control form-control-lg',{'is-invalid': errors.password} )}
                                         placeholder="Password"
                                         name="password"
                                         value={this.state.password}
@@ -97,7 +94,7 @@ Login.protoTypes={
     loginUser:PropTypes.func.isRequired,
     auth:PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
-}
+};
 const mapStateToProps=state=>({
     auth:state.auth,
     errors: state.errors

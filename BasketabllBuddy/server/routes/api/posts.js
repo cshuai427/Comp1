@@ -3,10 +3,10 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
 
-// Post model
+// Posts model
 const Post = require('../../models/Post');
 
-// Post model
+// Posts model
 
 const Profile = require('../../models/Profile');
 
@@ -19,7 +19,7 @@ const validationPostComment = require('../../validation/comment');
 //  @desc   Test post route
 //  @access Public
 
-router.get('/test', (req, res)=> res.json({msg: "post works"}));
+router.get('/test', (req, res)=> res.json({msg: "Posts works"}));
 
 
 //  @route  GET api/posts
@@ -49,17 +49,19 @@ router.get('/:id', (req, res) =>
 
 
 
-//  @route  Post api/posts
+//  @route  Posts api/posts
 //  @desc   Create post
 //  @access Private
 
-router.post('/', passport.authenticate('jwt', { session: false}),
+router.post('/',
+    passport.authenticate('jwt', { session: false}),
     (req, res) => {
         const {errors, isValid} = validationPost(req.body);
 
-        // Check validation
+        //Check validation
         if(!isValid){
             //If any errors, send 400 with errors object
+            console.log("bad!");
             return res.status(400).json(errors);
         }
 
@@ -100,12 +102,12 @@ router.delete('/:id', passport.authenticate('jwt', { session: false}),
 
                         post.remove().then(() => res.json({ success: true}));
                     })
-                    .catch(err => res.status(404).json({ postnotfound: 'Not post found'}));
+                    .catch(err => res.status(404).json({ postnotfound: 'No post found'}));
             });
     });
 
 
-//  @route  Post api/posts/like/:id
+//  @route  Posts api/posts/like/:id
 //  @desc   Like post
 //  @access Private
 
@@ -127,13 +129,13 @@ router.post('/like/:id', passport.authenticate('jwt', { session: false}),
                         post.save().then(post => res.json(post));
 
                     })
-                    .catch(err => res.status(404).json({ postnotfound: 'Not post found'}));
+                    .catch(err => res.status(404).json({ postnotfound: 'No post found'}));
             });
     });
 
 
 
-//  @route  Post api/posts/unlike/:id
+//  @route  Posts api/posts/unlike/:id
 //  @desc   unlike post
 //  @access Private
 
@@ -162,11 +164,11 @@ router.post('/unlike/:id', passport.authenticate('jwt', { session: false}),
                         post.save().then(post => res.json(post));
 
                     })
-                    .catch(err => res.status(404).json({ postnotfound: 'Not post found'}));
+                    .catch(err => res.status(404).json({ postnotfound: 'No post found'}));
             });
     });
 
-//  @route  Post api/posts/comment/:id
+//  @route  Posts api/posts/comment/:id
 //  @desc   Add comment to post
 //  @access Private
 

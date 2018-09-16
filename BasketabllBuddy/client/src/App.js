@@ -15,8 +15,8 @@ import HomePageLeft from './components/account/Account';
 import EventPage from './components/event/Event';
 import HomePageRight from './components/contacts/FriendList';
 import Footer from './components/footer/Footer';
-import PostPage from './components/evenPost/Post';
-import CommitPage from './components/evenPost/Comment';
+import PostPage from './components/posts/Posts';
+import CommentPage from './components/posts/Comment';
 import Login from './components/authorization/Login';
 import Register from './components/authorization/Register';
 import  {PropTypes} from 'prop-types';
@@ -51,8 +51,8 @@ class App extends Component {
 
                         <div>
                             <Route exact path="/" component={EventPage}/>
-                            <Route exact path="/event/post" component={PostPage}/>
-                            <Route exact path="/event/commit" component={CommitPage}/>
+                            <Route exact path="/posts" component={PostPage}/>
+                            <Route exact path="/event/commit" component={CommentPage}/>
                             <Route exact path="/login" component={Login}/>
                             <Route exact path="/register" component={Register}/>
 

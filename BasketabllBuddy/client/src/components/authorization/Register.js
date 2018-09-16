@@ -62,7 +62,8 @@ this.props.registerUser(newUser,this.props.history);
                                     <input
                                         type="text"
                                         className={classnames('form-control form-control-lg',{'is-invalid': errors.name} )}
-
+                                        name="name"
+                                        placeholder="name"
                                         value={this.state.name}
                                         onChange={this.onChange}
                                     />

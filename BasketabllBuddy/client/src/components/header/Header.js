@@ -24,10 +24,11 @@ class Header extends Component{
         return(
             <header>
         <ul>
-        <li><img src = { logo } alt="logo" /></li>
-        <li><a className="active" href="/">Home</a></li>
-        <li><Link to="/event/post">Event</Link></li>
-        <li><a href="">Account</a></li>
+            <li><img src = { logo } alt="logo" /></li>
+            <li><a className="active" href="/">Home</a></li>
+            <li><Link to="/posts">Post</Link></li>
+            <li><Link to="/">Event</Link></li>
+            <li><a href="">Account</a></li>
 
             {isAuthenticated ? authLinks : guestLinks}
 

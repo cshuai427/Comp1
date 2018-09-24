@@ -42,8 +42,10 @@ if(localStorage.jwtToken){
 class App extends Component {
     render() {
         return (
+            <body style="background: #ff0">
             <Provider store={store}>
                 <Router>
+                    <head><title> week 9</title></head>
                     <div>
                         <div className="App-header"><Header/></div>
 
@@ -66,7 +68,7 @@ class App extends Component {
                     </div>
                 </Router>
             </Provider>
-
+            </body>
 
         );
 

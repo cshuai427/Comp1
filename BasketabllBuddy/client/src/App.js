@@ -57,8 +57,6 @@ class App extends Component {
                             <Route exact path="/event/commit" component={CommentPage}/>
                             <Route exact path="/login" component={Login}/>
                             <Route exact path="/register" component={Register}/>
-
-
                         </div>
 
                         <div className="App-right"><HomePageRight/></div>
@@ -68,7 +66,7 @@ class App extends Component {
                     </div>
                 </Router>
             </Provider>
-          
+
 
         );
 

@@ -9,7 +9,7 @@ const PostSchema = new Schema({
     },
     eventTitle: {
         type: String,
-        required: true
+        // required: true
     },
     eventText: {
         type: String,
@@ -17,23 +17,23 @@ const PostSchema = new Schema({
     },
     eventPeopleNumber: {
         type: Number,
-        required: true
+        // required: true
     },
     eventLocation: {
         type: String,
-        required: true
+        // required: true
     },
     haveBall: {
         type: Boolean,
-        default: false
+        // default: false
     },
     eventDate: {
         type: Date,
-        required: true
+        // required: true
     },
     eventOverStatus: {
         type: Boolean,
-        default: false
+        // default: false
     },
     avatar: {
         type: String

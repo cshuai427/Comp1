@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
-import {Provider} from 'react-redux';
-import store from './store';
+
 import jwt_decode from 'jwt-decode';
 import setAuthtoken from './unit/setAuthToken';
 import {logoutUser, setCurrentUser} from './actions/authActions';
-//style
-import './App.css';
 
+import {Provider} from 'react-redux';
+import store from './store';
+import PrivateRoute from './components/common/PrivateRoute';
 
 //import components
 import Header from './components/header/Header';
@@ -20,20 +20,32 @@ import CommentPage from './components/posts/Comment';
 import Login from './components/authorization/Login';
 import Register from './components/authorization/Register';
 import  {PropTypes} from 'prop-types';
-import {connect} from 'react-redux';
+
+import './App.css';
 
 
 
 //check for token
 if(localStorage.jwtToken){
+
+    // Set auth token header auth
     setAuthtoken(localStorage.jwtToken);
+
+    // Decode token and get user information and experience
     const decoded =jwt_decode(localStorage.jwtToken);
 
+    // Set user and isAuthenticated
     store.dispatch(setCurrentUser(decoded));
+
+    // Check for expired token
     const currentTime =Date.now() /1000;
 
     if( decoded.exp<currentTime){
+
+        // Logout user
         store.dispatch(logoutUser());
+
+        // Clear current Profile * need to be done
         window.location.href='/login';
     }
 }
@@ -51,12 +63,23 @@ class App extends Component {
 
                         <div className="App-left"><HomePageLeft/></div>
 
-                        <div>
-                            <Route exact path="/" component={EventPage}/>
-                            <Route exact path="/posts" component={PostPage}/>
-                            <Route exact path="/event/commit" component={CommentPage}/>
+                        <Route exact path="/" component={EventPage}/>
+
+                        <div className="container">
+
+
                             <Route exact path="/login" component={Login}/>
                             <Route exact path="/register" component={Register}/>
+
+
+                            <Switch>
+                                <PrivateRoute exact path="/posts" component={PostPage}/>
+                            </Switch>
+
+                            <Switch>
+                                <PrivateRoute exact path="/event/commit" component={CommentPage}/>
+                            </Switch>
+
                         </div>
 
                         <div className="App-right"><HomePageRight/></div>

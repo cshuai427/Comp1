@@ -120,7 +120,7 @@ this.props.registerUser(newUser,this.props.history);
         );
     }
 }
-Register.protoTypes={
+Register.propTypes={
     registerUser:PropTypes.func.isRequired,
     auth:PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired

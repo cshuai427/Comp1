@@ -35,7 +35,7 @@ const ProfileSchema = new Schema({
             linkedin: {
                 type: String
             },
-            instargram: {
+            instagram: {
                 type: String
             }
 

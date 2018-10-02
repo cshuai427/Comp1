@@ -4,7 +4,7 @@ class Account extends Component {
 
     render(){
         return(
-            <div className="App-left">
+            <div className="col-sm-2 col-auto sidenav">
                     <h3>My account</h3>
                     <img width="100" height="200" alt="avatar"/>
                     <h3>Username123</h3>

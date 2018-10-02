@@ -7,7 +7,7 @@ class Event extends Component {
     render(){
         return(
 
-                <div className="App-middle">
+                <div className="Event">
 
                     <h1>Basketball Meetup Events</h1>
                     <hr />

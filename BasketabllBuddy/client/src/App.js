@@ -13,7 +13,7 @@ import PrivateRoute from './components/common/PrivateRoute';
 import Header from './components/header/Header';
 import HomePageLeft from './components/account/Account';
 import EventPage from './components/event/Event';
-import HomePageRight from './components/contacts/FriendList';
+import FriendList from './components/contacts/FriendList';
 import Footer from './components/footer/Footer';
 import PostPage from './components/posts/Posts';
 import CommentPage from './components/posts/Comment';
@@ -21,7 +21,7 @@ import Login from './components/authorization/Login';
 import Register from './components/authorization/Register';
 import  {PropTypes} from 'prop-types';
 
-import './App.css';
+// import './App.css';
 
 
 
@@ -58,31 +58,30 @@ class App extends Component {
             <Provider store={store}>
                 <Router>
 
-                    <div>
-                        <div className="App-header"><Header/></div>
+                    <div className="App">
+                        <Header/>
 
-                        <div className="App-left"><HomePageLeft/></div>
+                        <div className="container-fluid text-center">
+                            <div className="row content">
+                                <HomePageLeft/>
 
-                        <Route exact path="/" component={EventPage}/>
+                                <div className="container col-sm-8 col-auto">
+                                    <Route exact path="/" component={EventPage}/>
+                                    <Route exact path="/login" component={Login}/>
+                                    <Route exact path="/register" component={Register}/>
 
-                        <div className="container">
+                                    <Switch>
+                                        <PrivateRoute exact path="/posts" component={PostPage}/>
+                                    </Switch>
 
-
-                            <Route exact path="/login" component={Login}/>
-                            <Route exact path="/register" component={Register}/>
-
-
-                            <Switch>
-                                <PrivateRoute exact path="/posts" component={PostPage}/>
-                            </Switch>
-
-                            <Switch>
-                                <PrivateRoute exact path="/event/commit" component={CommentPage}/>
-                            </Switch>
-
+                                    <Switch>
+                                        <PrivateRoute exact path="/event/commit" component={CommentPage}/>
+                                    </Switch>
+                                </div>
+                                <FriendList/>
+                            </div>
                         </div>
 
-                        <div className="App-right"><HomePageRight/></div>
 
                         <div className="App-footer"><Footer/></div>
 

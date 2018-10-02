@@ -70,7 +70,7 @@ router.get('/:name', (req, res) => {
     const errors = {};
 
     // param can grab the url variable
-    Profile.findOne({ user: req.user.name})
+    Profile.findOne({ user: req.params.nickName})
 
         .populate('user', ['name', 'avatar'])
         .then(profile => {
@@ -131,6 +131,8 @@ router.post ('/', passport.authenticate('jwt', {session: false}),
         const profileFields = {};
 
         profileFields.user = req.user.id;
+
+        if(req.body.nickName) profileFields.nickName = req.body.nickName;
         if(req.body.playerRole) profileFields.playerRole = req.body.playerRole;
         if(req.body.aboutMe) profileFields.aboutMe = req.body.aboutMe;
 
@@ -159,6 +161,21 @@ router.post ('/', passport.authenticate('jwt', {session: false}),
                         { $set: profileFields},
                         { new: true}
                     ).then(profile => res.json(profile));
+                }
+                else {
+                    // Create
+
+                    // Check if nickName exists
+                    Profile.findOne({ nickName: profileFields.nickName})
+                        .then(profile => {
+                            if(profile){
+                                errors.nickName = 'That nickName already exists';
+                                res.status(400).json(errors);
+                            }
+
+                            // Save Profile
+                            new Profile(profileFields).save().then(profile => res.json(profile));
+                        })
                 }
             });
     });

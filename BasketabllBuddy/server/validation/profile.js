@@ -4,6 +4,21 @@ const isEmpty = require('./is-empty');
 module.exports = function validationProfileInput(data) {
     let errors = {};
 
+
+    data.nickName = !isEmpty(data.nickName) ? data.nickName : '';
+
+
+
+    if(!validator.isLength(data.nickName, { min: 2, max: 40}))
+    {
+        errors.nickName = 'NickName needs to between and 4 characters';
+    }
+
+    if(validator.isEmpty(data.nickName))
+    {
+        errors.nickName = 'Profile nickName is required';
+    }
+
     if(!isEmpty(data.youtube)){
         if(!validator.isURL(data.youtube)){
             errors.youtube = 'Not a valid URL';

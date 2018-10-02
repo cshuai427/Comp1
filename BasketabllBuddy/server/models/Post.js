@@ -52,10 +52,6 @@ const PostSchema = new Schema({
                 type: Schema.Types.ObjectId,
                 ref: 'users'
             },
-            nickName:{
-                type: String,
-                required: true
-            },
             text: {
                 type: String,
                 required: true

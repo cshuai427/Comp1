@@ -22,12 +22,17 @@ class Header extends Component{
         const authLinks = (
             <ul className = "navbar-nav ml-auto">
                 <li className = "nav-item">
+                    <Link className = "nav-link" to="/profile-view">
+                        Profile
+                    </Link>
+                </li>
+                <li className = "nav-item">
                     <Link to="" className = "nav-link" onClick={this.onLogoutClick.bind(this)}>
                         <img className="rounded-circle"
                              src={user.avatar}
                              style={{width:'25px',marginRight:'5px'}}
                              alt={user.name}
-                             title="email"
+                             title={user.name}
                         />{' '}
                              Logout
                     </Link>
@@ -78,12 +83,6 @@ class Header extends Component{
                             <li className = "nav-item">
                                 <Link className = "nav-link" to = "/">
                                     Event
-                                </Link>
-                            </li>
-
-                            <li className = "nav-item">
-                                <Link className = "nav-link" to = "/account">
-                                    Account
                                 </Link>
                             </li>
                         </ul>

@@ -6,7 +6,7 @@ module.exports = function validationProfileInput(data) {
 
 
     data.nickName = !isEmpty(data.nickName) ? data.nickName : '';
-
+    data.playerRole = !isEmpty(data.playerRole) ? data.playerRole : '';
 
 
     if(!validator.isLength(data.nickName, { min: 2, max: 40}))
@@ -17,6 +17,11 @@ module.exports = function validationProfileInput(data) {
     if(validator.isEmpty(data.nickName))
     {
         errors.nickName = 'Profile nickName is required';
+    }
+
+    if(validator.isEmpty(data.playerRole))
+    {
+        errors.playerRole = 'Profile player role is required';
     }
 
     if(!isEmpty(data.youtube)){

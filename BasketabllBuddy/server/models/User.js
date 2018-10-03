@@ -25,15 +25,9 @@ const UsersSchema = new Schema({
     },
     friendList: [
         {
-            user:{
+            profile:{
                 type: Schema.Types.ObjectId,
-                ref: 'users'
-            },
-            name: {
-                type: String
-            },
-            avatar: {
-                type: String
+                ref: 'profile'
             }
         }
     ]

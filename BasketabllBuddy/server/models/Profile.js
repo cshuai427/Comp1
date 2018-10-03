@@ -15,7 +15,8 @@ const ProfileSchema = new Schema({
         type: [String]
     },
     playerRole: {
-        type: String
+        type: String,
+        required: true
     },
     aboutMe: {
         type: String

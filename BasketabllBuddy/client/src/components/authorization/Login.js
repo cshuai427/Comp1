@@ -17,13 +17,13 @@ class Login extends Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
-componentDidMount(){
+    componentDidMount(){
         if(this.props.auth.isAuthenticated){
-        this.props.history.push('/dashboard');
-}}
+            this.props.history.push('/profile-view');
+        }}
     componentWillReceiveProps(nextProps){
         if (nextProps.auth.isAuthenticated){
-            this.props.history.push('/dashboard');
+            this.props.history.push('/profile-view');
         }
         if(nextProps.errors){
             this.setState({errors:nextProps.errors});
@@ -39,7 +39,7 @@ componentDidMount(){
         };
 
         this.props.loginUser(userData);
-        }
+    }
 
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
@@ -56,7 +56,7 @@ componentDidMount(){
                             <h1 className="display-4 text-center">Login</h1>
                             <p className="lead text-center">
                                 Sign in to your basketball account
-                            </p>
+                            </p >
                             <form onSubmit={this.onSubmit}>
                                 <div className="form-group">
                                     <input
@@ -79,7 +79,7 @@ componentDidMount(){
                                         value={this.state.password}
                                         onChange={this.onChange}
                                     />
-                                     {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
+                                    {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
 
                                 </div>
                                 <input type="submit" className="btn btn-info btn-block mt-4" />

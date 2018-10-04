@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { withRouter} from 'react-router-dom';
+import { Link, withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
 import SelectListGroup from '../common/SelectListGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
-import { createProfile } from '../../actions/profileActions';
+import { createProfile, getCurrentProfile } from '../../actions/profileActions';
 import isEmpty from '../../validation/is-empty';
 
 
@@ -35,6 +35,9 @@ class EditProfile extends Component {
     }
 
 
+    componentDidMount(){
+        this.props.getCurrentProfile();
+    }
 
 
     componentWillReceiveProps(nextProps)
@@ -177,6 +180,11 @@ class EditProfile extends Component {
             <div className="create-profile">
                 <div className="container">
                     <div className="row">
+                        <div className="align-baseline">
+                            <Link to='/profile-view' className="btn btn-light">
+                                Go Back
+                            </Link>
+                        </div>
                         <div className="col-md-8 m-auto">
                             <h1 className="display-4 text-center">Edit Your Profile</h1>
                             <p className="lead text-center">
@@ -187,7 +195,7 @@ class EditProfile extends Component {
                             <form onSubmit={this.onSubmit}>
 
                                 <TextFieldGroup
-                                    placeholder="* Profile Handle"
+                                    placeholder="* Profile Nickname"
                                     name="nickName"
                                     value={this.state.nickName}
                                     onChange={this.onChange}
@@ -248,6 +256,8 @@ class EditProfile extends Component {
 }
 
 EditProfile.propTypes = {
+    createProfile: PropTypes.func.isRequired,
+    getCurrentProfile: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };
@@ -258,4 +268,4 @@ const mapStateToProps= state => ({
     errors: state.errors
 
 });
-export default connect(mapStateToProps, { createProfile })(withRouter(EditProfile));
+export default connect(mapStateToProps, { createProfile, getCurrentProfile })(withRouter(EditProfile));

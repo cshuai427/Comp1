@@ -3,21 +3,23 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import Spinner from '../common/Spinner';
-import { getCurrentProfile } from '../../actions/profileActions';
-import EditProfile from './EditProfile';
+import { getCurrentProfile, getProfileByNickname } from '../../actions/profileActions';
+import Profile from './Profile';
 
 class ProfileView extends Component {
 
     constructor(){
         super();
-        this.state = {
-            displayProfile: false,
-        };
+
     }
 
     componentDidMount()
     {
         this.props.getCurrentProfile();
+
+        if(this.props.match.params.nickName){
+            this.props.getProfileByNickname(this.props.match.params.nickName)
+        }
     }
 
 
@@ -25,54 +27,47 @@ class ProfileView extends Component {
 
         const { user } = this.props.auth;
         const { profile, loading } = this.props.profile;
-        const { displayProfile } = this.state;
 
-        let displayProfileContent;
-        if(displayProfile && this.props)
-        {
-            displayProfileContent = <EditProfile />
-        }
-
-        let profileDetail;
+        let profileBasic;
+        let profileContent;
 
         if(profile === null || loading)
         {
-            profileDetail = <Spinner />
+            profileBasic = <Spinner />
         }
         else
         {
             // Check if logged in user has profile data
             if(Object.keys(profile).length > 0)
             {
-                profileDetail = (
+                profileBasic = (
                     <div>
                         <p className="lead text-muted">
-                            Welcome
+                            Welcome{' '}
                             <Link to={`{profile-view/${user.name}`}>{user.name}</Link>
                         </p >
-                        <div className="btn-group mb-4" role="group">
-
-                            <button
-                                type="button"
-
-                                onClick={() => {
-                                    this.setState(prevState => ({
-                                        displayProfile: !prevState.displayProfile
-                                    }))
-                                }} className="btn btn-light">
-
-                                <i className="fas fa-user-circle text-info mr-1" />
-                                Profile
-                            </button>
-                        </div>
-                        {displayProfileContent}
+                        <Link to="/edit-profile" className="btn btn-light" >
+                            <i className="fas fa-user-circle text-info mr-1" />
+                            Edit Profile
+                        </Link>
                     </div>
-                )
+                );
+
+                profileContent = (
+                    <div>
+                        <div className="row">
+                            <div className="col-md-6">
+
+                            </div>
+                        </div>
+                        <Profile profile={profile}/>
+                    </div>
+                );
             }
             else
             {
                 // User is logged in has no profile
-                profileDetail =
+                profileBasic =
                     (
                         <div>
                             <p className="lead text-muted">Welcome {user.name} </p >
@@ -89,9 +84,17 @@ class ProfileView extends Component {
             <div className="profileView">
                 <div className="contarer">
                     <div className="row">
-                        <div className="col-md-12">
+                        <div className="col-md-12 bg-light">
                             <h1 className="dispaly-4">Profile</h1>
-                            {profileDetail}
+                            {profileBasic}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-12">
+                            {profileContent}
                         </div>
                     </div>
                 </div>
@@ -104,6 +107,7 @@ class ProfileView extends Component {
 
 ProfileView.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
+    getProfileByNickname: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     profile: PropTypes.object.isRequired
 };
@@ -113,4 +117,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, { getCurrentProfile })(ProfileView);
+export default connect(mapStateToProps, { getCurrentProfile, getProfileByNickname })(ProfileView);

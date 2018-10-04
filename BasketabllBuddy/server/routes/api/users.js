@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
+const emailConfirm = require('../../utils/EmailConfirm');
 
 // Load Input Validation
 const validationRegisterInput = require('../../validation/register');
@@ -57,18 +58,31 @@ router.post('/register', (req, res)=> {
 
                 });
 
+                let payload = {};
                 bcrypt.genSalt(10, (err, salt) =>{
                     // use 'sal' Create randomly string into the hash
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         if(err) throw err;
                         newUser.password = hash;
                         newUser.save()
-                            .then(user => res.json(user))
+                            .then(user => {
+                                res.json(user);
+                                payload ={
+                                    id: user._id,
+                                    email: user.email,
+                                };
+                                emailConfirm(payload);
+                            })
                             .catch(err => console.log(err));
 
                     });
                 });
                 console.log('register success');
+
+
+
+
+
             }
         });
 });
@@ -102,19 +116,28 @@ router.post('/login', (req, res) => {
                     if(isMatch){
                         //  res.json({msg: 'Success'});
                         //  User Matched
-                        const payload = { id: user.id, name: user.name, avatar: user.avatar }; //   Create JWT payload
+                        if(user.confirmed === true)
+                        {
+                            const payload = { id: user.id, name: user.name, avatar: user.avatar }; //   Create JWT payload
 
-                        //  Sign Token
-                        jwt.sign(
-                            payload,
-                            keys.secretOrKey,
-                            { expiresIn: 7200},
-                            (err, token) => {
-                                res.json({
-                                    success: true,
-                                    token: 'Bearer ' + token
+                            //  Sign Token
+                            jwt.sign(
+                                payload,
+                                keys.secretOrKey,
+                                { expiresIn: 7200},
+                                (err, token) => {
+                                    res.json({
+                                        success: true,
+                                        token: 'Bearer ' + token
+                                    });
                                 });
-                            });
+                        }
+                        else
+                        {
+                            errors.confirmed = 'Please confirm your eamil';
+                            return res.status(400).json(errors);
+                        }
+
                     } else {
                         errors.password = 'Password incorrect';
                         return res.status(400).json(errors);
@@ -137,5 +160,39 @@ router.get(
             email: req.user.email
         });
     });
+
+
+
+
+//  @route  GET api/users/current
+//  @desc   Return current user
+//  @access Private
+
+router.get('/email/confirm/:token',
+    (req, res) => {
+
+        jwt.verify(
+            req.params.token,
+            keys.secretOrKey,
+            (err, user) => {
+                if (err) return next(err);
+                User.findOne({_id: user.id})
+                    .then(user =>
+                    {
+                        if(user){
+                            User.findOneAndUpdate(
+                                {_id: user.id},
+                                {confirmed: true }
+                            )
+                                .then(res => res.json('Email confirmed'));
+                            res.redirect('http://localhost:3000');
+                        }
+                        console.log('done')
+                    })
+                    .catch(err => res.status(400).json('errors'))
+            });
+    });
+
+
 
 module.exports = router;

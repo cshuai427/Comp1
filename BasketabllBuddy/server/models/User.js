@@ -23,12 +23,16 @@ const UsersSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    confirmed: {
+        type: Boolean,
+        default: false
+    },
     friendList: [
         {
             profile:{
                 type: Schema.Types.ObjectId,
                 ref: 'profile'
-            }
+            },
         }
     ]
 });

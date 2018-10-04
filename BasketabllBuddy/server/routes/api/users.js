@@ -164,8 +164,8 @@ router.get(
 
 
 
-//  @route  GET api/users/current
-//  @desc   Return current user
+//  @route  GET api/users/email/confirm/:token
+//  @desc   Confirm user email
 //  @access Private
 
 router.get('/email/confirm/:token',

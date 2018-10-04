@@ -23,18 +23,18 @@ class Header extends Component{
             <ul className = "navbar-nav ml-auto">
                 <li className = "nav-item">
                     <Link className = "nav-link" to="/profile-view">
-                        Profile
-                    </Link>
-                </li>
-                <li className = "nav-item">
-                    <Link to="" className = "nav-link" onClick={this.onLogoutClick.bind(this)}>
                         <img className="rounded-circle"
                              src={user.avatar}
                              style={{width:'25px',marginRight:'5px'}}
                              alt={user.name}
                              title={user.name}
                         />{' '}
-                             Logout
+                        Profile
+                    </Link>
+                </li>
+                <li className = "nav-item">
+                    <Link to="" className = "nav-link bg-danger" onClick={this.onLogoutClick.bind(this)}>
+                            <i className="fa fa-sign-out-alt"/> Logout
                     </Link>
                 </li>
             </ul>
@@ -43,11 +43,14 @@ class Header extends Component{
             <ul className = "navbar-nav ml-auto">
                 <li className = "nav-item">
                     <Link className = "nav-link" to="/login">
-                        Login
+                        <i className="fa fa-sign-in-alt"/>{' '}
+                            Login
                     </Link>
                 </li>
                 <li className = "nav-item">
+
                     <Link className = "nav-link" to="/register">
+                    <i className="fa fa-user"/>{' '}
                         Sign Up
                     </Link>
                 </li>

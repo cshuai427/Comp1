@@ -19,6 +19,12 @@ const PostSchema = new Schema({
         type: Number,
         required: true
     },
+    eventAttendPeople: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'users'
+        }
+    ],
     eventLocation: {
         type: String,
         required: true

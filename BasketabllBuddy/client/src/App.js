@@ -22,6 +22,9 @@ import Login from './components/authorization/Login';
 import Register from './components/authorization/Register';
 import ProfileView from './components/profileView/ProfileView';
 import CreateProfile from './components/profileView/CreateProfile';
+import EditProfile from './components/profileView/EditProfile';
+import News from './components/news/News';
+import NotFound from './components/Not-Found/NotFound';
 
 // import './App.css';
 
@@ -58,45 +61,47 @@ class App extends Component {
         return (
 
             <Provider store={store}>
-            <Router>
+                <Router>
+                    <div className="App">
 
-            <div className="App">
-            <Header/>
+                        <Header/>
 
-            <div className="container-fluid text-center">
-            <div className="row content">
-            <Account/>
+                        <div className="container-fluid text-center">
+                            <div className="row content">
+                                <Account/>
 
-            <div className="container col-sm-8 col-auto">
-            <Route exact path="/" component={Event}/>
-        <Route exact path="/login" component={Login}/>
-        <Route exact path="/register" component={Register}/>
+                                    <div className="container col-sm-8 col-auto">
+                                    <Switch>
+                                        <Route exact path="/" component={Event}/>
 
-        <Switch>
-        <PrivateRoute exact path = { '/profile-view' } component = {ProfileView} />
-        </Switch>
+                                        <Route exact path="/login" component={Login}/>
 
-        <Switch>
-        <PrivateRoute exact path = { '/create-profile' } component = {CreateProfile} />
-        </Switch>
+                                        <Route exact path="/register" component={Register}/>
 
-        <Switch>
-        <PrivateRoute exact path="/posts" component={PostPage}/>
-        </Switch>
+                                        <Route exact path="/news" component={News}/>
 
-        <Switch>
-        <PrivateRoute exact path="/event/commit" component={CommentPage}/>
-        </Switch>
-        </div>
-        <FriendList/>
-        </div>
-        </div>
+                                        <PrivateRoute exact path = { '/profile-view' } component = {ProfileView} />
 
+                                        <PrivateRoute exact path = { '/create-profile' } component = {CreateProfile} />
 
-        <div className="App-footer"><Footer/></div>
+                                        <PrivateRoute exact path = { '/edit-profile' } component = {EditProfile} />
 
-            </div>
-            </Router>
+                                        <PrivateRoute exact path="/posts" component={PostPage}/>
+
+                                        <PrivateRoute exact path="/event/commit" component={CommentPage}/>
+
+                                        <Route component={NotFound}/>
+                                    </Switch>
+
+                                        </div>
+                                    <FriendList/>
+                                </div>
+                            </div>
+
+                        <div className="App-footer"><Footer/></div>
+
+                    </div>
+                </Router>
             </Provider>
 
 

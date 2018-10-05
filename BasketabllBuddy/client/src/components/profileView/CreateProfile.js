@@ -7,7 +7,7 @@ import SelectListGroup from '../common/SelectListGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
 import { createProfile } from '../../actions/profileActions';
-
+import Spinner from '../common/Spinner';
 
 
 class CreateProfile extends Component {
@@ -66,6 +66,20 @@ class CreateProfile extends Component {
     }
 
     render() {
+        const { profile, loading } = this.props.profile;
+
+        if(profile === null || loading)
+        {
+            return <Spinner/>;
+        }
+        else
+        {
+            if(profile.nickName !== undefined)
+            {
+                this.props.history.push('/edit-profile');
+            }
+        }
+
         const { errors, displaySocialInputs } = this.state;
 
         let socialInputs;
@@ -214,7 +228,7 @@ class CreateProfile extends Component {
 
 CreateProfile.propTypes = {
     profile: PropTypes.object.isRequired,
-    errors: PropTypes.object.isRequired
+    errors: PropTypes.object.isRequired,
 };
 
 

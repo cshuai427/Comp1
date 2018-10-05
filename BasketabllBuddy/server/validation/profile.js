@@ -24,6 +24,11 @@ module.exports = function validationProfileInput(data) {
         errors.playerRole = 'Profile player role is required';
     }
 
+    if(!validator.isEmpty(data.playerRole) && data.playerRole === '0')
+    {
+        errors.playerRole = 'Profile player role is required';
+    }
+
     if(!isEmpty(data.youtube)){
         if(!validator.isURL(data.youtube)){
             errors.youtube = 'Not a valid URL';

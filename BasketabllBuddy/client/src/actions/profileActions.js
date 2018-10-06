@@ -52,14 +52,14 @@ export const getProfileByNickname = (nickname) => dispatch =>
     dispatch(setProfileLoading());
     axios.get(`/api/profile/${nickname}`)
         .then(res =>
-            dispatch({
-                type: GET_PROFILE,
-                payload: res.data
-            }))
+        dispatch({
+            type: GET_PROFILES,
+            payload: res.data
+        }))
         .catch(err => (
             dispatch({
-                type: GET_PROFILE,
-                payload: null
+                type: GET_PROFILES,
+                payload: {}
             })
         ));
 };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import EventItem from './EventItem';
+import EventItem from './EventItems';
 
 class EventFeed extends Component {
     render() {

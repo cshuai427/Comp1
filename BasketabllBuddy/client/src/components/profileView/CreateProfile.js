@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { withRouter} from 'react-router-dom';
+import { withRouter, Redirect, } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
 import SelectListGroup from '../common/SelectListGroup';
@@ -8,6 +8,7 @@ import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
 import { createProfile } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
+import isEmpty from '../../validation/is-empty';
 
 
 class CreateProfile extends Component {
@@ -68,15 +69,15 @@ class CreateProfile extends Component {
     render() {
         const { profile, loading } = this.props.profile;
 
-        if(profile === null || loading)
+        if(isEmpty(profile) || loading)
         {
             return <Spinner/>;
         }
         else
         {
-            if(profile.nickName !== undefined)
+            if(!isEmpty(profile.nickName))
             {
-                this.props.history.push('/edit-profile');
+                return <Redirect to='/edit-profile'/>
             }
         }
 

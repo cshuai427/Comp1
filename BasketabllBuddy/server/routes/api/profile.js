@@ -39,7 +39,7 @@ router.get('/', passport.authenticate('jwt',
         .catch(err => res.status(404).json(err));
 });
 
-//  @route  GET api/profile/profile/all
+//  @route  GET api/profile/all
 //  @desc   Get all profile
 //  @access Public
 
@@ -62,15 +62,15 @@ router.get('/all', (req, res) =>
 
 
 
-//  @route  GET api/profile/:name
-//  @desc   Get profile by id
+//  @route  GET api/profile/:nickName
+//  @desc   Get profile by nickname
 //  @access Public
 
-router.get('/:name', (req, res) => {
+router.get('/profile/:nickName', (req, res) => {
     const errors = {};
 
     // param can grab the url variable
-    Profile.findOne({ user: req.params.nickName})
+    Profile.findOne({ nickName: req.params.nickName})
 
         .populate('user', ['name', 'avatar'])
         .then(profile => {
@@ -156,15 +156,15 @@ router.post ('/', passport.authenticate('jwt', {session: false}),
             .then(profile => {
                 if(profile){
                     // Update
-                    Profile.findOneAndUpdate(
-                        { user: req.user.id},
-                        { $set: profileFields},
-                        { new: true}
-                    ).then(profile => res.json(profile));
+                        Profile.findOneAndUpdate(
+                            { user: req.user.id},
+                            { $set: profileFields},
+                            { new: true}
+                        ).then(profile => res.json(profile));
+
                 }
                 else {
                     // Create
-
                     // Check if nickName exists
                     Profile.findOne({ nickName: profileFields.nickName})
                         .then(profile => {
@@ -194,6 +194,7 @@ router.delete('/', passport.authenticate('jwt', {session: false}),
                     .then(() => res.json({success: true}))
             });
     });
+
 
 
 

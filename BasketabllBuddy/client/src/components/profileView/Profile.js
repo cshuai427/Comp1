@@ -9,10 +9,14 @@ class Profile extends Component {
         const { profile } = this.props;
 
         // Interested List
+
         const interests = profile.interests.map((interest, index) =>
-            (<div key={index} className="p-3">
-                <i className="fa fa-heart" /> {interest}
-            </div>));
+            (
+                interest !== "" ?
+                    <div key={index} className="p-3">
+                        <i className="fa fa-heart" />
+                        {' '}<span className="badge badge-primary badge-pill">{interest}</span>
+                    </div>: null));
 
         return (
             <div className="row">

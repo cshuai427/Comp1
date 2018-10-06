@@ -8,7 +8,8 @@ import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
 import { createProfile, getCurrentProfile } from '../../actions/profileActions';
 import isEmpty from '../../validation/is-empty';
-
+import Spinner from '../common/Spinner';
+//f2537743@nwytg.net
 
 
 class EditProfile extends Component {
@@ -36,12 +37,16 @@ class EditProfile extends Component {
 
 
     componentDidMount(){
-        this.props.getCurrentProfile();
-    }
 
+
+        this.props.getCurrentProfile();
+        console.log(this.props.profile)
+
+    }
 
     componentWillReceiveProps(nextProps)
     {
+
         if(this.props.errors)
         {
             this.setState({errors: this.props.errors})
@@ -104,6 +109,17 @@ class EditProfile extends Component {
     }
 
     render() {
+        const { profile, loading } = this.props.profile;
+        if(profile === null || loading)
+        {
+            return <Spinner />
+        }
+        else
+        {
+            if(!profile.nickName)
+                this.props.history.push('/create-profile')
+        }
+
         const { errors, displaySocialInputs } = this.state;
 
         let socialInputs;
@@ -162,7 +178,7 @@ class EditProfile extends Component {
 
         // Select options for playerRole
         const options = [
-            { label: '* Select Player Role', value: 0},
+            { label: '* Select Player Role', value: '0'},
             { label: 'New Player',value: 'New Player' },
             { label: 'Center',value: 'Center' },
             { label: 'Forward',value: 'Forward' },
@@ -175,7 +191,6 @@ class EditProfile extends Component {
             { label: 'Scout',value: 'Scout' },
             { label: 'Other',value: 'Other' }
         ];
-
         return (
             <div className="create-profile">
                 <div className="container">
@@ -199,8 +214,7 @@ class EditProfile extends Component {
                                     name="nickName"
                                     value={this.state.nickName}
                                     onChange={this.onChange}
-                                    error={errors.nickName}
-                                    info="A unique nickname for your profile URL."
+                                    disabled={true}
                                 />
 
                                 <SelectListGroup

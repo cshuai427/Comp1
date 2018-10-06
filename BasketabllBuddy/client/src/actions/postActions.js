@@ -3,15 +3,19 @@ import axios from 'axios';
 import {ADD_POST, GET_ERRORS, CLEAR_ERRORS, GET_POSTS, POST_LOADING, GET_POST, DELETE_POST} from "./types";
 
 //Add post
-export const addPost = postData => dispatch => {
+export const addPost = (postData, history) => dispatch => {
     axios
         .post('/api/posts', postData)
         .then(res =>
+        {
+            // ?
             dispatch ({
                 type: ADD_POST,
                 payload: res.data
-            })
-        )
+            });
+            // should be to created post
+            history.push('/')
+        })
         .catch(err =>
         dispatch({
             type: GET_ERRORS,
@@ -38,6 +42,7 @@ export const getPosts = () => dispatch => {
             })
         );
 };
+
 //Get post
 export const getPost = id => dispatch => {
     dispatch (setPostLoading());
@@ -61,7 +66,7 @@ export const getPost = id => dispatch => {
 export const addLike = id => dispatch => {
     axios
         .post(`/api/posts/like/${id}`)
-        .then(res => dispatch(getPosts()))
+        .then(res => dispatch(getPost(id)))
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,
@@ -73,7 +78,7 @@ export const addLike = id => dispatch => {
 export const removeLike = id => dispatch => {
     axios
         .post(`/api/posts/unlike/${id}`)
-        .then(res => dispatch(getPosts()))
+        .then(res => dispatch(getPost(id)))
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,
@@ -99,6 +104,25 @@ export const addComment = (postId, commentData) => dispatch => {
             })
         );
 };
+
+// Delete Comment
+
+export const deleteComment = (postId, commentId) => dispatch =>{
+    axios
+        .delete(`/api/posts/comment/${postId}/${commentId}`)
+        .then(res =>
+            dispatch({
+                type: GET_POST,
+                payload: res.data
+            }))
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            }));
+};
+
+
 //delete post
 export const deletePost = id => dispatch => {
     axios

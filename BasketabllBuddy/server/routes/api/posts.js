@@ -73,8 +73,10 @@ router.post('/',
             haveBall: req.body.haveBall,
             eventDate: req.body.eventDate,
             eventOverStatus: req.body.eventOverStatus,
+            photo: req.body.photo,
+            user: req.user.id,
             avatar: req.body.avatar,
-            user: req.user.id
+            nickName: req.body.nickName
         });
 
         newPost.save().then(post => res.json(post));
@@ -188,7 +190,7 @@ router.post('/comment/:id', passport.authenticate('jwt', { session: false}),
             .then(post => {
                 const newComment =({
                     text: req.body.text,
-                    name: req.body.name,
+                    nickName: req.body.nickName,
                     avatar: req.body.avatar,
                     user: req.user.id
                 });

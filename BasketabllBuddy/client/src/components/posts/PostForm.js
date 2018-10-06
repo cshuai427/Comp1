@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addPost } from '../../actions/postActions';
-import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import  SelectListGroup from '../common/SelectListGroup';
 import TextFieldGroup from '../common/TextFieldGroup';
 import InputGroup from '../common/InputGroup';
+import {numberOfPeople, location, ballStatus} from './PostSelectOptions';
+
 
 class PostForm extends Component{
     constructor() {
@@ -14,7 +15,7 @@ class PostForm extends Component{
             eventTitle: '',
             eventText: '',
             eventPeopleNumber: '1',
-            eventLocation: 'Sydney',
+            eventLocation: 'UTS',
             haveBall: 'false',
             eventDate: '',
             photo: '',
@@ -44,7 +45,6 @@ class PostForm extends Component{
             eventDate: this.state.eventDate,
             avatar: user.avatar,
             nickName: profile.nickName
-            // avatar: user.avatar
         };
         this.props.addPost(newPost, this.props.history);
     }
@@ -59,33 +59,8 @@ class PostForm extends Component{
 
         const { errors } = this.state;
 
-        // Select options for number of event people
-        const numberOfPeople = [
-            { label: 1 ,value: 1 },
-            { label: 2 ,value: 2 },
-            { label: 3 ,value: 3 },
-            { label: 4 ,value: 4 },
-            { label: 5 ,value: 5 },
-            { label: 6 ,value: 6 },
-            { label: 7 ,value: 7 },
-            { label: 8 ,value: 8 },
-            { label: 9 ,value: 9 }
-        ];
 
-        // Select options for event location
-        // Need to fix
-        const location = [
-            { label: 'Sydney' ,value: 'Sydney' },
-            { label: 'UTS' ,value: 'UTS' },
-            { label: 'Other Place' ,value: 'Other Place' }
-        ];
 
-        // Select options for have ball
-
-        const ballStatus = [
-            { label: 'Yes' ,value: true },
-            { label: 'No' ,value: false }
-        ];
         return(
             <div className="add-post">
                 <div className="container">

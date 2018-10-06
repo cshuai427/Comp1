@@ -22,6 +22,11 @@ class Header extends Component{
         const authLinks = (
             <ul className = "navbar-nav ml-auto">
                 <li className = "nav-item">
+                    <Link className = "nav-link" to = "/post">
+                        Post
+                    </Link>
+                </li>
+                <li className = "nav-item">
                     <Link className = "nav-link" to="/profile-view">
                         <img className="rounded-circle"
                              src={user.avatar}
@@ -77,12 +82,6 @@ class Header extends Component{
                                 </Link>
 
                             </li>
-                            <li className = "nav-item">
-                                <Link className = "nav-link" to = "/posts">
-                                    Post
-                                </Link>
-                            </li>
-
                             <li className = "nav-item">
                                 <Link className = "nav-link" to = "/">
                                     Event

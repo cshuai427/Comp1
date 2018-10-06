@@ -7,6 +7,12 @@ const PostSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'users'
     },
+    nickName: {
+        type: String
+    },
+    avatar: {
+        type: String
+    },
     eventTitle: {
         type: String,
         required: true
@@ -19,12 +25,6 @@ const PostSchema = new Schema({
         type: Number,
         required: true
     },
-    eventAttendPeople: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'users'
-        }
-    ],
     eventLocation: {
         type: String,
         required: true
@@ -41,7 +41,7 @@ const PostSchema = new Schema({
         type: Boolean,
         default: false
     },
-    avatar: {
+    photo: {
         type: String
     },
     likes: [
@@ -62,7 +62,7 @@ const PostSchema = new Schema({
                 type: String,
                 required: true
             },
-            title: {
+            nickName: {
                 type: String
             },
             avatar: {
@@ -72,6 +72,12 @@ const PostSchema = new Schema({
                 type: Date,
                 default: Date.now
             }
+        }
+    ],
+    eventAttendPeople: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'users'
         }
     ],
     createDate: {

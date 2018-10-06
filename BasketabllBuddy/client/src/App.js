@@ -16,7 +16,7 @@ import Account from './components/account/Account';
 import Event from './components/event/Event';
 import FriendList from './components/contacts/FriendList';
 import Footer from './components/footer/Footer';
-import PostPage from './components/posts/Posts';
+import PostForm from './components/posts/PostForm';
 import CommentPage from './components/posts/Comment';
 import Login from './components/authorization/Login';
 import Register from './components/authorization/Register';
@@ -24,6 +24,7 @@ import ProfileView from './components/profileView/ProfileView';
 import CreateProfile from './components/profileView/CreateProfile';
 import EditProfile from './components/profileView/EditProfile';
 import News from './components/news/News';
+import Post from './components/post/Post';
 import NotFound from './components/Not-Found/NotFound';
 
 // import './App.css';
@@ -68,7 +69,7 @@ class App extends Component {
 
                         <div className="container-fluid text-center">
                             <div className="row content">
-                                <Account/>
+                                <PrivateRoute component={Account}/>
 
                                     <div className="container col-sm-8 col-auto">
                                     <Switch>
@@ -80,13 +81,15 @@ class App extends Component {
 
                                         <Route exact path="/news" component={News}/>
 
+                                        <Route exact path="/post/:id" component={Post}/>
+
                                         <PrivateRoute exact path = { '/profile-view' } component = {ProfileView} />
 
                                         <PrivateRoute exact path = { '/create-profile' } component = {CreateProfile} />
 
                                         <PrivateRoute exact path = { '/edit-profile' } component = {EditProfile} />
 
-                                        <PrivateRoute exact path="/posts" component={PostPage}/>
+                                        <PrivateRoute exact path="/post" component={PostForm}/>
 
                                         <PrivateRoute exact path="/event/commit" component={CommentPage}/>
 
@@ -94,7 +97,8 @@ class App extends Component {
                                     </Switch>
 
                                         </div>
-                                    <FriendList/>
+
+                                {/*<PrivateRoute component={FriendList} />*/}
                                 </div>
                             </div>
 

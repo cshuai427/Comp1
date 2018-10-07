@@ -25,12 +25,24 @@ router.get('/test', (req, res)=> res.json({msg: "Posts works"}));
 //  @route  GET api/posts
 //  @desc   Get post
 //  @access Public
+router.get('/page/:pages', (req, res) => {
+    var perPage = 5;
+    var current = req.params.pages || 1;
 
-router.get('/', (req, res) =>
-{
     Post.find()
         .sort({data: -1})
-        .then(posts => res.json(posts))
+        .skip(perPage * current - perPage)
+        .limit(perPage)
+        .then(posts => {
+            Post.countDocuments()
+                .then(count => {
+                    res.json({
+                        posts: posts,
+                        currentPage: current,
+                        totalPages: Math.ceil(count / perPage)
+                    });
+                });
+        })
         .catch(err => res.status(404).json({nopostfound: 'No post found'}));
 });
 

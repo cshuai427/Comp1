@@ -75,7 +75,13 @@ class App extends Component {
 
                                 <div className="container-fluid text-center col-sm-12 col-lg-12 col-md-12 col-xs-12 col-auto nopadding" style={{backgroundColor:'#DCDCDC'}} >
                                     <Switch>
-                                        <Route exact path="/" component={Event}/>
+                                        <Route exact path="/:page"
+                                               render = { props => (
+                                                <Event
+                                                    {...props.match.params}
+                                                    key={props.match.params.page}
+                                                />)}
+                                        />
 
                                         <Route exact path="/login" component={Login}/>
 

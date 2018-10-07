@@ -19,7 +19,8 @@ class Profile extends Component {
                     </div>: null));
 
         return (
-            <div className="row">
+            <div className="profileView" >
+            <div className="row" style={{backgroundColor:'#DCDCDC'}}>
                 <div className="col-md-12">
                     <div className="card card-body bg-info text-white mb-3">
                         <div className="row">
@@ -95,7 +96,7 @@ class Profile extends Component {
 
 
                 <div className="col-md-12">
-                    <div className="card card-body bg-light mb-3">
+                    <div className="card card-body  mb-3">
                         <h3 className="text-center text-info">About Me</h3>
                         <p className="lead">{isEmpty(profile.aboutMe)
                             ? <span> {profile.nickName} does not have a aboutMe</span>
@@ -108,6 +109,7 @@ class Profile extends Component {
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         );
     }

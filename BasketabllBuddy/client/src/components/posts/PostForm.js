@@ -11,15 +11,6 @@ import isEmpty from '../../validation/is-empty';
 import { Redirect } from 'react-router-dom';
 import Spinner from '../common/Spinner';
 import { getCurrentProfile } from '../../actions/profileActions';
-import DatePicker from 'react-datepicker'
-import moment from "moment";
-import 'react-datepicker/dist/react-datepicker.css';
-//
-// import 'react-datepicker/dist/react-datepicker.min.css';
-import Moment from 'react-moment';
-import classnames from "classnames";
-
-
 
 
 class PostForm extends Component{
@@ -29,20 +20,14 @@ class PostForm extends Component{
             eventTitle: '',
             eventText: '',
             eventPeopleNumber: '1',
-            eventLocation: 'UTS',
+            eventLocation: 'Sydney',
             haveBall: 'false',
             eventDate: '',
             photo: '',
-            errors: {},
-            //datepicker: '',
-            startDate: moment(),
-            stateTime:''
-
-
+            errors: {}
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount(){
@@ -54,23 +39,6 @@ class PostForm extends Component{
             this.setState({ errors: newProps.errors });
         }
     }
-    handleChange(date) {
-
-        this.setState({
-            startDate: date,
-            startTime: moment()
-
-        });
-        if (this.state.stateTime == this.state.startDate){
-
-            return (10)
-        }else{
-            return(0)
-        }
-
-    }
-
-
     onSubmit(e){
         e.preventDefault();
         const { user } = this.props.auth;
@@ -92,24 +60,14 @@ class PostForm extends Component{
 
     onChange(e){
         this.setState({[e.target.name]:e.target.value})
-
     }
 
-    // disabledStartDate = (current) => {
-    //     return current < moment().add(-1, 'd');
-    // }
 
 
     render(){
 
         const { errors } = this.state;
 
-        const today = new Date();
-        const now = moment()
-        function disabledDate(current) {
-            // Can not select days before today and today
-            return current && current.valueOf() < Date.now();
-        }
         const { profile, loading } = this.props.profile;
 
         if(profile === null || loading )
@@ -208,44 +166,6 @@ class PostForm extends Component{
                                     icon="far fa-calendar-alt"
                                     info="You can upload a image for attract people to join your event"
                                 />
-
-                                {/*<TimePicker*/}
-                                    {/*moment={this.state.moment}*/}
-                                    {/*onChange={this.handleChange}*/}
-                                    {/*showSeconds={true}*/}
-                                    {/*locale="en"*/}
-                                {/*/>*/}
-                                <DatePicker  className='form-control form-control-lg'
-
-
-                                    selected={this.state.startDate}
-                                    onChange={this.handleChange}
-                                    showTimeSelect
-                                    timeFormat="HH:mm"
-                                    timeIntervals={15}
-                                    dateFormat="LLL"
-                                    timeCaption="time"
-                                             da
-
-
-                                            // minDate={moment()}
-                                             //minTime={moment()}
-                                            // excludeDates={[moment(),}
-                                            // disabled={this.disable}
-                                           //  startDate={this.disabledStartDate}
-                                           //  minDate={moment()}
-                                            // disabledDays={{ after: today }}
-                                            // excludeTimes={now.hours(now.hour()).minutes(now.minutes())}
-                                             minDate={now}
-                                             minTime={this.handleChange()}
-                                         // minTime={moment().add(24, "hours")}
-                                            // minTime={now.hours(now.hour()).minutes(now.minutes())}
-
-                                    //minTime={now.hours(now.hour())}
-                                            // minTime={now.hours(now.hour()).minutes(now.minutes())}
-                                             maxTime={now.hours(23).minutes(45)}
-                                />
-
 
                                 <input type="submit" value="Submit" className="btn btn-info btn-block mt-4"/>
                             </form>

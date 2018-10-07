@@ -6,7 +6,6 @@ import  SelectListGroup from '../common/SelectListGroup';
 import TextFieldGroup from '../common/TextFieldGroup';
 import InputGroup from '../common/InputGroup';
 import {numberOfPeople, location, ballStatus} from './PostSelectOptions';
-import Moment from 'moment';
 import isEmpty from '../../validation/is-empty';
 import { Redirect } from 'react-router-dom';
 import Spinner from '../common/Spinner';
@@ -14,11 +13,6 @@ import { getCurrentProfile } from '../../actions/profileActions';
 import DatePicker from 'react-datepicker'
 import moment from "moment";
 import 'react-datepicker/dist/react-datepicker.css';
-//
-// import 'react-datepicker/dist/react-datepicker.min.css';
-
-//import Moment from 'react-moment';
-import classnames from "classnames";
 
 
 
@@ -202,8 +196,8 @@ class PostForm extends Component{
                                              dateFormat="YYYY-MM-DD HH:mm"
                                              timeCaption="time"
                                              minDate={ moment().add(+1,'d')}
-
                                 />
+
 
                                 <input type="submit" value="Submit" className="btn btn-info btn-block mt-4"/>
                             </form>

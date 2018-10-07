@@ -6,6 +6,11 @@ import  SelectListGroup from '../common/SelectListGroup';
 import TextFieldGroup from '../common/TextFieldGroup';
 import InputGroup from '../common/InputGroup';
 import {numberOfPeople, location, ballStatus} from './PostSelectOptions';
+import Moment from 'moment';
+import isEmpty from '../../validation/is-empty';
+import { Redirect } from 'react-router-dom';
+import Spinner from '../common/Spinner';
+import { getCurrentProfile } from '../../actions/profileActions';
 
 
 class PostForm extends Component{
@@ -15,7 +20,7 @@ class PostForm extends Component{
             eventTitle: '',
             eventText: '',
             eventPeopleNumber: '1',
-            eventLocation: 'UTS',
+            eventLocation: 'Sydney',
             haveBall: 'false',
             eventDate: '',
             photo: '',
@@ -23,6 +28,10 @@ class PostForm extends Component{
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    componentDidMount(){
+        this.props.getCurrentProfile();
     }
 
     componentWillReceiveProps(newProps){
@@ -59,7 +68,17 @@ class PostForm extends Component{
 
         const { errors } = this.state;
 
+        const { profile, loading } = this.props.profile;
 
+        if(profile === null || loading )
+        {
+            return <Spinner />
+        }
+        else
+        {
+            if(isEmpty(profile.nickName))
+                return  <Redirect to='/create-profile' />
+        }
 
         return(
             <div className="add-post">
@@ -162,6 +181,7 @@ class PostForm extends Component{
 }
 
 PostForm.propTypes ={
+    getCurrentProfile: PropTypes.func.isRequired,
     addPost: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     profile: PropTypes.object.isRequired,
@@ -173,4 +193,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 
 });
-export default connect(mapStateToProps, { addPost })(PostForm);
+export default connect(mapStateToProps, { addPost, getCurrentProfile })(PostForm);

@@ -27,7 +27,7 @@ class EventItems extends Component {
                 </div>
                 <div className="events2 col-lg-8 col-xl-8 col-xs-8 col-sm-8">
 
-                    <div clasName="events2">
+                    <div className="events2">
                         <h3>{post.eventTitle}</h3>
                         <p className="p">
                             {post.eventText}

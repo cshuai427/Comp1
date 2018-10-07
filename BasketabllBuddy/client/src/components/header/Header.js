@@ -78,12 +78,6 @@ class Header extends Component{
                     <div className = "collapse navbar-collapse" id = "mobile-nav">
                         <ul className = "navbar-nav mr-auto">
                             <li className = "nav-item">
-                                <Link className = "nav-link navlinks" to = "/news">
-                                    News
-                                </Link>
-
-                            </li>
-                            <li className = "nav-item">
                                 <Link className = "nav-link navlinks" to = "/">
                                     Event
                                 </Link>

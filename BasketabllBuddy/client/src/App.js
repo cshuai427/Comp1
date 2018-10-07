@@ -22,7 +22,6 @@ import Register from './components/authorization/Register';
 import ProfileView from './components/profileView/ProfileView';
 import CreateProfile from './components/profileView/CreateProfile';
 import EditProfile from './components/profileView/EditProfile';
-import News from './components/news/News';
 import Post from './components/post/Post';
 import NotFound from './components/Not-Found/NotFound';
 import ManagePost from './components/manageEvent/ManagePost';
@@ -81,8 +80,6 @@ class App extends Component {
                                         <Route exact path="/login" component={Login}/>
 
                                         <Route exact path="/register" component={Register}/>
-
-                                        <Route exact path="/news" component={News}/>
 
                                         <Route exact path="/post/:id" component={Post}/>
 

@@ -26,6 +26,7 @@ import News from './components/news/News';
 import Post from './components/post/Post';
 import NotFound from './components/Not-Found/NotFound';
 import ManagePost from './components/manageEvent/ManagePost';
+import GuestView from './components/profileView/GuestView';
 
 import './App.css';
 
@@ -94,7 +95,7 @@ class App extends Component {
                                         <PrivateRoute exact path="/post" component={PostForm}/>
 
                                         <PrivateRoute exact path = { '/manage-post' } component = {ManagePost} />
-
+                                        <PrivateRoute exact path = { '/profile/nickname/:nickName' } component = {GuestView} />
                                         <Route component={NotFound}/>
                                     </Switch>
                                 </div>

@@ -27,7 +27,7 @@ class EventItems extends Component {
                 </div>
                 <div className="events2 col-lg-8 col-xl-8 col-xs-8 col-sm-8">
 
-                    <div className="">
+                    <div className="events2">
                         <h3>{post.eventTitle}</h3>
                         <p className="p">
                             {post.eventText}
@@ -39,6 +39,7 @@ class EventItems extends Component {
                         {post.eventDate}
                         </p>
                         <p>
+                            Number of attend: {post.eventAttendPeople.length} of {post.eventPeopleNumber}
                         </p>
                             <Link to={`/post/${post._id}`} className="badge badge-primary badge-pill">
                                 View

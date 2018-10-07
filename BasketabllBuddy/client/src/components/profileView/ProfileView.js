@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import Spinner from '../common/Spinner';
-import { getCurrentProfile, getProfileByNickname } from '../../actions/profileActions';
+import { getCurrentProfile } from '../../actions/profileActions';
 import Profile from './Profile';
 
 class ProfileView extends Component {
@@ -17,9 +17,6 @@ class ProfileView extends Component {
     {
         this.props.getCurrentProfile();
 
-        // if(this.props.match.params.nickName){
-        //     this.props.getProfileByNickname(this.props.match.params.nickName)
-        // }
     }
 
 

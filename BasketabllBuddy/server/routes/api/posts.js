@@ -239,18 +239,20 @@ router.delete('/comment/:id/:comment_id', passport.authenticate('jwt', { session
     });
 
 //eventAttendPeople
-//  @route  Post api/posts/attend/:id
+//  @route  Post api/posts/attend/:post_id
 //  @desc   Attend post
 //  @access Private
 
 
-router.post('/attend/:id', passport.authenticate('jwt', { session: false}),
+router.post('/attend/:post_id', passport.authenticate('jwt', { session: false}),
     (req, res)=>
     {
 
+        console.log(req.params.post_id);
+
         Profile.findOne({ user: req.user.id })
             .then( profile => {
-                Post.findById(req.params.id)
+                Post.findById(req.params.post_id)
                     .then(post => {
                         const newAttendUser = {
                             user: req.user.id,
@@ -261,17 +263,17 @@ router.post('/attend/:id', passport.authenticate('jwt', { session: false}),
                         if(post.eventAttendPeople.filter(attend => attend.user.toString() === req.user.id).length > 0){
                             return res.status(400).json({ alreadyselected: 'User already select attend this event'});
                         }
-
-                        if(post.user === req.user.id)
+                        if(post.user.toString() === req.user.id)
                         {
                             return res.status(400).json({ ownerselected: 'You can not use this function for you own event'})
                         }
 
-                        // Add user id to eventAttendPeople array
 
-                        post.eventAttendPeople.unshift(newAttendUser);
+                            // Add user id to eventAttendPeople array
 
-                        post.save().then(post => res.json(post));
+                            post.eventAttendPeople.unshift(newAttendUser);
+
+                            post.save().then(post => res.json(post));
 
                     })
                     .catch(err => res.status(404).json({ postnotfound: 'Not post found'}));
@@ -280,23 +282,24 @@ router.post('/attend/:id', passport.authenticate('jwt', { session: false}),
 
 
 
-//  @route  Post api/posts/unattend/:id
+//  @route  Post api/posts/unattend/:post_id
 //  @desc   won't attend event
 //  @access Private
 
-router.post('/unattend/:id', passport.authenticate('jwt', { session: false}),
+router.post('/unattend/:post_id', passport.authenticate('jwt', { session: false}),
     (req, res)=>
     {
         Profile.findOne({ user: req.user.id })
             .then( profile => {
-                Post.findById(req.params.id)
+                Post.findById(req.params.post_id)
                     .then(post => {
-                        if(post.eventAttendPeople.filter(attend => attend.user.toString() === req.user.id).length === 0){
-                            return res.status(400).json({ unattend: 'You have not yet select to attend this event'});
+
+                        if(post.user.toString() ===  req.user.id){
+                            return res.status(400).json({ unattend: 'This is your event, you must attend.'});
                         }
 
-                        if(post.user === req.user.id){
-                            return res.status(400).json({ unattend: 'This is your event, you must attend.'});
+                        if(post.eventAttendPeople.filter(attend => attend.user.toString() === req.user.id).length === 0){
+                            return res.status(400).json({ unattend: 'You have not yet select to attend this event'});
                         }
 
                         // Get remove index

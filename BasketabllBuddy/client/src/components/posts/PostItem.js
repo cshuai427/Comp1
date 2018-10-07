@@ -119,9 +119,9 @@ class PostItem extends Component{
 
                         <div className="col-4 pl-0">
                             <img
-                                src={basketBall1}
+                                src={post.photo}
                                 className="rounded d-block float-left m-1 w-100"
-                                alt="Title Photo"
+                                alt="Photo"
                             />
                         </div>
                         <div className="col-7 mt-3 text-left">

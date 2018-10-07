@@ -51,7 +51,7 @@ class Event extends Component {
             } else {
                 firstPage = (
                     <li className="page-item">
-                        <a className="page-link text-dark" href= "/1">
+                        <a className="page-link text-dark" href= "/event/1">
                         <span aria-hidden="true">&laquo;</span>
                         <span className="sr-only"> First </span>
                     </a >
@@ -71,7 +71,7 @@ class Event extends Component {
             } else {
                 lastPage = (
                     <li className="page-item">
-                        <a className="page-link text-dark" href={`/${totalPages}`}>
+                        <a className="page-link text-dark" href={`/event/${totalPages}`}>
                             <span aria-hidden="true">&raquo;</span>
                             <span className="sr-only"> Last </span>
                         </a >
@@ -90,7 +90,7 @@ class Event extends Component {
                 } else {
                     pageArray.push(
                         <li className="page-item" key={i}>
-                            <a className="page-link text-dark" href={`/${i}`}>{i}</a >
+                            <a className="page-link text-dark" href={`/event/${i}`}>{i}</a >
                         </li>
                     );
                 }

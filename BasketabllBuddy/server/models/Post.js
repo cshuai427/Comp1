@@ -76,8 +76,16 @@ const PostSchema = new Schema({
     ],
     eventAttendPeople: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'users'
+            user:{
+                type: Schema.Types.ObjectId,
+                ref: 'users'
+            },
+            nickName:{
+                type: String
+            },
+            avatar: {
+                type: String
+            }
         }
     ],
     createDate: {

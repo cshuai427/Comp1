@@ -4,12 +4,31 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import {Link, withRouter} from 'react-router-dom';
 import { deletePost, addLike, removeLike, attendEvent, removeAttendEvent } from "../../actions/postActions";
+import { getCurrentProfile } from '../../actions/profileActions';
 
 // should be fix
 import basketBall1 from '../../Img/basketball1.jpeg'
 
 class PostItem extends Component{
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            nickName: '',
+            avatar: ''
+        }
+    }
+
+
+    componentDidMount()
+    {
+        getCurrentProfile();
+        if(!this.props.profile.profile === null)
+        {
+            this.setState({nickName: this.props.profile.profile.nickName});
+            this.setState(({avatar: this.props.profile.profile.avatar}));
+        }
+    }
 
     onDeleteClick(id){
 
@@ -34,13 +53,24 @@ class PostItem extends Component{
     }
 
     onAttendClick(id){
-        this.props.attendEvent(id);
+
+
+        if(this.state.nickName !== null)
+        {
+            const newAttendUser = {
+                nickName : this.state.nickName,
+                avatar: this.state.avatar
+            };
+            this.props.attendEvent(id, newAttendUser);
+        }
+
     }
     onUnattendClick(id){
-        this.props.removeAttendEvent(id);
+        this.props.removeAttendEvent(id, this.props.history,'/');
     }
 
     findUserAttend(attends){
+
         const { auth } = this.props;
         if(attends.filter(attend => attend.user === auth.user.id).length > 0) {
             return true;
@@ -122,6 +152,7 @@ class PostItem extends Component{
 
 
 PostItem.propTypes = {
+    getCurrentProfile: PropTypes.func.isRequired,
     deletePost: PropTypes.func.isRequired,
     attendEvent: PropTypes.func.isRequired,
     removeAttendEvent: PropTypes.func.isRequired,
@@ -132,7 +163,8 @@ PostItem.propTypes = {
 };
 
 const mapStateToProps = state =>({
-    auth: state.auth
+    auth: state.auth,
+    profile: state.auth
 });
 
-export default connect(mapStateToProps, {deletePost, addLike, removeLike, removeAttendEvent, attendEvent})(withRouter(PostItem));
+export default connect(mapStateToProps, {deletePost, addLike, removeLike, removeAttendEvent, attendEvent, getCurrentProfile})(withRouter(PostItem));

@@ -16,16 +16,16 @@ class CommentItem extends Component {
         return (
             <div className="card card-body mb-3">
                 <div className="row">
-                    <div className="col-md-2">
+                    <div className="col-md-3">
                         <a href={`/profile/${comment.nickName}`} >
                             < img className="rounded-circle d-none d-md-block"
-                                  src={comment.avatar} alt=""/>
+                                  src={comment.avatar} alt="" style={{width:'70px',height:'70px',borderColor: '#DCDCDC', marginLeft: '25px'}}/>
                         </a >
                         <br/>
-                        <p className="text-center">{comment.nickName}</p >
+                        <p className="" style={{textAlign:'left',width:'auto'}}>{comment.nickName}</p >
                     </div>
-                    <div className="col-md-10">
-                        <p className="lead">{comment.text}</p >
+                    <div className="col-md-9">
+                        <p className="lead" style={{textAlign:'left'}}>{comment.text}</p >
                         {comment.user === auth.user.id ?
                             (<button onClick={this.onDeleteClick.bind(this, postId, comment._id)}
                                      type="button" className="btn btn-danger mr-1">

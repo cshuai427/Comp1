@@ -81,7 +81,7 @@ class App extends Component {
 
                                         <Route exact path="/register" component={Register}/>
 
-                                        <Route exact path="/news" component={News}/>
+                                        {/*<Route exact path="/news" component={News}/>*/}
 
                                         <Route exact path="/post/:id" component={Post}/>
 

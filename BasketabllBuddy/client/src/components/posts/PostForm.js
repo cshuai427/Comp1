@@ -7,7 +7,7 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import InputGroup from '../common/InputGroup';
 import {numberOfPeople, location, ballStatus} from './PostSelectOptions';
 import isEmpty from '../../validation/is-empty';
-import { Redirect } from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import Spinner from '../common/Spinner';
 import { getCurrentProfile } from '../../actions/profileActions';
 import DatePicker from 'react-datepicker'
@@ -104,7 +104,11 @@ class PostForm extends Component{
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
-
+                            <div className="align-baseline">
+                                <Link to='/profile-view' className="btn btn-light float-left">
+                                    Go Back
+                                </Link>
+                            </div>
                             <h4 className="badge badge-primary badge-pill display-4 text-center">
                                 Post Your Meetup Events
                             </h4>

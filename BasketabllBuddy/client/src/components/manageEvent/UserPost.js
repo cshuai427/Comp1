@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { deletePost } from '../../actions/postActions';
+import moment from 'moment';
 
 class UserPost extends Component {
 
@@ -16,27 +17,36 @@ class UserPost extends Component {
 
         const { posts, auth } = this.props;
 
+        let number = 0;
        let postedEvent = posts.map(post=>(
             auth.user.id === post.user
                 ?
                 <tr key={post._id}>
+                    <th>{++number}</th>
                     <td><Link to={`/post/${post._id}`} >{post.eventTitle}</Link></td>
-                    <td>{post.createDate}</td>
-                    <td><button onClick={this.onDeletePostClick.bind(this, post._id)} className="btn btn-danger">Delete</button></td>
+                    <td>{moment(post.createDate).format('YYYY-MM-DD HH:mm')}</td>
+                    <td><button
+                        onClick={this.onDeletePostClick.bind(this, post._id)}
+                        className="btn btn-sm btn-outline-danger w-50">
+                        <i className="fas fa-times"/>
+                    </button></td>
                 </tr>
                 : null));
         return (
-            <div>
-                <h4 className="mb-4">You posted Event</h4>
-                <table className="table">
+            <div className="container m-3 py-3 mx-auto pl-0 row border rounded shadow-sm">
+                <h4 className="m-2 mx-auto">Your Posted Events</h4>
+                <table className="table table-sm">
                     <thead>
-                    <tr>
-                        <th>Event Title</th>
-                        <th>Create Date</th>
-                        <th />
+                    <tr className="table-info">
+                        <th scope="col">#</th>
+                        <th scope="col">Event Title</th>
+                        <th scope="col">Create Date</th>
+                        <th scope="col"/>
                     </tr>
-                    {postedEvent}
                     </thead>
+                    <tbody>
+                    {postedEvent}
+                    </tbody>
                 </table>
             </div>
         );

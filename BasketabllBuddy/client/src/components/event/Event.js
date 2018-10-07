@@ -117,19 +117,7 @@ class Event extends Component {
                 <h1>Basketball Meetup Events</h1>
                 <hr />
                 <div>
-                    < img src={ basketball1 } width="200" height="100"  />
-                    <h3>Saturday Event -test 1</h3>
-                    <p>Hello everyone, this Saturday I will play basketball at central. Anyone has time could join me. Welcome <a href=" "> View</a ></p >
-                    <hr/>
-                    <h3>Sunday Event -test 2</h3>
-                    <p>Hello everyone, this Saturday I will play basketball at central. Anyone has time could join me. Welcome<a href="/event/commit"> View</a ></p >
-                    <hr/>
-                    < img src={ basketball2 } width="200" height="100"  />
-                    <h3>Saturday Event -test 3</h3>
-                    <p>Hello everyone, this Saturday I will play basketball at central. Anyone has time could join me. Welcome <a href="/event/commit"> View</a ></p >
-                    <hr/>
                     {postContent}
-                    <br />
                     {pagination}
                 </div>
             </div>

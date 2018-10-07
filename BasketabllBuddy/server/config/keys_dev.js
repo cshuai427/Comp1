@@ -6,6 +6,6 @@ module.exports = {
     secretOrKey: 'secret',
 
     // nodemailer
-    emailName: 'basketballbuddyaip',
+    emailName: 'basketballbuddyaip@gmail.com',
     emailPassword: 'AIP123456'
 };

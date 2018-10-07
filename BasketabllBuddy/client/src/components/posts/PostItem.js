@@ -107,10 +107,6 @@ class PostItem extends Component{
                                 </span>
                     ))
             }
-            else
-            {
-                return  <span className="col-1 px-0 pr-2">None</span>
-            }
         }
 
         return (

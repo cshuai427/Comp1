@@ -93,9 +93,10 @@ class PostItem extends Component{
 
                     <h3 className="text-center text-info">{post.eventTitle}</h3>
 
-                    < img src={basketBall1} width="200" height="100" />
+                    < img src={basketBall1} width="200" height="100" style={{paddingLeft:'4%'}}/>
+                    <p></p>
 
-                    <div className="">
+                    <div className="postItem">
                         <p className="lead"><strong>Owner: </strong>{post.nickName}</p >
                         <p className="lead"><strong>Description: </strong>{post.eventText}</p >
                         <p className="lead"><strong>Location: </strong>{post.eventLocation}</p >
@@ -103,7 +104,7 @@ class PostItem extends Component{
                         <p className="lead"><strong>Status: </strong>{post.eventOverStatus ? 'Over': 'Not begin'}</p >
                         <p className="lead"><strong>Have ball? </strong>{post.haveBall ? 'Yes': 'No'}</p >
                         <p className="lead"><strong>Required number of People: </strong>{post.eventPeopleNumber}</p >
-                        <p className="lead"><strong>Who will go: </strong>{post.eventAttendPeople.length === 0? 'None' : post.eventAttendPeople}</p >
+                        <p className="lead"><strong>Who will go: </strong>{post.eventAttendPeople.length === 0? 'None' : post.eventAttendPeople.length}</p >
                         <p className="lead"><strong>Do you want to attend ? </strong></p >
 
 

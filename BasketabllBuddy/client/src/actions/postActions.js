@@ -9,18 +9,42 @@ export const addPost = (postData, history) => dispatch => {
         .then(res =>
         {
             // ?
+            console.log(res.data);
             dispatch ({
                 type: ADD_POST,
                 payload: res.data
             });
             // should be to created post
-            history.push('/')
+            history.push(`/post/${res.data._id}`);
         })
         .catch(err =>
         dispatch({
             type: GET_ERRORS,
             payload: err.response.data
         })
+        );
+};
+
+
+//delete post
+export const deletePost = (id, history, url) => dispatch => {
+    axios
+        .delete(`/api/posts/${id}`)
+        .then(res =>
+            {
+                dispatch({
+                    type: DELETE_POST,
+                    payload: id
+                });
+               url ? history.push(url) : null
+            }
+
+        )
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
         );
 };
 
@@ -111,10 +135,12 @@ export const deleteComment = (postId, commentId) => dispatch =>{
     axios
         .delete(`/api/posts/comment/${postId}/${commentId}`)
         .then(res =>
-            dispatch({
-                type: GET_POST,
-                payload: res.data
-            }))
+            {
+                dispatch({
+                    type: GET_POST,
+                    payload: res.data
+                });
+            })
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,
@@ -122,17 +148,12 @@ export const deleteComment = (postId, commentId) => dispatch =>{
             }));
 };
 
+// Attend Event
 
-//delete post
-export const deletePost = id => dispatch => {
+export const attendEvent = id => dispatch => {
     axios
-        .delete(`/api/posts/${id}`)
-        .then(res =>
-            dispatch({
-                type: DELETE_POST,
-                payload: id
-            })
-        )
+        .post(`/api/posts/attend/${id}`)
+        .then(res => dispatch(getPost(id)))
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,
@@ -140,6 +161,22 @@ export const deletePost = id => dispatch => {
             })
         );
 };
+
+// Remove Attend
+
+export const removeAttendEvent = id => dispatch => {
+    axios
+        .post(`/api/posts/unattend/${id}`)
+        .then(res => dispatch(getPost(id)))
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};
+
+
 // set loading state
 export const setPostLoading = () => {
     return {

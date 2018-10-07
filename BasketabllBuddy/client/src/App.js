@@ -3,7 +3,7 @@ import  PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import jwt_decode from 'jwt-decode';
-import setAuthtoken from './unit/setAuthToken';
+import setAuthtoken from './utils/setAuthToken';
 import {logoutUser, setCurrentUser} from './actions/authActions';
 
 import { Provider } from 'react-redux';
@@ -17,7 +17,6 @@ import Event from './components/event/Event';
 import FriendList from './components/contacts/FriendList';
 import Footer from './components/footer/Footer';
 import PostForm from './components/posts/PostForm';
-import CommentPage from './components/posts/Comment';
 import Login from './components/authorization/Login';
 import Register from './components/authorization/Register';
 import ProfileView from './components/profileView/ProfileView';
@@ -26,6 +25,7 @@ import EditProfile from './components/profileView/EditProfile';
 import News from './components/news/News';
 import Post from './components/post/Post';
 import NotFound from './components/Not-Found/NotFound';
+import ManagePost from './components/manageEvent/ManagePost';
 
 // import './App.css';
 
@@ -69,7 +69,7 @@ class App extends Component {
 
                         <div className="container-fluid text-center">
                             <div className="row content">
-                                <PrivateRoute component={Account}/>
+                                {/*<PrivateRoute component={Account}/>*/}
 
                                     <div className="container col-sm-8 col-auto">
                                     <Switch>
@@ -91,7 +91,7 @@ class App extends Component {
 
                                         <PrivateRoute exact path="/post" component={PostForm}/>
 
-                                        <PrivateRoute exact path="/event/commit" component={CommentPage}/>
+                                        <PrivateRoute exact path = { '/manage-post' } component = {ManagePost} />
 
                                         <Route component={NotFound}/>
                                     </Switch>

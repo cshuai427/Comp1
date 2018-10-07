@@ -13,10 +13,10 @@ class FriendItem extends Component {
         return (
             <li className="list-group-item d-flex justify-content-between align-items-center">
                 <Link to={`/profile/${profile._id}`}>
-                    < img src={profile.user.avatar}
-                          alt="avatar"
-                          className="rounded-circle"
-                          style={{width:'25px' ,height:'25px'}}/>{' '+ profile.nickName}
+                <img src={profile.user.avatar}
+                     alt="avatar"
+                     className="rounded-circle"
+                     style={{width:'25px' ,height:'25px'}}/>{' '+ profile.nickName}
                 </Link>
                 <Link to={'/todo'} className="badge badge-primary badge-pill">2</Link>
             </li>
@@ -31,3 +31,6 @@ FriendItem.propTypes = {
 
 
 export default FriendItem;
+
+
+

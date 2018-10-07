@@ -4,11 +4,37 @@ import { connect } from 'react-redux';
 import { getProfiles } from '../../actions/profileActions';
 import FriendItem from './FriendItem';
 import Spinner from '../common/Spinner'
+import axios from "axios";
 
+function searchingFor(term){
+    return function (x) {
+        return x.first.toLowerCase().includes(term.toLowerCase()) || !term;
+
+    }
+}
 class FriendList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            searchContent: "",
+            friendItems: [],
+            term:''
+        };
+        this.onChange = this.onChange.bind(this); // ！
+
+
+    }
 
     componentDidMount(){
         this.props.getProfiles();
+    }
+    onChange(e) {
+       // this.setState({ [e.target.name]: e.target.value });
+        this.setState({ term: e.target.value });
+
+
+
+
     }
 
     render(){
@@ -18,22 +44,39 @@ class FriendList extends Component {
 
         let friendItems;
 
+
         if(profiles === null || loading) {
-            friendItems = <Spinner />;
+             friendItems = <Spinner />;
         }
         else
         {
 
             if(profiles.length > 0){
-                friendItems = profiles.map(profile =>
-                    (
+                friendItems = profiles.filter(searchingFor(this.state.term)).map(profile =>{
+                       return(
+                           <li
+                               className="dropdown-item list-item-group"
+                               //key={index}
+                               onClick={this.onClickTitle}
+                               value={profile.nickName}
+                           >
+                               {profile.nickName}
+                           </li>
+                       )
 
-                        // Remove login user from list
-                        user.id !== profile.user._id
-                            ? <FriendItem key={profile._id} profile={profile} />
-                            : null
+               }
+                    // (
+                    //
+                    //     // Remove login user from list
+                    //     profile.nickName && profile.user ?
+                    //         <FriendItem key={profile._id} profile={profile} />
+                    //         : null
+                    //
+                    // )
 
-                    ))
+
+
+                );
             }
             else
             {
@@ -41,16 +84,25 @@ class FriendList extends Component {
             }
         }
 
+
         return(
             <div className="col-sm-2 col-auto sidenav bg-secondary">
 
-                 <ul className="list-group list-group-flush">
-                     <li className="list-group-item d-flex justify-content-between align-items-center">
-                     <i className="fa fa-search"/>
-                     <input type="text" className="bg-light"/>
-                     </li>
-                     {friendItems}
-                 </ul>
+                <ul className="list-group list-group-flush">
+                    <li className="list-group-item d-flex justify-content-between align-items-center">
+                        <i className="fa fa-search"/>
+                        <input type="text" className="bg-light"
+                               name="searchContent"
+                               autoComplete="off"
+                               required
+                               value={this.state.searchContent}
+                               onChange={this.onChange}
+
+                        />
+                    </li>
+
+                    {friendItems}
+                </ul>
             </div>
         );
     }

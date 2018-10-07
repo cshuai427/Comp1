@@ -8,6 +8,7 @@ import { getCurrentProfile } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
 // should be fix
 import basketBall1 from '../../Img/basketball1.jpeg'
+import moment from 'moment';
 
 class PostItem extends Component{
 
@@ -39,7 +40,6 @@ class PostItem extends Component{
     }
 
     onAttendClick(id, nickName, avatar){
-
 
         if(nickName !== null)
         {
@@ -89,13 +89,13 @@ class PostItem extends Component{
                     <h3 className="text-center text-info">{post.eventTitle}</h3>
 
                     < img src={basketBall1} width="200" height="100" style={{paddingLeft:'4%'}}/>
-                    <p></p>
+                    <p></p >
 
                     <div className="postItem">
                         <p className="lead"><strong>Owner: </strong>{post.nickName}</p >
                         <p className="lead"><strong>Description: </strong>{post.eventText}</p >
                         <p className="lead"><strong>Location: </strong>{post.eventLocation}</p >
-                        <p className="lead"><strong>Time: </strong>{post.eventDate}</p >
+                        <p className="lead"><strong>Time: </strong>{moment(post.eventDate).format('YYYY-MM-DD HH:mm')}</p >
                         <p className="lead"><strong>Status: </strong>{post.eventOverStatus ? 'Over': 'Not begin'}</p >
                         <p className="lead"><strong>Have ball? </strong>{post.haveBall ? 'Yes': 'No'}</p >
                         <p className="lead"><strong>Required number of People: </strong>{post.eventPeopleNumber}</p >
@@ -105,7 +105,7 @@ class PostItem extends Component{
 
                         /*/event attend /*/
                         {auth.isAuthenticated
-                        ? (<span>
+                            ? (<span>
                             <button
                                 onClick={this.onAttendClick.bind(this, post._id, profile.nickName, auth.user.avatar)}
                                 type="button"
@@ -115,7 +115,7 @@ class PostItem extends Component{
                                     {
                                         'text-info'
                                             : this.findUserAttend(post.eventAttendPeople)
-                                })} />
+                                    })} />
                                 <span
                                     className="badge badge-light"
                                 >
@@ -136,7 +136,7 @@ class PostItem extends Component{
 
                         /*/event like /*/
                         {auth.isAuthenticated
-                        ? (<span>
+                            ? (<span>
                                 <button
                                     onClick={this.onLikeClick.bind(this, post._id)}
                                     type="button"
@@ -147,7 +147,7 @@ class PostItem extends Component{
                                         {
                                             'text-info'
                                                 : this.findUserLike(post.likes)
-                                })} />
+                                        })} />
                                 <span
                                     className="badge badge-light">
                                     {post.likes.length}
@@ -175,7 +175,7 @@ class PostItem extends Component{
                                     </button>)
                                     :null}
                         </span>)
-                        : null}
+                            : null}
                     </div>
                 </div>
             </div>

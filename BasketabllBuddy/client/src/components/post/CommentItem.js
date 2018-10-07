@@ -20,14 +20,14 @@ class CommentItem extends Component {
                 <div className="container m-3 py-3 pl-0 row border rounded shadow-sm bg-light">
                     <div className="col-2">
                         <Link to={`/profile/nickname${comment.nickName}`}>
-                        <img
-                            src={comment.avatar}
-                            className="rounded-circle w-100 shadow"
-                            alt={comment.nickName}
-                        />
+                            <img
+                                src={comment.avatar}
+                                className="rounded-circle w-100 shadow"
+                                alt={comment.nickName}
+                            />
                         </Link>
 
-                        <p className="font-weight-bold py-2 mb-0">{comment.nickName}</p>
+                        <p className="font-weight-bold py-2 mb-0">{comment.nickName}</p >
                     </div>
                     <div className="col-9 rounded-left bg-light border border-right-0 mt-0 text-left">
                         <h5 className="d-inline-block font-italic py-3 px-1">

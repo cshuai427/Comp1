@@ -80,7 +80,7 @@ class CommentForm extends Component {
                             className="rounded-circle w-100 shadow"
                             alt="niubi"
                         />
-                        <p className="font-weight-bold py-2 mb-0">{profile.nickName}</p>
+                        <p className="font-weight-bold py-2 mb-0">{profile.nickName}</p >
                     </div>
                     <div className="col-10 mt-0 p-0">
                         <form onSubmit={this.onSubmit}>

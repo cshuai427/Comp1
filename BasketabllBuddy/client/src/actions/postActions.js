@@ -150,9 +150,9 @@ export const deleteComment = (postId, commentId) => dispatch =>{
 
 // Attend Event
 
-export const attendEvent = id => dispatch => {
+export const attendEvent = (id, newAttendUser) => dispatch => {
     axios
-        .post(`/api/posts/attend/${id}`)
+        .post(`/api/posts/attend/${id}`, newAttendUser)
         .then(res => dispatch(getPost(id)))
         .catch(err =>
             dispatch({

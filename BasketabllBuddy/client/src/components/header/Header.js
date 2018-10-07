@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import {logoutUser} from "../../actions/authActions";
 import PropTypes from 'prop-types';
 
-
 class Header extends Component{
 
     onLogoutClick(e){
@@ -20,17 +19,13 @@ class Header extends Component{
         const { isAuthenticated, user } = this.props.auth;
 
         const authLinks = (
-            <ul className = "navbar-nav ml-auto">
+            <ul className = "navbar-nav ml-auto sm-auto xs-auto lg-auto">
+
                 <li className = "nav-item">
-                    <Link className = "nav-link" to = "/post">
-                        Post
-                    </Link>
-                </li>
-                <li className = "nav-item">
-                    <Link className = "nav-link" to="/profile-view">
+                    <Link className = "nav-link navlinks" to="/profile-view">
                         <img className="rounded-circle"
                              src={user.avatar}
-                             style={{width:'25px',marginRight:'5px'}}
+                             style={{width:'28px',marginRight:'5px'}}
                              alt={user.name}
                              title={user.name}
                         />{' '}
@@ -38,8 +33,13 @@ class Header extends Component{
                     </Link>
                 </li>
                 <li className = "nav-item">
-                    <Link to="" className = "nav-link bg-danger" onClick={this.onLogoutClick.bind(this)}>
-                            <i className="fa fa-sign-out-alt"/> Logout
+                    <Link className = "nav-link navlinks" to = "/post">
+                        Post
+                    </Link>
+                </li>
+                <li className = "nav-item" >
+                    <Link to="" className = "nav-link navlinks" onClick={this.onLogoutClick.bind(this)}>
+                        <i className="fa fa-sign-out-alt" />Logout
                     </Link>
                 </li>
             </ul>
@@ -47,22 +47,23 @@ class Header extends Component{
         const guestLinks = (
             <ul className = "navbar-nav ml-auto">
                 <li className = "nav-item">
-                    <Link className = "nav-link" to="/login">
-                        <i className="fa fa-sign-in-alt"/>{' '}
-                            Login
+                    <Link className = "nav-link navlinks" to="/login">
+                        <i className="fa fa-sign-in-alt" />{' '}
+                        Login
                     </Link>
                 </li>
                 <li className = "nav-item">
 
-                    <Link className = "nav-link" to="/register">
-                    <i className="fa fa-user"/>{' '}
+                    <Link className = "nav-link navlinks" to="/register">
+                        <i className="fa fa-user" />{' '}
                         Sign Up
                     </Link>
                 </li>
             </ul>
         );
+
         return(
-            <nav className = "navbar navbar-inverse navbar-expand-sm navbar-dark bg-primary mb-4">
+            <nav className = "navbar navbar-expand-sm " style={{backgroundColor: '#ffffff'}}>
                 <div className="container">
                     <Link to="/" className = "navbar-brand">
                         <img src = { logo } alt="logo" />
@@ -77,13 +78,13 @@ class Header extends Component{
                     <div className = "collapse navbar-collapse" id = "mobile-nav">
                         <ul className = "navbar-nav mr-auto">
                             <li className = "nav-item">
-                                <Link className = "nav-link" to = "/news">
+                                <Link className = "nav-link navlinks" to = "/news">
                                     News
                                 </Link>
 
                             </li>
                             <li className = "nav-item">
-                                <Link className = "nav-link" to = "/">
+                                <Link className = "nav-link navlinks" to = "/">
                                     Event
                                 </Link>
                             </li>

@@ -26,10 +26,16 @@ module.exports = function validationRegisterInput(data) {
         errors.email = 'Email field is required';
     }
 
+    var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*?[#?!@$%^&*-])/;
+
+    if(!regex.exec(data.password)) {
+        errors.password = 'Your password should include one Uppercase,Lowercase,number and Symbol'
+    }
 
     if(!validator.isLength(data.password, {min: 6, max: 30})){
         errors.password = 'Password must be at least 6 and 30 characters';
     }
+
 
     if(validator.isEmpty(data.password)){
         errors.password = 'Password field is required';

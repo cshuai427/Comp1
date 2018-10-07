@@ -252,6 +252,12 @@ router.post('/attend/:id', passport.authenticate('jwt', { session: false}),
             .then( profile => {
                 Post.findById(req.params.id)
                     .then(post => {
+                        const newAttendUser = {
+                            user: req.user.id,
+                            nickName: req.body.nickName,
+                            avatar: req.body.avatar
+                        };
+
                         if(post.eventAttendPeople.filter(attend => attend.user.toString() === req.user.id).length > 0){
                             return res.status(400).json({ alreadyselected: 'User already select attend this event'});
                         }
@@ -263,7 +269,7 @@ router.post('/attend/:id', passport.authenticate('jwt', { session: false}),
 
                         // Add user id to eventAttendPeople array
 
-                        post.eventAttendPeople.unshift({ user: req.user.id});
+                        post.eventAttendPeople.unshift(newAttendUser);
 
                         post.save().then(post => res.json(post));
 
@@ -285,7 +291,7 @@ router.post('/unattend/:id', passport.authenticate('jwt', { session: false}),
             .then( profile => {
                 Post.findById(req.params.id)
                     .then(post => {
-                        if(post.eventAttendPeople.filter(like => like.user.toString() === req.user.id).length === 0){
+                        if(post.eventAttendPeople.filter(attend => attend.user.toString() === req.user.id).length === 0){
                             return res.status(400).json({ unattend: 'You have not yet select to attend this event'});
                         }
 

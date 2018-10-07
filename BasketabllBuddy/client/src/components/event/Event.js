@@ -12,6 +12,7 @@ import basketball2 from "../../Img/basketball2.jpg";
 import { getPosts } from '../../actions/postActions';
 import Spinner from '../common/Spinner';
 import EventFeed from './EventFeed';
+import basketballBanner from '../../Img/basketballBanner.jpg';
 
 class Event extends Component {
 
@@ -36,22 +37,30 @@ class Event extends Component {
         return(
 
             <div className="Event">
-
+                <div className="banner nopadding">
+                    <img className="tp-bgimg defaultimg col-sm-12 col-lg-12 col-md-12 col-xs-12 nopadding img-responsive img-thumbnail pull-left"
+                         src={basketballBanner}
+                         style={{position:'center', height:'100%', width:'100%'}}
+                         alt="Responsive image"
+                    />
+                </div>
                 <h1>Basketball Meetup Events</h1>
                 <hr />
                 <div>
-                    < img src={ basketball1 } width="200" height="100"  />
-                    <h3>Saturday Event</h3>
-                    <p>Hello everyone, this Saturday I will play basketball at central. Anyone has time could join me. Welcome <a href=" "> View</a ></p >
-                    <hr/>
-                    <h3>Sunday Event</h3>
-                    <p>Hello everyone, this Saturday I will play basketball at central. Anyone has time could join me. Welcome<a href="/event/commit"> View</a ></p >
-                    <hr/>
-                    < img src={ basketball2 } width="200" height="100"  />
-                    <h3>Saturday Event</h3>
-                    <p>Hello everyone, this Saturday I will play basketball at central. Anyone has time could join me. Welcome <a href="/event/commit"> View</a ></p >
-                    <hr/>
+                    {/*< img src={ basketball1 } width="200" height="100"  />*/}
+                    {/*<h3>Saturday Event</h3>*/}
+                    {/*<p>Hello everyone, this Saturday I will play basketball at central. Anyone has time could join me. Welcome <a href=" "> View</a ></p >*/}
+                    {/*<hr/>*/}
+                    {/*<h3>Sunday Event</h3>*/}
+                    {/*<p>Hello everyone, this Saturday I will play basketball at central. Anyone has time could join me. Welcome<a href="/event/commit"> View</a ></p >*/}
+                    {/*<hr/>*/}
+                    {/*< img src={ basketball2 } width="200" height="100"  />*/}
+                    {/*<h3>Saturday Event</h3>*/}
+                    {/*<p>Hello everyone, this Saturday I will play basketball at central. Anyone has time could join me. Welcome <a href="/event/commit"> View</a ></p >*/}
+                    {/*<hr/>*/}
+                    <div className="eventAll">
                     {postContent}
+                    </div>
                 </div>
 
             </div>

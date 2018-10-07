@@ -73,7 +73,7 @@ class App extends Component {
                             {/*<div className="row content">*/}
                                 {/*<PrivateRoute component={Account}/>*/}
 
-                                <div className="container text-center col-sm-12 col-lg-12 col-md-12 col-xs-12 col-auto nopadding" style={{backgroundColor:'#DCDCDC'}} >
+                                <div className="container-fluid text-center col-sm-12 col-lg-12 col-md-12 col-xs-12 col-auto nopadding" style={{backgroundColor:'#DCDCDC'}} >
                                     <Switch>
                                         <Route exact path="/" component={Event}/>
 

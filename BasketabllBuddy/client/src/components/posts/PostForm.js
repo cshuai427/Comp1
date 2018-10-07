@@ -197,6 +197,7 @@ class PostForm extends Component{
                                              timeCaption="time"
                                              minDate={ moment().add(+1,'d')}
                                 />
+                                <small className="badge badge-danger badge-pill">Please Select your event date</small>
 
 
                                 <input type="submit" value="Submit" className="btn btn-info btn-block mt-4"/>

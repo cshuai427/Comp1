@@ -87,6 +87,10 @@
     text-align: left;
     padding-left: 4%;
 }
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
 /* Set white background color, grey text and some padding */
 header {
     background-color: white;

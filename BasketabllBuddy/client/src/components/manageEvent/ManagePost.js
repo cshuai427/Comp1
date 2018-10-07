@@ -72,21 +72,22 @@ class ManagePost extends Component {
                             <h1 className="display-4">
                                 Event Management
                             </h1>
-
+                            <div className="container m-3 py-3 mx-auto pl-0 row border rounded shadow-sm">
                             {ManageContent}
-                            <h4 className="mb-4">Your posted Comment</h4>
-                            <table className="table">
-                                <thead>
-                                <tr>
-                                    <th width="25%">Event Title</th>
-                                    <th width="25%">Comment Content</th>
-                                    <th width="25%">Create Date</th>
-                                    <th width="25%"/>
+                            <h4 className="m-2 mx-auto">Your posted Comment</h4>
 
-                                </tr>
-                                </thead>
-                            </table>
-                            {ManageCommentContent}
+                                <table className="table table-sm">
+                                    <thead>
+                                    <tr className="table-info">
+                                        <th scope="col">Event Title</th>
+                                        <th scope="col">Comment Content</th>
+                                        <th scope="col">Create Date</th>
+                                        <th scope="col"/>
+                                    </tr>
+                                    </thead>
+                                </table>
+                                {ManageCommentContent}
+                            </div>
                         </div>
                     </div>
                 </div>

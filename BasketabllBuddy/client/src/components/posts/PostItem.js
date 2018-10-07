@@ -97,7 +97,7 @@ class PostItem extends Component{
 
                 attendAvatar = post.eventAttendPeople.map(user =>
                     (
-                        <span key={user.user} className="col-2 px-0 pr-2">
+                        <span key={user.user} className="col-1 px-0 pr-2">
                                   <Link to={`/profile/nickname/${user.nickName}`}><img
                                       src={user.avatar}
                                       className="rounded-circle w-100 shadow"
@@ -109,7 +109,7 @@ class PostItem extends Component{
             }
             else
             {
-
+                return  <span className="col-1 px-0 pr-2">None</span>
             }
         }
 
@@ -205,11 +205,11 @@ class PostItem extends Component{
                             ? (<div className="col-1 py-4 px-1">
                                 <h5>
                                     <span className="badge badge-light align-middle bg-white w-100">
-                                        {post.eventPeopleNumber - post.eventAttendPeople.length}
+                                        {post.eventPeopleNumber - post.eventAttendPeople.length <= 0 ? 0 : post.eventPeopleNumber - post.eventAttendPeople.length}
                                     </span>
                                     <span className={(post.eventPeopleNumber - post.eventAttendPeople.length) < 3
                                         ? "badge badge-danger align-middle mb-2 w-100" : "badge badge-primary align-middle mb-2 w-100"}>
-                                        Remain
+                                        {post.eventPeopleNumber - post.eventAttendPeople.length <=0 ? 'Full' : 'Remain'}
                                     </span>
                                 </h5>
                             <button

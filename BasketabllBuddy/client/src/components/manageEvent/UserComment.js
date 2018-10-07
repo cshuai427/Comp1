@@ -7,34 +7,39 @@ import { Link } from "react-router-dom";
 class UserComment extends Component {
 
 
+    componentWillReceiveProps(nextProps)
+    {
+
+    }
+
 
     render() {
 
         const { post, auth } = this.props;
 
+        let number = 0;
         let commentManageContent;
 
         commentManageContent = post.comments.map(comment => (
             auth.user.id === comment.user
                 ?
-                <tr key={comment._id} >
-                    <td width="25%"><Link to={`/post/${post._id}`}>{post.eventTitle}</Link></td>
-                    <td width="25%">{comment.text}</td>
-                    <td width="25%">{comment.date}</td>
-                    <td width="25%">
-                        <button onClick={this.props.onDeleteCommentClick.bind(this, post._id, comment._id)}
-                                className="btn btn-danger">Delete
-                        </button>
-                    </td>
-                </tr>
-                : null));
-        return (
-            <div>
-                <table className="table">
+                <table className="table table-sm">
                     <tbody>
-                    {commentManageContent}
+                <tr key={comment._id} >
+                    <td><Link to={`/post/${post._id}`}>{post.eventTitle}</Link></td>
+                    <td>{comment.text}</td>
+                    <td>{comment.date}</td>
+                        <button onClick={this.props.onDeleteCommentClick.bind(this, post._id, comment._id)}
+                                className="btn btn-sm btn-outline-danger w-50">
+                            <i className="fas fa-times"/>
+                        </button>
+                </tr>
                     </tbody>
                 </table>
+                : number++));
+        return (
+            <div className={number === post.comments.length ? "invisible" :"container m-3 py-3 mx-auto pl-0 row border rounded shadow-sm"}>
+                   {commentManageContent}
             </div>
 
         );

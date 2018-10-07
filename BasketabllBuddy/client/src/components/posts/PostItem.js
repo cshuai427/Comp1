@@ -151,7 +151,7 @@ class PostItem extends Component{
 
                                 <i className="fas fa-basketball-ball" />
                                 <span className={post.haveBall ? 'badge badge-success shadow-sm mx-2 px-2': 'badge badge-danger shadow-sm mx-2 px-2' }>
-                                    {post.haveBall ? '' : 'Need a ball'}
+                                    {post.haveBall ? 'I will take' : 'Need a ball'}
                                 </span>
                                 {auth.isAuthenticated
                                     ? (<span>

@@ -50,8 +50,9 @@ module.exports = function validationPost(data) {
         errors.haveBall = 'Ball field is required';
     }
 
-    if(validator.isEmpty(data.eventDate)){
-        errors.eventDate = 'Event start date field is required';
+
+    if(validator.toDate(data.eventDate) === null){
+        errors.eventDate = 'This is not a date'
     }
 
 

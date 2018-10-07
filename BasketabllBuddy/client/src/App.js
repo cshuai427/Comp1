@@ -27,7 +27,7 @@ import Post from './components/post/Post';
 import NotFound from './components/Not-Found/NotFound';
 import ManagePost from './components/manageEvent/ManagePost';
 
-// import './App.css';
+import './App.css';
 
 
 
@@ -65,13 +65,15 @@ class App extends Component {
                 <Router>
                     <div className="App">
 
-                        <Header/>
+                        <div className="header">
+                            <Header/>
+                        </div>
 
                         <div className="container-fluid text-center">
-                            <div className="row content">
+                            {/*<div className="row content">*/}
                                 {/*<PrivateRoute component={Account}/>*/}
 
-                                    <div className="container col-sm-8 col-auto">
+                                    <div className="container text-center col-sm-12 col-lg-12 col-md-12 col-xs-12 col-auto nopadding" style={{backgroundColor:'#DCDCDC'}} >
                                     <Switch>
                                         <Route exact path="/" component={Event}/>
 

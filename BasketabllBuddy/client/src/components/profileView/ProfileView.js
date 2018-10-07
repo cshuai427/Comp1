@@ -17,9 +17,9 @@ class ProfileView extends Component {
     {
         this.props.getCurrentProfile();
 
-        if(this.props.match.params.nickName){
-            this.props.getProfileByNickname(this.props.match.params.nickName)
-        }
+        // if(this.props.match.params.nickName){
+        //     this.props.getProfileByNickname(this.props.match.params.nickName)
+        // }
     }
 
 
@@ -44,11 +44,15 @@ class ProfileView extends Component {
                     <div>
                         <p className="lead text-muted">
                             Welcome{' '}
-                            <Link to={`{profile-view/${user.name}`}>{user.name}</Link>
+                            {/*<Link to={`{profile-view/${user.name}`}>{user.name}</Link>*/}
                         </p >
                         <Link to="/edit-profile" className="btn btn-light" >
                             <i className="fas fa-user-circle text-info mr-1" />
                             Edit Profile
+                        </Link>
+                        <Link to="/manage-post" className="btn btn-light" >
+                            <i className="fas fa-user-circle text-info mr-1" />
+                            Manage post
                         </Link>
                     </div>
                 );
@@ -107,7 +111,6 @@ class ProfileView extends Component {
 
 ProfileView.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
-    getProfileByNickname: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     profile: PropTypes.object.isRequired
 };
@@ -117,4 +120,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, getProfileByNickname })(ProfileView);
+export default connect(mapStateToProps, { getCurrentProfile })(ProfileView);

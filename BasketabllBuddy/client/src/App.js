@@ -17,7 +17,6 @@ import Event from './components/event/Event';
 import FriendList from './components/contacts/FriendList';
 import Footer from './components/footer/Footer';
 import PostForm from './components/posts/PostForm';
-import CommentPage from './components/posts/Comment';
 import Login from './components/authorization/Login';
 import Register from './components/authorization/Register';
 import ProfileView from './components/profileView/ProfileView';
@@ -93,8 +92,6 @@ class App extends Component {
                                         <PrivateRoute exact path="/post" component={PostForm}/>
 
                                         <PrivateRoute exact path = { '/manage-post' } component = {ManagePost} />
-
-                                        <PrivateRoute exact path="/event/commit" component={CommentPage}/>
 
                                         <Route component={NotFound}/>
                                     </Switch>

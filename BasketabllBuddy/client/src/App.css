@@ -17,7 +17,10 @@
     height: 450px
 }
 .container-fluid {
-    padding: 0;
+    padding-left: 0;
+    padding-right: 0;
+    /*margin-bottom: 100px;*/
+    padding-bottom: 100px;
 }
 /* Set gray background color and 100% height */
 .sidenav {
@@ -43,21 +46,26 @@
     float: left;
     /*align: left;*/
     text-align: left;
-    width: 30%;
+    /*width: 30%;*/
 }
 .events2{
     display: inline;
     float: right;
     /*align: left;*/
     text-align: left;
-    width: 70%;
+    /*width: 70%;*/
+    height: auto;
 }
+/*.container{*/
+    /*background-color: #DCDCDC;*/
+/*}*/
+
 .p {
     text-align: left;
 }
 .imageItem{
-    padding-top: 1%;
-    padding-left: 3%;
+    padding-top: 2%;
+    padding-left: 4%;
 }
 .eventItem {
     background-color: white;
@@ -67,8 +75,18 @@
     margin-bottom: 3%;
     border-radius: 10px;
     padding-top: 15px;
+    height: auto;
 }
-
+.profileView{
+    background-color: #DCDCDC;
+}
+.createProfile{
+    background-color: #DCDCDC;
+}
+.postItem {
+    text-align: left;
+    padding-left: 4%;
+}
 /* Set white background color, grey text and some padding */
 header {
     background-color: white;
@@ -91,6 +109,7 @@ footer {
     height: 70px;
     position: fixed;
     bottom: 0;
+    float: bottom;
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */

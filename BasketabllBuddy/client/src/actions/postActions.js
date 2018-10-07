@@ -49,16 +49,16 @@ export const deletePost = (id, history, url) => dispatch => {
 };
 
 //Get posts
-export const getPosts = () => dispatch => {
+export const getPosts = page => dispatch => {
     dispatch (setPostLoading());
     axios
-        .get('/api/posts')
-        .then(res =>
-            dispatch ({
+        .get(`/api/posts/page/${page}`)
+        .then(res => {
+            dispatch({
                 type: GET_POSTS,
                 payload: res.data
             })
-        )
+        })
         .catch(err =>
             dispatch({
                 type: GET_POSTS,

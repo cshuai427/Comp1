@@ -66,7 +66,7 @@ router.get('/all', (req, res) =>
 //  @desc   Get profile by nickname
 //  @access Public
 
-router.get('/profile/:nickName', (req, res) => {
+router.get('/nickname/:nickName', (req, res) => {
     const errors = {};
 
     // param can grab the url variable

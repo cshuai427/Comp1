@@ -17,7 +17,10 @@
     height: 450px
 }
 .container-fluid {
-    padding: 0;
+    padding-left: 0;
+    padding-right: 0;
+    /*margin-bottom: 100px;*/
+    padding-bottom: 100px;
 }
 /* Set gray background color and 100% height */
 .sidenav {
@@ -52,6 +55,10 @@
     text-align: left;
     width: 70%;
 }
+/*.container{*/
+    /*background-color: #DCDCDC;*/
+/*}*/
+
 .p {
     text-align: left;
 }
@@ -68,7 +75,12 @@
     border-radius: 10px;
     padding-top: 15px;
 }
-
+.profileView{
+    background-color: #DCDCDC;
+}
+.createProfile{
+    background-color: #DCDCDC;
+}
 /* Set white background color, grey text and some padding */
 header {
     background-color: white;
@@ -91,6 +103,7 @@ footer {
     height: 70px;
     position: fixed;
     bottom: 0;
+    float: bottom;
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */

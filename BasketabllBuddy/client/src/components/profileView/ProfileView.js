@@ -41,7 +41,7 @@ class ProfileView extends Component {
             if(Object.keys(profile).length > 0)
             {
                 profileBasic = (
-                    <div>
+                    <div className="profileView">
                         <p className="lead text-muted">
                             Welcome{' '}
                             {/*<Link to={`{profile-view/${user.name}`}>{user.name}</Link>*/}
@@ -58,7 +58,7 @@ class ProfileView extends Component {
                 );
 
                 profileContent = (
-                    <div>
+                    <div className="profileView">
                         <div className="row">
                             <div className="col-md-6">
 
@@ -73,7 +73,7 @@ class ProfileView extends Component {
                 // User is logged in has no profile
                 profileBasic =
                     (
-                        <div>
+                        <div className="profileView">
                             <p className="lead text-muted">Welcome {user.name} </p >
                             <p>You have not yet setup a profile, please add some info</p >
                             <Link to="/create-profile" className="btn btn-lg btn-info">
@@ -86,9 +86,9 @@ class ProfileView extends Component {
 
         return (
             <div className="profileView">
-                <div className="contarer">
+                <div className="container">
                     <div className="row">
-                        <div className="col-md-12 bg-light">
+                        <div className="col-md-12">
                             <h1 className="dispaly-4">Profile</h1>
                             {profileBasic}
                         </div>
@@ -103,6 +103,7 @@ class ProfileView extends Component {
                     </div>
                 </div>
             </div>
+
         );
     }
 }

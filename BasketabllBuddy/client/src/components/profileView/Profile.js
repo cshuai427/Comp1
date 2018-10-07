@@ -24,7 +24,7 @@ class Profile extends Component {
                     <div className="card card-body bg-info text-white mb-3">
                         <div className="row">
                             <div className="col-4 col-md-4 m-auto">
-                                < img src={profile.user.avatar} alt="" className="rounded-circle"/>
+                                < img src={profile.user.avatar} alt="" className="rounded-circle" />
                             </div>
                         </div>
                         <div className="text-center">
@@ -34,31 +34,57 @@ class Profile extends Component {
                             <p className="lead text-center">
 
                                 {isEmpty(profile.social && profile.social.twitter) ? null: (
-                                    <a href= "_blank" className="text-white p-2">
+                                    <a
+                                        href= {profile.social.twitter.toString().includes('http://')
+                                            ? profile.social.twitter
+                                            : 'http://' + profile.social.twitter}
+                                        target="_blank"
+                                        className="text-white p-2"
+                                    >
                                         <i className="fab fa-twitter fa-2x" />
                                     </a >
                                 )}
 
                                 {isEmpty(profile.social && profile.social.facebook) ? null: (
-                                    <a href={profile.social.facebook} target="_blank" className="text-white p-2">
+                                    <a href= {profile.social.facebook.toString().includes('http://')
+                                        ? profile.social.facebook
+                                        : 'http://' + profile.social.facebook}
+                                       target="_blank"
+                                       className="text-white p-2"
+                                    >
                                         <i className="fab fa-facebook fa-2x" />
                                     </a >
                                 )}
 
                                 {isEmpty(profile.social && profile.social.youtube) ? null: (
-                                    <a href={profile.social.youtube} target="_blank" className="text-white p-2">
+                                    <a href= {profile.social.youtube.toString().includes('http://')
+                                        ? profile.social.youtube
+                                        : 'http://' + profile.social.youtube}
+                                       target="_blank"
+                                       className="text-white p-2"
+                                    >
                                         <i className="fab fa-youtube fa-2x" />
                                     </a >
                                 )}
 
                                 {isEmpty(profile.social && profile.social.instagram) ? null: (
-                                    <a href={profile.social.instagram} target="_blank" className="text-white p-2">
+                                    <a href= {profile.social.instagram.toString().includes('http://')
+                                        ? profile.social.instagram
+                                        : 'http://' + profile.social.instagram}
+                                       target="_blank"
+                                       className="text-white p-2"
+                                    >
                                         <i className="fab fa-instagram fa-2x" />
                                     </a >
                                 )}
 
                                 {isEmpty(profile.social && profile.social.linkedin) ? null: (
-                                    <a href={profile.social.linkedin} target="_blank" className="text-white p-2">
+                                    <a href= {profile.social.linkedin.toString().includes('http://')
+                                        ? profile.social.linkedin
+                                        : 'http://' + profile.social.linkedin}
+                                       target="_blank"
+                                       className="text-white p-2"
+                                    >
                                         <i className="fab fa-linkedin fa-2x" />
                                     </a >
                                 )}

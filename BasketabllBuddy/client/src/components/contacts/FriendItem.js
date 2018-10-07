@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 class FriendItem extends Component {
 
 
-
     render() {
 
         const { profile } = this.props;
@@ -17,9 +16,9 @@ class FriendItem extends Component {
                 <img src={profile.user.avatar}
                      alt="avatar"
                      className="rounded-circle"
-                     style={{width:'25px' ,height:'25px'}}/>{' '+ profile.user.name}
+                     style={{width:'25px' ,height:'25px'}}/>{' '+ profile.nickName}
                 </Link>
-                <Link to={'/'} className="badge badge-primary badge-pill">2</Link>
+                <Link to={'/todo'} className="badge badge-primary badge-pill">2</Link>
             </li>
 
         );
@@ -32,3 +31,6 @@ FriendItem.propTypes = {
 
 
 export default FriendItem;
+
+
+

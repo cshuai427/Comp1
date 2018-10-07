@@ -27,13 +27,12 @@ class FriendList extends Component {
             if(profiles.length > 0){
                 friendItems = profiles.map(profile =>
                     (
-
                         // Remove login user from list
-                        user.id !== profile.user._id
-                            ? <FriendItem key={profile._id} profile={profile} />
+                        profile.nickName && profile.user ?
+                         <FriendItem key={profile._id} profile={profile} />
                             : null
 
-                    ))
+                    ));
             }
             else
             {

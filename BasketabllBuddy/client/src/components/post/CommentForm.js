@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import TextFieldGroup from '../common/TextFieldGroup';
 import { addComment } from '../../actions/postActions';
 import Spinner from "../common/Spinner";
 import isEmpty from "../../validation/is-empty";
+import classnames from "classnames";
 
 
 class CommentForm extends Component {
@@ -72,34 +72,45 @@ class CommentForm extends Component {
 
         return (
 
-            <div className="post-form mb-3">
-                <div className="card card-info">
-                    <div className="card-header bg-info text-white">
-                        Make a Comment...
+            <div className="comment-form">
+                <div className="container m-3 py-3 pl-0 row border rounded shadow-sm bg-light">
+                    <div className="col-2">
+                        <img
+                            src={auth.user.avatar}
+                            className="rounded-circle w-100 shadow"
+                            alt="niubi"
+                        />
+                        <p className="font-weight-bold py-2 mb-0">{profile.nickName}</p >
                     </div>
-                    <div className="card-body">
+                    <div className="col-10 mt-0 p-0">
                         <form onSubmit={this.onSubmit}>
-                            <div className="form-group">
-
-                                <TextFieldGroup
-                                    placeholder={auth.isAuthenticated && profileAuth ? "Reply to post": "Please SignUp or Create your profile"}
+                            <div className="input-group shadow-sm">
+                                <label className="sr-only sr-only-focusable" htmlFor="comments"/>
+                                <textarea
+                                    className={classnames('form-control rounded-left', {
+                                        'is-invalid': errors.text
+                                    })}
+                                    placeholder={auth.isAuthenticated && profileAuth ? "Enter some comments": "Please SignUp or Create your profile"}
                                     onChange={this.onChange}
-                                    value={this.state.text}
                                     name="text"
-                                    error={errors.text}
                                     disabled={!auth.isAuthenticated || !profileAuth}
+                                    value={this.state.text}
                                 />
+                                <div className="input-group-append">
+                                    <button
+                                        type="submit"
+                                        className="btn btn-sm btn-success"
+                                        disabled={!auth.isAuthenticated || !profileAuth}>
+                                        <i className="fas fa-check"/>
+                                    </button>
+                                </div>
+                                {errors.text && (<div className="invalid-feedback align-content-center">{errors.text}</div>)}
                             </div>
-
-                            <button
-                                type="submit"
-                                className="btn btn-dark"
-                                disabled={!auth.isAuthenticated || !profileAuth}>
-                                Submit
-                            </button>
                         </form>
                     </div>
                 </div>
+
+
             </div>
         );
     }

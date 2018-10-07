@@ -6,11 +6,15 @@ import  SelectListGroup from '../common/SelectListGroup';
 import TextFieldGroup from '../common/TextFieldGroup';
 import InputGroup from '../common/InputGroup';
 import {numberOfPeople, location, ballStatus} from './PostSelectOptions';
-import Moment from 'moment';
 import isEmpty from '../../validation/is-empty';
 import { Redirect } from 'react-router-dom';
 import Spinner from '../common/Spinner';
 import { getCurrentProfile } from '../../actions/profileActions';
+import DatePicker from 'react-datepicker'
+import moment from "moment";
+import 'react-datepicker/dist/react-datepicker.css';
+
+
 
 
 class PostForm extends Component{
@@ -20,14 +24,19 @@ class PostForm extends Component{
             eventTitle: '',
             eventText: '',
             eventPeopleNumber: '1',
-            eventLocation: 'Sydney',
+            eventLocation: 'UTS',
             haveBall: 'false',
-            eventDate: '',
+
             photo: '',
-            errors: {}
+            errors: {},
+            //datepicker: '',
+            eventDate: moment().add(+1,'d'),
+
+
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount(){
@@ -39,6 +48,16 @@ class PostForm extends Component{
             this.setState({ errors: newProps.errors });
         }
     }
+    handleChange(date) {
+
+        this.setState({
+            eventDate: date
+
+        });
+
+    }
+
+
     onSubmit(e){
         e.preventDefault();
         const { user } = this.props.auth;
@@ -60,13 +79,13 @@ class PostForm extends Component{
 
     onChange(e){
         this.setState({[e.target.name]:e.target.value})
+
     }
-
-
 
     render(){
 
         const { errors } = this.state;
+
 
         const { profile, loading } = this.props.profile;
 
@@ -147,15 +166,15 @@ class PostForm extends Component{
                                     info="If you won't take ball, just select no, other attend people may take it for you"
                                 />
 
-                                <InputGroup
-                                    placeholder="* Event Date"
-                                    onChange={this.onChange}
-                                    value={this.state.eventDate}
-                                    error={errors.eventDate}
-                                    name="eventDate"
-                                    icon="far fa-calendar-alt"
-                                    info="Please fill in your Event Date "
-                                />
+                                {/*<InputGroup*/}
+                                    {/*placeholder="* Event Date"*/}
+                                    {/*onChange={this.onChange}*/}
+                                    {/*value={this.state.eventDate}*/}
+                                    {/*error={errors.eventDate}*/}
+                                    {/*name="eventDate"*/}
+                                    {/*icon="far fa-calendar-alt"*/}
+                                    {/*info="Please fill in your Event Date "*/}
+                                {/*/>*/}
 
                                 <InputGroup
                                     placeholder="Title Photo"
@@ -166,6 +185,20 @@ class PostForm extends Component{
                                     icon="far fa-calendar-alt"
                                     info="You can upload a image for attract people to join your event"
                                 />
+
+
+                                <DatePicker  className='form-control form-control-lg'
+                                             selected={this.state.eventDate}
+                                             onChange={this.handleChange}
+                                             startDate={moment().add(+1,'d')}
+                                             showTimeSelect
+                                             timeIntervals={30}
+                                             dateFormat="YYYY-MM-DD HH:mm"
+                                             timeCaption="time"
+                                             minDate={ moment().add(+1,'d')}
+                                />
+                                <small className="badge badge-danger badge-pill">Please Select your event date</small>
+
 
                                 <input type="submit" value="Submit" className="btn btn-info btn-block mt-4"/>
                             </form>

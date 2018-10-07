@@ -50,16 +50,16 @@ export const getCurrentProfile = () => dispatch =>
 export const getProfileByNickname = (nickname) => dispatch =>
 {
     dispatch(setProfileLoading());
-    axios.get(`/api/profile/${nickname}`)
+    axios.get(`/api/profile/nickname/${nickname}`)
         .then(res =>
         dispatch({
-            type: GET_PROFILES,
+            type: GET_PROFILE,
             payload: res.data
         }))
         .catch(err => (
             dispatch({
-                type: GET_PROFILES,
-                payload: {}
+                type: GET_PROFILE,
+                payload: null
             })
         ));
 };

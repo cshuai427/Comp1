@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import basketball1 from "../../Img/basketball1.jpeg";
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
+import moment from "moment";
 
 class EventItems extends Component {
 
@@ -21,28 +22,29 @@ class EventItems extends Component {
                         < img src={ basketball1 } style={{width:'100%',height:'100%',position:'relative',}}  alt={post.photo} />
                     </div>
                     {/*<div className="">*/}
-                        {/*<img className="rounded-circle" src={post.avatar} width="30px" height="30px" alt={post.avatar} />*/}
+                    {/*< img className="rounded-circle" src={post.avatar} width="30px" height="30px" alt={post.avatar} />*/}
                     {/*</div>*/}
                     {/*{post.nickName}*/}
                 </div>
                 <div className="events2 col-lg-8 col-xl-8 col-xs-8 col-sm-8">
 
-                    <div className="">
+                    <div className="events2">
                         <h3>{post.eventTitle}</h3>
                         <p className="p">
                             {post.eventText}
-                            </p>
+                        </p >
                         <p>
-                        {post.eventLocation}
-                        </p>
+                            {post.eventLocation}
+                        </p >
                         <p>
-                        {post.eventDate}
-                        </p>
+                            {moment(post.eventDate).format('YYYY-MM-DD HH:mm')}
+                        </p >
                         <p>
-                        </p>
-                            <Link to={`/post/${post._id}`} className="badge badge-primary badge-pill">
-                                View
-                            </Link>
+                            Number of attend: {post.eventAttendPeople.length} of {post.eventPeopleNumber}
+                        </p >
+                        <Link to={`/post/${post._id}`} className="badge badge-primary badge-pill">
+                            View
+                        </Link>
                         {/*<hr/>*/}
                     </div>
                 </div>

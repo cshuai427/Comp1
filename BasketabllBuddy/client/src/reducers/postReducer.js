@@ -3,7 +3,9 @@ import { ADD_POST, GET_POSTS, POST_LOADING, DELETE_POST, GET_POST } from "../act
 const initialState = {
     posts: [],
     post: [],
-    loading: false
+    loading: false,
+    currentPage: null,
+    totalPages: null
 };
 
 export default function (state = initialState, action) {
@@ -22,8 +24,10 @@ export default function (state = initialState, action) {
         case GET_POSTS:
             return {
                 ...state,
-                posts: action.payload,
-                loading: false
+                posts: action.payload.posts,
+                loading: false,
+                currentPage: action.payload.currentPage,
+                totalPages: action.payload.totalPages
             };
         case ADD_POST:
             return {

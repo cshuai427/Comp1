@@ -49,16 +49,16 @@ export const deletePost = (id, history, url) => dispatch => {
 };
 
 //Get posts
-export const getPosts = () => dispatch => {
+export const getPosts = page => dispatch => {
     dispatch (setPostLoading());
     axios
-        .get('/api/posts')
-        .then(res =>
-            dispatch ({
+        .get(`/api/posts/page/${page}`)
+        .then(res => {
+            dispatch({
                 type: GET_POSTS,
                 payload: res.data
             })
-        )
+        })
         .catch(err =>
             dispatch({
                 type: GET_POSTS,
@@ -150,10 +150,10 @@ export const deleteComment = (postId, commentId) => dispatch =>{
 
 // Attend Event
 
-export const attendEvent = (id, newAttendUser) => dispatch => {
+export const attendEvent = (postId, newAttendUser) => dispatch => {
     axios
-        .post(`/api/posts/attend/${id}`, newAttendUser)
-        .then(res => dispatch(getPost(id)))
+        .post(`/api/posts/attend/${postId}`, newAttendUser)
+        .then(res => dispatch(getPost(postId)))
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,

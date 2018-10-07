@@ -1,10 +1,8 @@
-
-module.exports = {
-    mongoURI: 'mongodb://Tian:tian1234@ds219832.mlab.com:19832/webdb',
-    //database link
-
-    secretOrKey: 'secret',
-
-    emailName: 'basketballbuddyaip',
-    emailPassword: 'AIP123456'
-};
+if(process.env.NODE_ENV === 'production')
+{
+    module.exports = require('./keys_prod');
+}
+else
+{
+    module.exports = require('./keys_dev');
+}

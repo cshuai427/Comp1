@@ -10,6 +10,9 @@ import { Provider } from 'react-redux';
 import store from './store';
 import PrivateRoute from './components/common/PrivateRoute';
 
+
+import { Link } from 'react-router-dom';
+
 //import components
 import Header from './components/header/Header';
 import Account from './components/account/Account';
@@ -22,12 +25,16 @@ import Register from './components/authorization/Register';
 import ProfileView from './components/profileView/ProfileView';
 import CreateProfile from './components/profileView/CreateProfile';
 import EditProfile from './components/profileView/EditProfile';
-import News from './components/news/News';
 import Post from './components/post/Post';
 import NotFound from './components/Not-Found/NotFound';
 import ManagePost from './components/manageEvent/ManagePost';
+import GuestView from './components/profileView/GuestView';
 
 import './App.css';
+import Redirect from "react-router-dom/es/Redirect";
+
+
+
 
 
 
@@ -59,6 +66,7 @@ if(localStorage.jwtToken){
 
 class App extends Component {
     render() {
+
         return (
 
             <Provider store={store}>
@@ -74,14 +82,30 @@ class App extends Component {
                                 {/*<PrivateRoute component={Account}/>*/}
 
                                 <div className="container-fluid text-center col-sm-12 col-lg-12 col-md-12 col-xs-12 col-auto nopadding" style={{backgroundColor:'#DCDCDC'}} >
+
                                     <Switch>
-                                        <Route exact path="/" component={Event}/>
+
+                                        {/* force redirect homepage to /event/1 */}
+                                        <Route
+                                            exact
+                                            path="/"
+                                            render={ () => ( <Redirect to="/event/1" /> )}
+                                        />
+
+
+
+                                        <Route path="/event/:page"
+                                               render = { props => (
+                                                <Event
+                                                    {...props.match.params}
+                                                    key={props.match.params.page}
+                                                />)}
+                                        />
+
 
                                         <Route exact path="/login" component={Login}/>
 
                                         <Route exact path="/register" component={Register}/>
-
-                                        {/*<Route exact path="/news" component={News}/>*/}
 
                                         <Route exact path="/post/:id" component={Post}/>
 
@@ -94,7 +118,7 @@ class App extends Component {
                                         <PrivateRoute exact path="/post" component={PostForm}/>
 
                                         <PrivateRoute exact path = { '/manage-post' } component = {ManagePost} />
-
+                                        <PrivateRoute exact path = { '/profile/nickname/:nickName' } component = {GuestView} />
                                         <Route component={NotFound}/>
                                     </Switch>
                                 </div>

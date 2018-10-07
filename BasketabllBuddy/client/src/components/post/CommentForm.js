@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import TextFieldGroup from '../common/TextFieldGroup';
 import { addComment } from '../../actions/postActions';
+import Spinner from "../common/Spinner";
+import isEmpty from "../../validation/is-empty";
 
 
 class CommentForm extends Component {
@@ -50,6 +52,24 @@ class CommentForm extends Component {
         const { errors } = this.state;
         const { auth } = this.props;
 
+        const { profile, loading } = this.props.profile;
+        let profileAuth = false;
+
+        if(profile === null || loading )
+        {
+            return <Spinner />
+        }
+        else
+        {
+            if(!isEmpty(profile.nickName))
+            {
+                profileAuth = true;
+
+            }
+
+
+        }
+
         return (
 
             <div className="post-form mb-3">
@@ -60,16 +80,23 @@ class CommentForm extends Component {
                     <div className="card-body">
                         <form onSubmit={this.onSubmit}>
                             <div className="form-group">
+
                                 <TextFieldGroup
-                                    placeholder={auth.isAuthenticated ? "Reply to post": "Please SignUp"}
+                                    placeholder={auth.isAuthenticated && profileAuth ? "Reply to post": "Please SignUp or Create your profile"}
                                     onChange={this.onChange}
                                     value={this.state.text}
                                     name="text"
                                     error={errors.text}
-                                    disabled={!auth.isAuthenticated}
+                                    disabled={!auth.isAuthenticated || !profileAuth}
                                 />
                             </div>
-                            <button type="submit"  className="btn btn-dark" disabled={!auth.isAuthenticated}>Submit</button>
+
+                            <button
+                                type="submit"
+                                className="btn btn-dark"
+                                disabled={!auth.isAuthenticated || !profileAuth}>
+                                Submit
+                            </button>
                         </form>
                     </div>
                 </div>

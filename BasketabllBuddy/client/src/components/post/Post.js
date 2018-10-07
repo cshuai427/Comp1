@@ -6,6 +6,7 @@ import PostItem from '../posts/PostItem';
 import CommentForm from './CommentForm';
 import CommentFeed from './CommentFeed';
 import { getPost } from '../../actions/postActions';
+import { getCurrentProfile } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
 
 
@@ -15,6 +16,8 @@ class Post extends Component {
 
     componentDidMount(){
         this.props.getPost(this.props.match.params.id);
+        this.props.getCurrentProfile();
+
     }
 
     render() {
@@ -29,8 +32,11 @@ class Post extends Component {
             postContent = (
                 <div>
                     <PostItem post={post}/>
+
                     <CommentForm postId={post._id}/>
+
                     <CommentFeed postId={post._id} comments={post.comments} />
+
                 </div>
             );
         }
@@ -55,11 +61,13 @@ class Post extends Component {
 
 Post.propTypes = {
     getPost: PropTypes.func.isRequired,
-    post: PropTypes.object.isRequired
+    post: PropTypes.object.isRequired,
+    profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    post: state.post
+    post: state.post,
+    profile: state.profile
 });
 
-export default connect(mapStateToProps, { getPost })(Post);
+export default connect(mapStateToProps, { getPost, getCurrentProfile })(Post);

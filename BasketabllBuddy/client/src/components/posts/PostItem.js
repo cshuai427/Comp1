@@ -240,7 +240,6 @@ class PostItem extends Component{
                             </button>
                             </div>) : null}
                     </div>
-
             </div>
         );
     }

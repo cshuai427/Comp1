@@ -3,13 +3,22 @@
 .navbar {
     margin-bottom: 0;
     border-radius: 0;
+    /*background-color: black;*/
+    /*color: grey;*/
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    z-index: 100;
 }
 
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {
     height: 450px
 }
-
+.container-fluid {
+    padding: 0;
+}
 /* Set gray background color and 100% height */
 .sidenav {
     /*padding-top: 20px;*/
@@ -22,18 +31,44 @@
 .nopadding {
     padding: 0;
 }
-.navbar{
-    /*background-color: black;*/
-    /*color: grey;*/
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 70px;
-    z-index: 100;
-}
 .navlinks {
     color: #808080;
 }
+.eventAll{
+    margin-bottom: 20px;
+    padding-bottom: 40px;
+}
+.events1{
+    display: inline;
+    float: left;
+    /*align: left;*/
+    text-align: left;
+    width: 30%;
+}
+.events2{
+    display: inline;
+    float: right;
+    /*align: left;*/
+    text-align: left;
+    width: 70%;
+}
+.p {
+    text-align: left;
+}
+.imageItem{
+    padding-top: 1%;
+    padding-left: 3%;
+}
+.eventItem {
+    background-color: white;
+    margin-left: 6%;
+    margin-right: 6%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 10px;
+    padding-top: 15px;
+}
+
 /* Set white background color, grey text and some padding */
 header {
     background-color: white;

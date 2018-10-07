@@ -24,7 +24,8 @@ class EditProfile extends Component {
             facebook: '',
             linkedin: '',
             youtube: '',
-            instagram: ''
+            instagram: '',
+            test: ''
         };
 
         this.onChange = this.onChange.bind(this);
@@ -35,18 +36,16 @@ class EditProfile extends Component {
 
     componentDidMount(){
 
-
         this.props.getCurrentProfile();
-
     }
 
     componentWillReceiveProps(nextProps)
     {
+        const { profile } = nextProps.profile;
 
-        if(this.props.profile.profile)
+        if(profile !== null)
         {
-            const profile = this.props.profile.profile;
-
+            
             // Bring interests array back to CSV
             const interestsCSV = profile.interests.join(',');
 

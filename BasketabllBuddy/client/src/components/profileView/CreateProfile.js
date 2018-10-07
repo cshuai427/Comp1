@@ -6,7 +6,7 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import SelectListGroup from '../common/SelectListGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
-import { createProfile } from '../../actions/profileActions';
+import { createProfile, getCurrentProfile } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
 import isEmpty from '../../validation/is-empty';
 
@@ -33,6 +33,12 @@ class CreateProfile extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
     }
+
+    componentDidMount()
+    {
+        this.props.getCurrentProfile();
+    }
+
 
     componentWillReceiveProps(nextProps)
     {
@@ -66,10 +72,11 @@ class CreateProfile extends Component {
         this.setState({[e.target.name]: e.target.value});
     }
 
+
     render() {
         const { profile, loading } = this.props.profile;
 
-        if(isEmpty(profile) || loading)
+        if(profile === null || loading)
         {
             return <Spinner/>;
         }
@@ -80,6 +87,8 @@ class CreateProfile extends Component {
                 return <Redirect to='/edit-profile'/>
             }
         }
+
+        console.log(profile);
 
         const { errors, displaySocialInputs } = this.state;
 
@@ -228,6 +237,8 @@ class CreateProfile extends Component {
 }
 
 CreateProfile.propTypes = {
+    getCurrentProfile: PropTypes.func.isRequired,
+    createProfile: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
 };
@@ -238,4 +249,4 @@ const mapStateToProps= state => ({
     errors: state.errors
 
 });
-export default connect(mapStateToProps, { createProfile })(withRouter(CreateProfile));
+export default connect(mapStateToProps, { createProfile, getCurrentProfile})(withRouter(CreateProfile));

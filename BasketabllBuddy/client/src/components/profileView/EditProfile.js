@@ -37,7 +37,6 @@ class EditProfile extends Component {
 
 
         this.props.getCurrentProfile();
-        console.log(this.props.profile)
 
     }
 
@@ -104,7 +103,7 @@ class EditProfile extends Component {
         const { profile, loading } = this.props.profile;
         const { displaySocialInputs } = this.state;
 
-        if(isEmpty(profile) || loading )
+        if(profile === null || loading )
         {
             return <Spinner />
         }
@@ -209,6 +208,7 @@ class EditProfile extends Component {
                                     value={this.state.nickName}
                                     onChange={this.onChange}
                                     disabled={true}
+                                    info="This is unique"
                                 />
 
                                 <SelectListGroup

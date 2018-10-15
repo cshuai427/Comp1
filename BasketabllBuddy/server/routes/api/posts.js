@@ -26,8 +26,8 @@ router.get('/test', (req, res)=> res.json({msg: "Posts works"}));
 //  @desc   Get post
 //  @access Public
 router.get('/page/:pages', (req, res) => {
-    var perPage = 5;
-    var current = req.params.pages || 1;
+    let perPage = 5;
+    let current = req.params.pages || 1;
 
     Post.find()
         .sort({data: -1})
@@ -101,7 +101,7 @@ router.post('/',
 router.delete('/:id', passport.authenticate('jwt', { session: false}),
     (req, res)=>
     {
-        Profile.findOne({ user: req.user.id })
+        Profile.findOneAndDelete({ user: req.user.id })
             .then(profile => {
                 Post.findById(req.params.id)
                     .then(post => {

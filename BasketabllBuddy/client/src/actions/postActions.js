@@ -8,13 +8,11 @@ export const addPost = (postData, history) => dispatch => {
         .post('/api/posts', postData)
         .then(res =>
         {
-            // ?
             console.log(res.data);
             dispatch ({
                 type: ADD_POST,
                 payload: res.data
             });
-            // should be to created post
             history.push(`/post/${res.data._id}`);
         })
         .catch(err =>

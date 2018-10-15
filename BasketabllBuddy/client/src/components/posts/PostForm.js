@@ -26,11 +26,9 @@ class PostForm extends Component{
             eventPeopleNumber: '1',
             eventLocation: 'UTS',
             haveBall: 'false',
-
             photo: '',
             errors: {},
-            //datepicker: '',
-            eventDate: moment().add(+1,'d'),
+            eventDate: moment().add(+1,'d')
 
 
         };
@@ -52,7 +50,6 @@ class PostForm extends Component{
 
         this.setState({
             eventDate: date
-
         });
 
     }
@@ -60,9 +57,9 @@ class PostForm extends Component{
 
     onSubmit(e){
         e.preventDefault();
+
         const { user } = this.props.auth;
         const { profile } = this.props.profile;
-        console.log(profile.nickName);
         const newPost = {
             eventTitle: this.state.eventTitle,
             eventText: this.state.eventText,
@@ -170,16 +167,6 @@ class PostForm extends Component{
                                     info="If you won't take ball, just select no, other attend people may take it for you"
                                 />
 
-                                {/*<InputGroup*/}
-                                    {/*placeholder="* Event Date"*/}
-                                    {/*onChange={this.onChange}*/}
-                                    {/*value={this.state.eventDate}*/}
-                                    {/*error={errors.eventDate}*/}
-                                    {/*name="eventDate"*/}
-                                    {/*icon="far fa-calendar-alt"*/}
-                                    {/*info="Please fill in your Event Date "*/}
-                                {/*/>*/}
-
                                 <InputGroup
                                     placeholder="Title Photo"
                                     onChange={this.onChange}
@@ -206,7 +193,6 @@ class PostForm extends Component{
 
                                 <input type="submit" value="Submit" className="btn btn-info btn-block mt-4"/>
                             </form>
-
                         </div>
                     </div>
                 </div>

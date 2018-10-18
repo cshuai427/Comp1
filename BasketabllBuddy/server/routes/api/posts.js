@@ -1,36 +1,27 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const passport = require('passport');
 
-// Posts model
+//models
 const Post = require('../../models/Post');
-
-// Posts model
-
 const Profile = require('../../models/Profile');
 
-// Validation
-
+//validation
 const validationPost = require('../../validation/post');
 const validationPostComment = require('../../validation/comment');
 
-//  @route  GET api/posts/test
-//  @desc   Test post route
-//  @access Public
-
-router.get('/test', (req, res)=> res.json({msg: "Posts works"}));
-
-
-//  @route  GET api/posts
+//  @route  GET api/posts/page/:pages
 //  @desc   Get post
 //  @access Public
 router.get('/page/:pages', (req, res) => {
+    // for pagination
+    // set limit of items displayed on each page to 5
     var perPage = 5;
     var current = req.params.pages || 1;
 
+    //find all posts and only return results for a specific page
     Post.find()
-        .sort({data: -1})
+        .sort({eventDate: 1})
         .skip(perPage * current - perPage)
         .limit(perPage)
         .then(posts => {
@@ -46,36 +37,32 @@ router.get('/page/:pages', (req, res) => {
         .catch(err => res.status(404).json({nopostfound: 'No post found'}));
 });
 
-
 //  @route  GET api/posts/:id
 //  @desc   Get post
 //  @access Public
-
 router.get('/:id', (req, res) =>
 {
+    // get user post by id
     Post.findById(req.params.id)
         .then(posts => res.json(posts))
         .catch(err => res.status(404).json({nopostfound: 'No post found with that ID'}));
 });
 
-
 //  @route  Posts api/posts
 //  @desc   Create post
 //  @access Private
-
 router.post('/',
     passport.authenticate('jwt', { session: false}),
     (req, res) => {
         const {errors, isValid} = validationPost(req.body);
 
-        console.log(req.body);
         //Check validation
         if(!isValid){
             //If any errors, send 400 with errors object
-            console.log("bad!");
             return res.status(400).json(errors);
         }
 
+        // create new post
         const newPost = new Post({
             eventTitle: req.body.eventTitle,
             eventText: req.body.eventText,
@@ -90,17 +77,22 @@ router.post('/',
             nickName: req.body.nickName
         });
 
+        // save and return post data to the front-end and store it in redux
         newPost.save().then(post => res.json(post));
     });
 
-
+//////////////////////////////
+//////////////////////////////
+//////////////////////////////
+// ////////////////////////////
+//////////////////////////////
 //  @route  Delete api/posts/:id
 //  @desc   Delete post
 //  @access Private
-
 router.delete('/:id', passport.authenticate('jwt', { session: false}),
     (req, res)=>
     {
+        // find a user profile bu user id and
         Profile.findOne({ user: req.user.id })
             .then(profile => {
                 Post.findById(req.params.id)
@@ -110,15 +102,19 @@ router.delete('/:id', passport.authenticate('jwt', { session: false}),
                             return res.status(401).json({ notauthorized: 'User not authorized'});
 
                         }
-
-                        // Delete
-
+                        // Delete a profile
                         post.remove().then(() => res.json({ success: true}));
                     })
                     .catch(err => res.status(404).json({ postnotfound: 'No post found'}));
             });
     });
 
+//////////////////////////////
+//////////////////////////////
+//////////////////////////////
+//////////////////////////////
+// ////////////////////////////
+//////////////////////////////
 
 //  @route  Posts api/posts/like/:id
 //  @desc   Like post
@@ -127,6 +123,7 @@ router.delete('/:id', passport.authenticate('jwt', { session: false}),
 router.post('/like/:id', passport.authenticate('jwt', { session: false}),
     (req, res)=>
     {
+        // find a profile by user id
         Profile.findOne({ user: req.user.id })
             .then( profile => {
                 Post.findById(req.params.id)
@@ -136,9 +133,7 @@ router.post('/like/:id', passport.authenticate('jwt', { session: false}),
                         }
 
                         // Add user id to likes array
-
                         post.likes.unshift({ user: req.user.id});
-
                         post.save().then(post => res.json(post));
 
                     })
@@ -169,17 +164,15 @@ router.post('/unlike/:id', passport.authenticate('jwt', { session: false}),
                             .indexOf(req.user.id);
 
                         // Splice out of array
-
                         post.likes.splice(removeIndex, 1);
-
                         // Save
-
                         post.save().then(post => res.json(post));
 
                     })
                     .catch(err => res.status(404).json({ postnotfound: 'No post found'}));
             });
     });
+
 
 //  @route  Posts api/posts/comment/:id
 //  @desc   Add comment to post
@@ -196,9 +189,10 @@ router.post('/comment/:id', passport.authenticate('jwt', { session: false}),
             return res.status(400).json(errors);
         }
 
-
+        // find a post by id(post)
         Post.findById(req.params.id)
             .then(post => {
+                // create a new comment
                 const newComment =({
                     text: req.body.text,
                     nickName: req.body.nickName,
@@ -206,12 +200,10 @@ router.post('/comment/:id', passport.authenticate('jwt', { session: false}),
                     user: req.user.id
                 });
 
-                // Add to comments array
-
+                // Add new comment to the found post comments array
                 post.comments.unshift(newComment);
 
-                // Save
-
+                // Save and send value back to front-end and store value in redux
                 post.save().then(post => res.json(post));
             })
             .catch(err => res.status(404).json({ postnotfound: 'No post found'}));
@@ -235,7 +227,6 @@ router.delete('/comment/:id/:comment_id', passport.authenticate('jwt', { session
                     return res.status(404).json({ commentnotexists: 'Comment does not exist'});
                 }
 
-
                 // Get remove Index
 
                 const removeIndex = post.comments
@@ -245,6 +236,7 @@ router.delete('/comment/:id/:comment_id', passport.authenticate('jwt', { session
                 // Splice comment out of array
                 post.comments.splice(removeIndex, 1);
 
+                // Save and send value back to front-end and store value in redux
                 post.save().then(post => res.json(post));
             })
             .catch(err => res.status(404).json({ postnotfound: 'No post found'}));
@@ -259,9 +251,6 @@ router.delete('/comment/:id/:comment_id', passport.authenticate('jwt', { session
 router.post('/attend/:post_id', passport.authenticate('jwt', { session: false}),
     (req, res)=>
     {
-
-        console.log(req.params.post_id);
-
         Profile.findOne({ user: req.user.id })
             .then( profile => {
                 Post.findById(req.params.post_id)
@@ -280,18 +269,18 @@ router.post('/attend/:post_id', passport.authenticate('jwt', { session: false}),
                             return res.status(400).json({ ownerselected: 'You can not use this function for you own event'})
                         }
 
-
+                        if(post.eventPeopleNumber < post.eventAttendPeople.length)
+                        {
+                            return res.status(400).json({ overflow: 'Full'})
+                        }
                             // Add user id to eventAttendPeople array
 
                             post.eventAttendPeople.unshift(newAttendUser);
-
                             post.save().then(post => res.json(post));
-
                     })
                     .catch(err => res.status(404).json({ postnotfound: 'Not post found'}));
             });
     });
-
 
 
 //  @route  Post api/posts/unattend/:post_id
@@ -320,11 +309,9 @@ router.post('/unattend/:post_id', passport.authenticate('jwt', { session: false}
                             .indexOf(req.user.id);
 
                         // Splice out of array
-
                         post.eventAttendPeople.splice(removeIndex, 1);
 
                         // Save
-
                         post.save().then(post => res.json(post));
 
                     })

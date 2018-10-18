@@ -8,11 +8,6 @@ import Profile from './Profile';
 
 class ProfileView extends Component {
 
-    constructor(){
-        super();
-
-    }
-
     componentDidMount()
     {
         this.props.getCurrentProfile();

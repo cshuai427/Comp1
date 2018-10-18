@@ -1,13 +1,12 @@
 const validator = require('validator');
 const isEmpty = require('./is-empty');
 
+//validate user profile text field
 module.exports = function validationProfileInput(data) {
     let errors = {};
 
-
     data.nickName = !isEmpty(data.nickName) ? data.nickName : '';
     data.playerRole = !isEmpty(data.playerRole) ? data.playerRole : '';
-
 
     if(!validator.isLength(data.nickName, { min: 2, max: 40}))
     {
@@ -58,9 +57,6 @@ module.exports = function validationProfileInput(data) {
             errors.instagram = 'Not a valid URL';
         }
     }
-
-
-
 
     return{
         errors,

@@ -88,8 +88,6 @@ class CreateProfile extends Component {
             }
         }
 
-        console.log(profile);
-
         const { errors, displaySocialInputs } = this.state;
 
         let socialInputs;
@@ -176,12 +174,12 @@ class CreateProfile extends Component {
                             <form onSubmit={this.onSubmit}>
 
                                 <TextFieldGroup
-                                    placeholder="* Profile Handle"
+                                    placeholder="* Profile Nickname"
                                     name="nickName"
                                     value={this.state.nickName}
                                     onChange={this.onChange}
                                     error={errors.nickName}
-                                    info="A unique nickname for your profile URL."
+                                    info="A unique nickname for you."
                                 />
 
                                 <SelectListGroup

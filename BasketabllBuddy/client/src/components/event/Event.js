@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import isEmpty from '../../validation/is-empty';
 
 // Should be removed
-import basketball1 from "../../Img/basketball1.jpeg";
-import basketball2 from "../../Img/basketball2.jpg";
 
 // components
 import { getPosts } from '../../actions/postActions';
@@ -111,7 +109,7 @@ class Event extends Component {
                     < img className="tp-bgimg defaultimg col-sm-12 col-lg-12 col-md-12 col-xs-12 nopadding img-responsive img-thumbnail pull-left"
                           src={basketballBanner}
                           style={{position:'center', height:'100%', width:'100%'}}
-                          alt="Responsive image"
+                          alt="CoverBanner"
                     />
                 </div>
                 <h1>Basketball Meetup Events</h1>

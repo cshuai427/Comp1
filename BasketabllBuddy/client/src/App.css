@@ -1,10 +1,7 @@
-
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
     margin-bottom: 0;
     border-radius: 0;
-    /*background-color: black;*/
-    /*color: grey;*/
     position: fixed;
     top: 0;
     width: 100%;
@@ -19,12 +16,11 @@
 .container-fluid {
     padding-left: 0;
     padding-right: 0;
-    /*margin-bottom: 100px;*/
     padding-bottom: 100px;
 }
+
 /* Set gray background color and 100% height */
 .sidenav {
-    /*padding-top: 20px;*/
     background-color: #f1f1f1;
     height: 100%;
 }
@@ -44,21 +40,14 @@
 .events1{
     display: inline;
     float: left;
-    /*align: left;*/
     text-align: left;
-    /*width: 30%;*/
 }
 .events2{
     display: inline;
     float: right;
-    /*align: left;*/
     text-align: left;
-    /*width: 70%;*/
     height: auto;
 }
-/*.container{*/
-    /*background-color: #DCDCDC;*/
-/*}*/
 
 .p {
     text-align: left;
@@ -129,100 +118,3 @@ footer {
         height: auto;
     }
 }
-/*color:white;*/
-/*text-align:center;*/
-/*padding:0px;*/
-/*}*/
-/*.App-left{*/
-/*width: 17%;*/
-/*height: 700px;*/
-/*background-color: #C5E9F3;*/
-/*float: left;*/
-/*}*/
-/*.App-right{*/
-/*width: 17%;*/
-/*height: 700px;*/
-/*background-color: #C5E9F3;*/
-/*float: right;*/
-/*}*/
-/*.App-middle{*/
-/*width: 65%;*/
-/*height: 700px;*/
-/*background-color: #ffffff;*/
-/*float: left;}*/
-
-/*.App-footer*/
-/*{*/
-/*background-color:black;*/
-/*color:white;*/
-/*clear:both;*/
-/*text-align:center;*/
-/*padding:5px;*/
-/*}*/
-/*!* avatar css example*!*/
-/*.APP-avatar {*/
-/*border: 1px solid #c4c9cc;*/
-/*border-radius: 3px;*/
-/*height: 40px;*/
-/*width: 40px;*/
-/*position: absolute;*/
-/*right: 0;*/
-/*top: 0*/
-/*}*/
-/*ul {*/
-/*list-style-type: none;*/
-/*margin: 0;*/
-/*padding: 0;*/
-/*overflow: hidden;*/
-/*background-color: #3498db;*/
-/*}*/
-
-/*li {*/
-/*float: left;*/
-/*}*/
-
-/*li a {*/
-/*display: block;*/
-/*color: white;*/
-/*text-align: center;*/
-/*padding: 16px 17px;*/
-/*text-decoration: none;*/
-/*}*/
-
-/*li a:hover:not(.active) {*/
-/*background-color: #111;*/
-/*}*/
-
-/*.active {*/
-/*background-color: #4CAF50;*/
-/*}*/
-
-/*.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-*/

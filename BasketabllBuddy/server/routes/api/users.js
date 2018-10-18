@@ -11,14 +11,12 @@ const emailConfirm = require('../../utils/EmailConfirm');
 const validationRegisterInput = require('../../validation/register');
 const validationLoginInput = require('../../validation/login');
 
-
 // Load User model
 const User = require('../../models/User');
 
 //  @route  GET api/users/test
 //  @desc   Test users route
 //  @access Public
-
 router.get('/test', (req, res)=> res.json({msg: "users works"}));
 
 //  @route  GET api/users/register
@@ -50,12 +48,12 @@ router.post('/register', (req, res)=> {
                     d: 'mm'     // Default
                 });
 
+                // create a new user
                 const newUser = new User({
                     name: req.body.name,
                     email: req.body.email,
                     avatar,
                     password: req.body.password
-
                 });
 
                 let payload = {};
@@ -64,9 +62,12 @@ router.post('/register', (req, res)=> {
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         if(err) throw err;
                         newUser.password = hash;
+                        // hash user password
                         newUser.save()
+                            // return user data to front-end and store data in redux
                             .then(user => {
                                 res.json(user);
+                                // send info back for email confirmation
                                 payload ={
                                     id: user._id,
                                     email: user.email,
@@ -74,15 +75,8 @@ router.post('/register', (req, res)=> {
                                 emailConfirm(payload);
                             })
                             .catch(err => console.log(err));
-
                     });
                 });
-                console.log('register success');
-
-
-
-
-
             }
         });
 });
@@ -126,6 +120,7 @@ router.post('/login', (req, res) => {
                                 keys.secretOrKey,
                                 { expiresIn: 7200},
                                 (err, token) => {
+                                    // send expire time and token(including user detail=> payload) to front-end
                                     res.json({
                                         success: true,
                                         token: 'Bearer ' + token
@@ -134,7 +129,7 @@ router.post('/login', (req, res) => {
                         }
                         else
                         {
-                            errors.confirmed = 'Please confirm your eamil';
+                            errors.confirmed = 'Please confirm your email';
                             return res.status(400).json(errors);
                         }
 
@@ -171,11 +166,13 @@ router.get(
 router.get('/email/confirm/:token',
     (req, res) => {
 
+    // validate token send back from email
         jwt.verify(
             req.params.token,
             keys.secretOrKey,
             (err, user) => {
                 if (err) return next(err);
+                // find a user and update user data
                 User.findOne({_id: user.id})
                     .then(user =>
                     {
@@ -185,9 +182,8 @@ router.get('/email/confirm/:token',
                                 {confirmed: true }
                             )
                                 .then(res => res.json('Email confirmed'));
-                            res.redirect('http://localhost:3000');
+                            res.redirect('https://basketballbuddaip.herokuapp.com');
                         }
-                        console.log('done')
                     })
                     .catch(err => res.status(400).json('errors'))
             });

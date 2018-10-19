@@ -171,8 +171,7 @@ router.get('/email/confirm/:token', (req, res) => {
                             User.findOneAndUpdate(
                                 {_id: user.id},
                                 {confirmed: true }
-                            )
-                                .then(res => res.json('Email confirmed'));
+                            ).then(res => res.json('Email confirmed'));
 
                             res.redirect(`${keys.clientURL}/login`);
                         }

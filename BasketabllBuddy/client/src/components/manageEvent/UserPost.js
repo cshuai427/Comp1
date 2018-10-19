@@ -9,6 +9,7 @@ class UserPost extends Component {
 
 
     onDeletePostClick(postId) {
+        // Pass post id to actions and delete it from back-end
         this.props.deletePost(postId);
     }
 
@@ -16,6 +17,8 @@ class UserPost extends Component {
 
         const { posts, auth } = this.props;
         let number = 0;
+
+        // Check the post owner is user and render it.
         let postedEvent = posts.map(post=>(
             auth.user.id === post.user ?
                 <tr key={post._id}>

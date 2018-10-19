@@ -21,11 +21,14 @@ class CommentForm extends Component {
 
     componentWillReceiveProps(newProps){
         if(newProps.errors){
+            // Receive error from back-end
             this.setState({errors: newProps.errors});
         }
     }
 
     onSubmit(e){
+
+        // Create new comment form and send it to actions and store it to the back-end
         e.preventDefault();
         const { user } = this.props.auth;
         const { postId } = this.props;
@@ -54,6 +57,9 @@ class CommentForm extends Component {
         const { profile, loading } = this.props.profile;
         let profileAuth = false;
 
+
+        // Check profile state from redux is not null
+        // If it null, this component will invoke loading page until receive data
         if(profile === null || loading ) {
             return <Spinner />
         } else {
@@ -63,14 +69,14 @@ class CommentForm extends Component {
         }
 
         return (
-
+            // Generate input forms for user making comments
             <div className="comment-form">
                 <div className="container m-3 py-3 pl-0 row border rounded shadow-sm bg-light">
                     <div className="col-2">
                         <img
                             src={auth.user.avatar}
                             className="rounded-circle w-100 shadow"
-                            alt="niubi"
+                            alt={profile.nickName}
                         />
                         <p className="font-weight-bold py-2 mb-0">{profile.nickName}</p >
                     </div>

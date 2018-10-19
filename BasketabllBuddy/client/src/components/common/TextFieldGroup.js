@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
-// This is a reuse components
+// This is a reusable components
 
 const TextFieldGroup = ({
                             name,

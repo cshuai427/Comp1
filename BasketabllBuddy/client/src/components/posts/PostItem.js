@@ -12,21 +12,26 @@ import isEmpty from "../../validation/is-empty";
 class PostItem extends Component{
 
     componentDidMount() {
+        // Get the user profile from redux
         getCurrentProfile();
     }
 
     onDeleteClick(id){
 
+        // Delete the post by postId, only can be used by owner
         this.props.deletePost(id,this.props.history,'/');
     }
 
     onLikeClick(id){
+        // Pass 'like' this post user id to the like list
         this.props.addLike(id);
     }
     onUnlikeClick(id){
+        // Remove 'like' this post user id to the like list
         this.props.removeLike(id);
     }
 
+    // Check user existing in the 'like' list
     findUserLike(likes){
         const { auth } = this.props;
         if(likes.filter(like => like.user === auth.user.id).length > 0) {
@@ -38,7 +43,7 @@ class PostItem extends Component{
     }
 
     onAttendClick(id, nickName, avatar){
-
+        // Pass 'attend' this post user id to the attend list
         if(nickName !== null && avatar !== null) {
             const newAttendUser = {
                 nickName : nickName,
@@ -53,12 +58,15 @@ class PostItem extends Component{
 
 
     onUnattendClick(id){
+        // Remove user from 'attend' list by user id
         this.props.removeAttendEvent(id, this.props.history,'/');
     }
 
     findUserAttend(attends){
 
         const { auth } = this.props;
+
+        // Check user existing in the 'attend' list
         if(attends.filter(attend => attend.user === auth.user.id).length > 0) {
             return true;
         } else {
@@ -74,6 +82,9 @@ class PostItem extends Component{
 
         let attendAvatar;
         let profileAuth = false;
+
+        // Check profile state from redux is not null
+        // If it null, this component will invoke loading page until receive data
         if(profile === null || loading) {
             return <Spinner/>;
         }
@@ -86,6 +97,7 @@ class PostItem extends Component{
 
             if(post.eventAttendPeople.length !== 0) {
 
+                // Display the attend people avatar on the page
                 attendAvatar = post.eventAttendPeople.map(user => (
                         <span key={user.user} className="col-1 px-0 pr-2">
                                   <Link to={`/profile/nickname/${user.nickName}`}>
@@ -103,6 +115,7 @@ class PostItem extends Component{
         }
 
         return (
+            // Generate event post details page
             <div className="post-display">
                     <div className="container m-3 pl-0 row border rounded shadow-sm bg-light">
 
@@ -143,9 +156,11 @@ class PostItem extends Component{
                                 </span>
 
                                 <i className="fas fa-basketball-ball" />
+                                {/* Show whether have basketball status */}
                                 <span className={post.haveBall ? 'badge badge-success shadow-sm mx-2 px-2': 'badge badge-danger shadow-sm mx-2 px-2' }>
                                     {post.haveBall ? 'I will take' : 'Need a ball'}
                                 </span>
+                                {/* Check authentication */}
                                 {auth.isAuthenticated
                                     ? (<span>
                                 <button
@@ -193,10 +208,11 @@ class PostItem extends Component{
                                 {attendAvatar}
                             </div>
                         </div>
-
+                        {/* To check the authentication of joining the event*/}
                         {auth.isAuthenticated
                             ? (<div className="col-1 py-4 px-1">
                                 <h5>
+                                    {/* Show event attending people numbers*/}
                                     <span className="badge badge-light align-middle bg-white w-100">
                                         {post.eventPeopleNumber - post.eventAttendPeople.length <= 0 ? 0 : post.eventPeopleNumber - post.eventAttendPeople.length}
                                     </span>
@@ -205,6 +221,7 @@ class PostItem extends Component{
                                         {post.eventPeopleNumber - post.eventAttendPeople.length <=0 ? 'Full' : 'Remain'}
                                     </span>
                                 </h5>
+                                {/* Option for joining the event and add the users to the event */}
                             <button
                                 onClick={this.onAttendClick.bind(this, post._id, profile.nickName, auth.user.avatar)}
                                 type="button"
@@ -224,7 +241,7 @@ class PostItem extends Component{
                                     {post.eventAttendPeople.length}
                                 </span>
                             </button>
-
+                            {/* Check whether the user has already chose to attend the event */}
                             <button
                                 onClick={this.onUnattendClick.bind(this, post._id)}
                                 type="button"

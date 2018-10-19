@@ -3,19 +3,18 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import UserComment from './UserComment';
 
-class UserComentFeed extends Component {
+class UserCommentFeed extends Component {
     render() {
         const { posts, auth } = this.props;
 
         // Pass each user's comment value to children component
         return posts.map(post =>
-
             <UserComment key={post._id} post={post} auth={auth} onDeleteCommentClick={this.props.onDeleteCommentClick}/>
         );
     }
 }
 
-UserComentFeed.propTypes = {
+UserCommentFeed.propTypes = {
     posts: PropTypes.array.isRequired,
     auth: PropTypes.object.isRequired
 };
@@ -26,4 +25,4 @@ const mapStateToProps = state => ({
 
 
 
-export default connect(mapStateToProps)(UserComentFeed);
+export default connect(mapStateToProps)(UserCommentFeed);

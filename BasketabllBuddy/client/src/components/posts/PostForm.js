@@ -38,11 +38,13 @@ class PostForm extends Component{
     }
 
     componentDidMount(){
+        // Get the user profile from redux
         this.props.getCurrentProfile();
     }
 
     componentWillReceiveProps(newProps){
         if(newProps.errors){
+            // Receive the error message from back-end
             this.setState({ errors: newProps.errors });
         }
     }
@@ -62,6 +64,7 @@ class PostForm extends Component{
         const { profile } = this.props.profile;
         const newPost = {
 
+            // Create new post form and check the url format
             eventTitle: this.state.eventTitle,
             eventText: this.state.eventText,
             photo: this.state.photo.toString().includes('http://')
@@ -89,6 +92,8 @@ class PostForm extends Component{
 
         const { profile, loading } = this.props.profile;
 
+        // Check profile state from redux is not null
+        // If it null, this component will invoke loading page until receive data
         if(profile === null || loading ) {
             return <Spinner />
         } else {
@@ -97,6 +102,7 @@ class PostForm extends Component{
         }
 
         return(
+            // Generate forms for making event post
             <div className="add-post">
                 <div className="container">
                     <div className="row">

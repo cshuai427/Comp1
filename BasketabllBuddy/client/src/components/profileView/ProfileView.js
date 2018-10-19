@@ -10,7 +10,7 @@ import Profile from './Profile';
 class ProfileView extends Component {
 
     componentDidMount() {
-        // get the logged in user profile
+        // Get the logged in user profile
         this.props.getCurrentProfile();
     }
 
@@ -59,7 +59,7 @@ class ProfileView extends Component {
             }
             else
             {
-                // User is logged in has no profile
+                // User is logged in with no profile
                 profileBasic = (
                         <div className="profileView">
                             <p className="lead text-muted">Welcome {user.name} </p >

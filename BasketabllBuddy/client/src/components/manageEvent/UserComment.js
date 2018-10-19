@@ -13,6 +13,7 @@ class UserComment extends Component {
         let number = 0;
         let commentManageContent;
 
+        // Render user comment list
         commentManageContent = post.comments.map(comment => (
             auth.user.id === comment.user ?
                 <table className="table table-sm">

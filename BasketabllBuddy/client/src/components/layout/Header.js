@@ -19,6 +19,7 @@ class Header extends Component{
         const { isAuthenticated, user } = this.props.auth;
 
         const authLinks = (
+            // View for the users who logged in
             <ul className = "navbar-nav ml-auto sm-auto xs-auto lg-auto">
 
                 <li className = "nav-item">
@@ -44,6 +45,7 @@ class Header extends Component{
                 </li>
             </ul>
         );
+        // Guest view
         const guestLinks = (
             <ul className = "navbar-nav ml-auto">
                 <li className = "nav-item">
@@ -63,6 +65,7 @@ class Header extends Component{
         );
 
         return(
+            // Navbar with all links
             <nav className = "navbar navbar-expand-sm " style={{backgroundColor: '#ffffff'}}>
                 <div className="container">
                     <Link to="/event/1" className = "navbar-brand">
@@ -94,12 +97,12 @@ class Header extends Component{
 
 
 }
-Header.protoTypes={
+Header.protoTypes = {
     logoutUser: PropTypes.func.isRequired,
     auth:PropTypes.object.isRequired
 };
 
-const mapStateToProps=state=>({
+const mapStateToProps = state => ({
     auth: state.auth,
     errors: state.errors
 });

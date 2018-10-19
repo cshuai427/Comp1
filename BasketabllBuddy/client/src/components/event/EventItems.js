@@ -6,7 +6,7 @@ import moment from 'moment';
 
 class EventItems extends Component {
 
-    // Render each post in this page
+    // Render each post content in this page
     render() {
 
         const { post } = this.props;
@@ -22,7 +22,7 @@ class EventItems extends Component {
 
                 <div className="post-display">
                     <div className="container m-3 pl-0 row border rounded shadow-sm bg-light">
-
+                        {/*display the event photos*/}
                         <div className="col-4 pl-0">
                             <img
                                 src={post.photo}
@@ -30,6 +30,7 @@ class EventItems extends Component {
                                 alt="Cover"
                             />
                         </div>
+                        {/*display the event information*/}
                         <div className="col-7 mt-3 text-left">
                             <h3>{post.eventTitle}</h3>
                             <h6>
@@ -60,13 +61,12 @@ class EventItems extends Component {
                                 <span className="badge badge-success shadow-sm mx-2 px-2">
                                     {post.eventLocation}
                                 </span>
-
+                                {/*showing basketball status "have" or "not"*/}
                                 <i className="fas fa-basketball-ball" />
                                 <span className={post.haveBall ? 'badge badge-success shadow-sm mx-2 px-2': 'badge badge-danger shadow-sm mx-2 px-2' }>
                                     {post.haveBall ? 'I will take' : 'Need a ball'}
                                 </span>
                                 {'  '}
-
                                 <span>
                                     <i className="fas fa-thumbs-up text-info" />
                                     <span className="badge badge-light">

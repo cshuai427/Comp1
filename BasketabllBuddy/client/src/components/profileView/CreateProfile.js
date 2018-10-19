@@ -36,6 +36,7 @@ class CreateProfile extends Component {
 
     componentDidMount()
     {
+        // Get the logged in user's profile
         this.props.getCurrentProfile();
     }
 
@@ -44,6 +45,7 @@ class CreateProfile extends Component {
     {
         if(nextProps.errors)
         {
+            // Receive error from back-end
             this.setState({errors: nextProps.errors})
         }
     }
@@ -52,6 +54,7 @@ class CreateProfile extends Component {
     {
         e.preventDefault();
 
+        // Create new profile form and pass it to the actions which connect to the back-end
         const profileData = {
             nickName: this.state.nickName,
             playerRole: this.state.playerRole,
@@ -76,6 +79,8 @@ class CreateProfile extends Component {
     render() {
         const { profile, loading } = this.props.profile;
 
+        // Check profile state from redux is not null
+        // If it null, this component will invoke loading page until receive data
         if(profile === null || loading)
         {
             return <Spinner/>;
@@ -92,9 +97,11 @@ class CreateProfile extends Component {
 
         let socialInputs;
 
+        // A toggle for displaying social input , when user click the button
         if(displaySocialInputs)
         {
             socialInputs = (
+                // Social media profile links
                 <div>
                     <InputGroup
                         placeholder="Twitter Profile URL"
@@ -161,6 +168,7 @@ class CreateProfile extends Component {
         ];
 
         return (
+            // Generate forms for user to create file
             <div className="createProfile">
                 <div className="container">
                     <div className="row">
@@ -212,6 +220,7 @@ class CreateProfile extends Component {
                                 />
 
                                 <div className="mb-3">
+                                    {/* Button for adding optional social media links*/}
                                     <button
                                         type="button"
                                         onClick={() => {

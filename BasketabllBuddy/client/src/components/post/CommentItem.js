@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 class CommentItem extends Component {
 
     onDeleteClick(postId, commentId) {
+        // Pass value to the actions and delete comment by postId and commentId from back-end
         this.props.deleteComment(postId,commentId);
     }
 
@@ -15,8 +16,9 @@ class CommentItem extends Component {
         const { comment, postId, auth } = this.props;
 
         return (
+            // User comment items
             <div className="Comment">
-
+                {/* Show the user's information*/}
                 <div className="container m-3 py-3 pl-0 row border rounded shadow-sm bg-light">
                     <div className="col-2">
                         <Link to={`/profile/nickname/${comment.nickName}`}>
@@ -35,6 +37,7 @@ class CommentItem extends Component {
                         </h5>
                     </div>
                     <div className="col-1 px-1">
+                        {/* Show the delete button for comment's owner*/}
                         {comment.user === auth.user.id ?
                             (<button onClick={this.onDeleteClick.bind(this, postId, comment._id)}
                                      type="button" className="btn btn-sm btn-outline-danger h-100 mb-2 w-100">

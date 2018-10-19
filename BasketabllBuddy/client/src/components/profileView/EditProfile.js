@@ -34,7 +34,7 @@ class EditProfile extends Component {
 
 
     componentDidMount(){
-
+        // Get the logged in user profile
         this.props.getCurrentProfile();
     }
 
@@ -110,6 +110,7 @@ class EditProfile extends Component {
 
         if(displaySocialInputs)
         {
+            // Display current social networks links for modifying
             socialInputs = (
                 <div>
                     <InputGroup
@@ -176,6 +177,7 @@ class EditProfile extends Component {
             { label: 'Other',value: 'Other' }
         ];
         return (
+            // Generate profile modification fields for editing
             <div className="create-profile">
                 <div className="container">
                     <div className="row">

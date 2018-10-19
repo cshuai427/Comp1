@@ -22,7 +22,7 @@ class Register extends Component {
  }
     componentDidMount(){
         if(this.props.auth.isAuthenticated){
-            // // This prevent the logged in user open the register page
+            // This prevent the logged in user open the register page
             this.props.history.push('/profile-view');
         }}
  componentWillReceiveProps(nextProps){
@@ -55,7 +55,7 @@ this.props.registerUser(newUser,this.props.history);
         const  { errors } =this.state;
 
         return (
-
+        //register form for creating new account
         <div className="register">
                 <div className="container">
                     <div className="row">

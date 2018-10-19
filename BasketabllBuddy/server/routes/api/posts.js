@@ -17,8 +17,8 @@ const validationPostComment = require('../../validation/comment');
 router.get('/page/:pages', (req, res) => {
     // for pagination
     // set limit of items displayed on each page to 5
-    var perPage = 5;
-    var current = req.params.pages || 1;
+    let perPage = 5;
+    let current = req.params.pages || 1;
 
     //find all posts and only return results for a specific page
     Post.find()

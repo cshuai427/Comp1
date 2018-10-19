@@ -5,12 +5,12 @@ import isEmpty from '../../validation/is-empty';
 
 // Should be removed
 
-// components
+// Imported components
 import { getPosts } from '../../actions/postActions';
 import Spinner from '../common/Spinner';
 
 
-////  all event items
+// All event items
 import EventFeed from './EventFeed';
 import basketballBanner from '../../Img/basketballBanner.jpg';
 
@@ -61,7 +61,7 @@ class Event extends Component {
                     </li>
                 );
             }
-
+            // Set maximum posts numbers per page
             if (parseInt(currentPage, 10) === parseInt(totalPages, 10)) {
                 lastPage = (
                     <li className="page-item disabled">
@@ -81,7 +81,7 @@ class Event extends Component {
                     </li>
                 );
             }
-
+            // Set pagination when the posts are more than 10 then generate another page, when the pages are more than 4, shows the first 4 pages.
             let i = currentPage > 4 ? currentPage - 3 : 1;
             for (i; i <= parseInt(currentPage, 10) + 3 && i <= parseInt(totalPages, 10); i++) {
                 if (i === parseInt(currentPage, 10)) {
@@ -98,7 +98,7 @@ class Event extends Component {
                     );
                 }
             }
-
+            // Generate the pagination
             pagination = (
                 <ul className="pagination text-center justify-content-center">
                     {firstPage}
@@ -119,7 +119,9 @@ class Event extends Component {
                 </div>
                 <h1>Basketball Meetup Events</h1>
                 <hr />
+
                 <div>
+                    {/*get post contents with pagination displaying*/}
                     {postContent}
                     {pagination}
                 </div>

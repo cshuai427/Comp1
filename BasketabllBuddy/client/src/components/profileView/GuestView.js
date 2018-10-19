@@ -20,7 +20,7 @@ class GuestView extends Component {
     {
 
         // This is check the user data status
-        // if it is null, page will redirect to not found
+        // If it is null, page will redirect to not found
         if(nextProps.profile.profile === null && this.props.profile.loading) {
             this.props.history.push('/not-found');
         }
@@ -52,6 +52,7 @@ class GuestView extends Component {
                     </div>: null));
 
         return (
+            // Generate guest profile view by user's nick name
             <div className="row">
                 <div className="col-md-12">
                     <div className="card card-body bg-info text-white mb-3">
@@ -64,6 +65,7 @@ class GuestView extends Component {
                             <h1 className="display-4 text-center">
                                 {profile.nickName}
                             </h1>
+                            {/* Social media links*/}
                             <p className="lead text-center">
 
                                 {isEmpty(profile.social && profile.social.twitter) ? null: (
@@ -139,12 +141,14 @@ class GuestView extends Component {
 
                 <div className="col-md-12">
                     <div className="card card-body bg-light mb-3">
+                        {/* User's 'about me' */}
                         <h3 className="text-center text-info">About Me</h3>
                         <p className="lead">{isEmpty(profile.aboutMe)
                             ? <span> {profile.nickName} does not have a aboutMe</span>
                             : <span>{profile.aboutMe}</span>}
                         </p >
                         <hr/>
+                        {/* Show user's interested fields*/}
                         <h3 className="text-center text-info">Interested Field</h3>
                         <div className="d-flex flex-wrap justify-content-center align-items-center">
                             {interests}

@@ -1,4 +1,5 @@
 /* Remove the navbar's default margin-bottom and rounded borders */
+/*fix the navbar at the top of the webpage */
 .navbar {
     margin-bottom: 0;
     border-radius: 0;
@@ -24,19 +25,23 @@
     background-color: #f1f1f1;
     height: 100%;
 }
+/*set banner style to the banner image on event page*/
 .banner{
     height: 280px;
 }
 .nopadding {
     padding: 0;
 }
+/*set nav links color*/
 .navlinks {
     color: #808080;
 }
+
 .eventAll{
     margin-bottom: 20px;
     padding-bottom: 40px;
 }
+
 .events1{
     display: inline;
     float: left;
@@ -52,10 +57,12 @@
 .p {
     text-align: left;
 }
+/*post images*/
 .imageItem{
     padding-top: 2%;
     padding-left: 4%;
 }
+/*set the styles for each event post preview on event page*/
 .eventItem {
     background-color: white;
     margin-left: 6%;
@@ -66,16 +73,20 @@
     padding-top: 15px;
     height: auto;
 }
+/*set bg color to profile view page */
 .profileView{
     background-color: #DCDCDC;
 }
+/*set background color for create profile page*/
 .createProfile{
     background-color: #DCDCDC;
 }
+/*single post event item*/
 .postItem {
     text-align: left;
     padding-left: 4%;
 }
+/*styles for react date picker*/
 .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list {
     padding-left: 0 !important;
     padding-right: 0 !important;

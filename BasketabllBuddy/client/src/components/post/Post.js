@@ -15,6 +15,7 @@ import Spinner from '../common/Spinner';
 class Post extends Component {
 
     componentDidMount(){
+        // Get post id from the url and get the post data from the actions which get data from back-end api
         this.props.getPost(this.props.match.params.id);
         this.props.getCurrentProfile();
 
@@ -24,9 +25,12 @@ class Post extends Component {
         const { post, loading } = this.props.post;
         let postContent;
 
+        // Check post state from redux is not null
+        // If it null, this component will invoke loading page until receive data
         if(post === null || loading || Object.keys(post).length === 0){
             postContent = <Spinner />
         } else {
+            // Pass post value for the children components with postId and following comments
             postContent = (
                 <div>
                     <PostItem post={post}/>
@@ -40,6 +44,7 @@ class Post extends Component {
         }
 
         return (
+            // Post content details page
             <div className="post">
                 <div className="container">
                     <div className="row">

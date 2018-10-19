@@ -13,7 +13,6 @@ export const numberOfPeople = [
 
 
 // Select options for event location
-// Need to fix
 export const location = [
     { label: 'UTS' ,value: 'UTS' },
     { label: 'Alroy Park' ,value: 'Alroy Park' },

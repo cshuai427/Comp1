@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 
-// Private route for check user is authenticated. This will be used for all private route.
+// Private route for checking whether the user is authenticated. This will be used for all private route.
 const PrivateRoute = ({component: Component, auth, ...rest}) =>
     (
         <Route

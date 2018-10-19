@@ -18,6 +18,7 @@ class Profile extends Component {
                     </div>: null));
 
         return (
+            // Profile view page
             <div className="profileView" >
             <div className="row" style={{backgroundColor:'#DCDCDC'}}>
                 <div className="col-md-12">
@@ -32,7 +33,7 @@ class Profile extends Component {
                                 {profile.nickName}
                             </h1>
                             <p className="lead text-center">
-
+                                {/* Social media links */}
                                 {isEmpty(profile.social && profile.social.twitter) ? null: (
                                     <a
                                         href= {profile.social.twitter.toString().includes('http://')

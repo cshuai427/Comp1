@@ -61,6 +61,7 @@ class PostForm extends Component{
         const { user } = this.props.auth;
         const { profile } = this.props.profile;
         const newPost = {
+
             eventTitle: this.state.eventTitle,
             eventText: this.state.eventText,
             photo: this.state.photo.toString().includes('http://')
@@ -88,12 +89,9 @@ class PostForm extends Component{
 
         const { profile, loading } = this.props.profile;
 
-        if(profile === null || loading )
-        {
+        if(profile === null || loading ) {
             return <Spinner />
-        }
-        else
-        {
+        } else {
             if(isEmpty(profile.nickName))
                 return  <Redirect to='/create-profile' />
         }

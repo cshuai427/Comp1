@@ -7,6 +7,7 @@ class UserComentFeed extends Component {
     render() {
         const { posts, auth } = this.props;
 
+        // Pass each user's comment value to children component
         return posts.map(post =>
 
             <UserComment key={post._id} post={post} auth={auth} onDeleteCommentClick={this.props.onDeleteCommentClick}/>

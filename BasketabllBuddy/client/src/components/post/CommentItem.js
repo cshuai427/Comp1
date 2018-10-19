@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 class CommentItem extends Component {
 
-    onDeleteClick(postId, commentId){
+    onDeleteClick(postId, commentId) {
         this.props.deleteComment(postId,commentId);
     }
 

@@ -5,6 +5,7 @@ import CommentItem from './CommentItem';
 
 class CommentFeed extends Component {
 
+    // Pass each comment value to children component
     render() {
 
         const { comments, postId } = this.props;

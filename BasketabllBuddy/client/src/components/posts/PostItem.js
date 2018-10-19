@@ -11,8 +11,7 @@ import isEmpty from "../../validation/is-empty";
 
 class PostItem extends Component{
 
-    componentDidMount()
-    {
+    componentDidMount() {
         getCurrentProfile();
     }
 
@@ -40,8 +39,7 @@ class PostItem extends Component{
 
     onAttendClick(id, nickName, avatar){
 
-        if(nickName !== null && avatar !== null)
-        {
+        if(nickName !== null && avatar !== null) {
             const newAttendUser = {
                 nickName : nickName,
                 avatar: avatar
@@ -63,8 +61,7 @@ class PostItem extends Component{
         const { auth } = this.props;
         if(attends.filter(attend => attend.user === auth.user.id).length > 0) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -77,23 +74,19 @@ class PostItem extends Component{
 
         let attendAvatar;
         let profileAuth = false;
-        if(profile === null || loading)
-        {
+        if(profile === null || loading) {
             return <Spinner/>;
         }
         else
         {
-            if(!isEmpty(profile.nickName))
-            {
+            if(!isEmpty(profile.nickName)) {
                 profileAuth = true;
 
             }
 
-            if(post.eventAttendPeople.length !== 0)
-            {
+            if(post.eventAttendPeople.length !== 0) {
 
-                attendAvatar = post.eventAttendPeople.map(user =>
-                    (
+                attendAvatar = post.eventAttendPeople.map(user => (
                         <span key={user.user} className="col-1 px-0 pr-2">
                                   <Link to={`/profile/nickname/${user.nickName}`}>
                                       <img
@@ -104,9 +97,7 @@ class PostItem extends Component{
                                   </Link>
                                 </span>
                     ))
-            }
-            else
-            {
+            } else {
                 attendAvatar = (<span className="badge badge-success shadow-sm mx-2 px-2">Let's join my event</span>)
             }
         }
@@ -238,8 +229,8 @@ class PostItem extends Component{
                                 onClick={this.onUnattendClick.bind(this, post._id)}
                                 type="button"
                                 className="btn btn-sm btn-outline-secondary mb-2 w-100"
-                                disabled=
-                                    {!this.findUserAttend(post.eventAttendPeople)
+                                disabled={
+                                    !this.findUserAttend(post.eventAttendPeople)
                                     || post.eventPeopleNumber === post.eventAttendPeople.length
                                     || !profileAuth
                                     || !(moment(post.eventDate).format('YYYY-MM-DD HH:mm') > moment(Date.now()).format('YYYY-MM-DD HH:mm'))}

@@ -6,13 +6,6 @@ import { Link } from "react-router-dom";
 
 class UserComment extends Component {
 
-
-    componentWillReceiveProps(nextProps)
-    {
-
-    }
-
-
     render() {
 
         const { post, auth } = this.props;
@@ -21,8 +14,7 @@ class UserComment extends Component {
         let commentManageContent;
 
         commentManageContent = post.comments.map(comment => (
-            auth.user.id === comment.user
-                ?
+            auth.user.id === comment.user ?
                 <table className="table table-sm">
                     <tbody>
                 <tr key={comment._id} >

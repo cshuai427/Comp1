@@ -23,16 +23,13 @@ class ManagePost extends Component {
         this.props.getPosts();
     }
 
-    onDeleteCommentClick(postId, commentId)
-    {
+    onDeleteCommentClick(postId, commentId) {
         this.props.deleteComment(postId, commentId);
         this.setState({delete: true})
     }
 
-    componentWillReceiveProps()
-    {
-        if(this.state.delete)
-        {
+    componentWillReceiveProps() {
+        if(this.state.delete) {
             window.location.reload();
         }
     }
@@ -47,9 +44,7 @@ class ManagePost extends Component {
 
         if(posts === null || loading){
             ManageContent = <Spinner/>;
-        }
-        else
-        {
+        } else {
             ManageContent = (
                 <UserPost posts={posts} />
             );

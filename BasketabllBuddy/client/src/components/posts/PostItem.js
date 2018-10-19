@@ -6,14 +6,12 @@ import { Link ,withRouter } from 'react-router-dom';
 import { deletePost, addLike, removeLike, attendEvent, removeAttendEvent } from "../../actions/postActions";
 import { getCurrentProfile } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
-// should be fix
-import basketBall1 from '../../Img/basketball1.jpeg'
 import moment from 'moment';
+import isEmpty from "../../validation/is-empty";
 
 class PostItem extends Component{
 
-    componentDidMount()
-    {
+    componentDidMount() {
         getCurrentProfile();
     }
 
@@ -41,13 +39,12 @@ class PostItem extends Component{
 
     onAttendClick(id, nickName, avatar){
 
-        if(nickName !== null)
-        {
+        if(nickName !== null && avatar !== null) {
             const newAttendUser = {
                 nickName : nickName,
                 avatar: avatar
             };
-            console.log(id);
+
             this.props.attendEvent(id, newAttendUser);
         }
 
@@ -64,8 +61,7 @@ class PostItem extends Component{
         const { auth } = this.props;
         if(attends.filter(attend => attend.user === auth.user.id).length > 0) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -77,35 +73,32 @@ class PostItem extends Component{
         const { profile, loading } = this.props.profile;
 
         let attendAvatar;
-        let disableValue = false;
-        if(profile === null || loading)
-        {
+        let profileAuth = false;
+        if(profile === null || loading) {
             return <Spinner/>;
         }
         else
         {
+            if(!isEmpty(profile.nickName)) {
+                profileAuth = true;
 
-            if(post.eventAttendPeople.length !== 0)
-            {
-                disableValue = post.eventAttendPeople.map(user =>
-                {
-                    if(user.user === auth.user.id)
-                    {
-                        return true;
-                    }
-                });
+            }
 
-                attendAvatar = post.eventAttendPeople.map(user =>
-                    (
+            if(post.eventAttendPeople.length !== 0) {
+
+                attendAvatar = post.eventAttendPeople.map(user => (
                         <span key={user.user} className="col-1 px-0 pr-2">
-                                  <Link to={`/profile/nickname/${user.nickName}`}><img
+                                  <Link to={`/profile/nickname/${user.nickName}`}>
+                                      <img
                                       src={user.avatar}
                                       className="rounded-circle w-100 shadow"
                                       alt={user.nickName}
-                                  />
+                                      />
                                   </Link>
                                 </span>
                     ))
+            } else {
+                attendAvatar = (<span className="badge badge-success shadow-sm mx-2 px-2">Let's join my event</span>)
             }
         }
 
@@ -117,7 +110,7 @@ class PostItem extends Component{
                             <img
                                 src={post.photo}
                                 className="rounded d-block float-left m-1 w-100"
-                                alt="Photo"
+                                alt="Cover"
                             />
                         </div>
                         <div className="col-7 mt-3 text-left">
@@ -128,9 +121,13 @@ class PostItem extends Component{
                                     {post.nickName}
                                 </span>
                                 <i className="fas fa-tasks" />
-                                <span className="badge badge-light font-weight-bold mx-2 px-2">
-                                    {post.eventOverStatus ? 'Over' : 'Not Start'}
-                                </span>
+                                {moment(post.eventDate).format('YYYY-MM-DD HH:mm') > moment(Date.now()).format('YYYY-MM-DD HH:mm')
+                                    ? <span className="badge badge-light font-weight-bold mx-2 px-2">
+                                        Not Start
+                                    </span>
+                                    : <span className="badge badge-warning badge-pill font-weight-bold mx-2 px-2">
+                                        END
+                                    </span>}
                             </h6>
                             <p className="pb-2 mb-0">{post.eventText}</p>
                             <div className="border-top border-bottom bg-light p-2">
@@ -211,13 +208,16 @@ class PostItem extends Component{
                             <button
                                 onClick={this.onAttendClick.bind(this, post._id, profile.nickName, auth.user.avatar)}
                                 type="button"
-                                className="btn btn-sm btn-outline-success mb-2 w-100">
+                                className="btn btn-sm btn-outline-success mb-2 w-100"
+                                disabled=
+                                    {this.findUserAttend(post.eventAttendPeople)
+                                    || post.eventPeopleNumber === post.eventAttendPeople.length
+                                    || !profileAuth
+                                    || !(moment(post.eventDate).format('YYYY-MM-DD HH:mm') > moment(Date.now()).format('YYYY-MM-DD HH:mm'))}
+                            >
 
-                                <i className={classnames('fas fa-check',
-                                    {
-                                        'text-info'
-                                            : this.findUserAttend(post.eventAttendPeople)
-                                    })} />
+
+                                <i className="fas fa-check"/>
                                 <span
                                     className="badge badge-light"
                                 >
@@ -229,10 +229,13 @@ class PostItem extends Component{
                                 onClick={this.onUnattendClick.bind(this, post._id)}
                                 type="button"
                                 className="btn btn-sm btn-outline-secondary mb-2 w-100"
+                                disabled={
+                                    !this.findUserAttend(post.eventAttendPeople)
+                                    || post.eventPeopleNumber === post.eventAttendPeople.length
+                                    || !profileAuth
+                                    || !(moment(post.eventDate).format('YYYY-MM-DD HH:mm') > moment(Date.now()).format('YYYY-MM-DD HH:mm'))}
                             >
-                                <i
-                                    className="fas fa-times"
-                                />
+                                <i className="fas fa-times"/>
                             </button>
                             </div>) : null}
                     </div>

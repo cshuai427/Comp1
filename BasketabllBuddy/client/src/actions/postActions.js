@@ -4,11 +4,12 @@ import {ADD_POST, GET_ERRORS, CLEAR_ERRORS, GET_POSTS, POST_LOADING, GET_POST, D
 
 //Add post
 export const addPost = (postData, history) => dispatch => {
+    // send new post data to backend api and store response to redux
+    // then redirect to detail page of created post
     axios
         .post('/api/posts', postData)
         .then(res =>
         {
-            console.log(res.data);
             dispatch ({
                 type: ADD_POST,
                 payload: res.data
@@ -26,6 +27,8 @@ export const addPost = (postData, history) => dispatch => {
 
 //delete post
 export const deletePost = (id, history, url) => dispatch => {
+    // delete a post by post id
+    // redirect to url
     axios
         .delete(`/api/posts/${id}`)
         .then(res =>
@@ -34,7 +37,13 @@ export const deletePost = (id, history, url) => dispatch => {
                     type: DELETE_POST,
                     payload: id
                 });
-               url ? history.push(url) : null
+                if(url){
+                    history.push(url);
+                }
+                else
+                {
+                   return null
+                }
             }
 
         )
@@ -49,6 +58,7 @@ export const deletePost = (id, history, url) => dispatch => {
 //Get posts
 export const getPosts = page => dispatch => {
     dispatch (setPostLoading());
+    // get all posts that will be displayed on a certain page and store data in redux
     axios
         .get(`/api/posts/page/${page}`)
         .then(res => {
@@ -68,6 +78,7 @@ export const getPosts = page => dispatch => {
 //Get post
 export const getPost = id => dispatch => {
     dispatch (setPostLoading());
+    // get one post by post id and store data in redux
     axios
         .get(`/api/posts/${id}`)
         .then(res =>
@@ -86,6 +97,7 @@ export const getPost = id => dispatch => {
 
 // Add Like
 export const addLike = id => dispatch => {
+    // find a post by id and store user data in like list of that post
     axios
         .post(`/api/posts/like/${id}`)
         .then(res => dispatch(getPost(id)))
@@ -98,6 +110,7 @@ export const addLike = id => dispatch => {
 };
 // Remove Like
 export const removeLike = id => dispatch => {
+    // find a post by id and remove a user from the like list
     axios
         .post(`/api/posts/unlike/${id}`)
         .then(res => dispatch(getPost(id)))
@@ -111,6 +124,9 @@ export const removeLike = id => dispatch => {
 // Add Comment
 export const addComment = (postId, commentData) => dispatch => {
     dispatch(clearErrors());
+    // send value to back-end
+    // find a post by id and add new comment under that post
+    // then retrieve data from backend and store in redux
     axios
         .post(`/api/posts/comment/${postId}`, commentData)
         .then(res =>
@@ -130,6 +146,9 @@ export const addComment = (postId, commentData) => dispatch => {
 // Delete Comment
 
 export const deleteComment = (postId, commentId) => dispatch =>{
+    // send value to back-end
+    // find a post by id and remove a comment under that post
+    // then retrieve data from backend and store in redux
     axios
         .delete(`/api/posts/comment/${postId}/${commentId}`)
         .then(res =>
@@ -149,6 +168,7 @@ export const deleteComment = (postId, commentId) => dispatch =>{
 // Attend Event
 
 export const attendEvent = (postId, newAttendUser) => dispatch => {
+    // find a post by id and store user data in the attendance list
     axios
         .post(`/api/posts/attend/${postId}`, newAttendUser)
         .then(res => dispatch(getPost(postId)))
@@ -163,6 +183,7 @@ export const attendEvent = (postId, newAttendUser) => dispatch => {
 // Remove Attend
 
 export const removeAttendEvent = id => dispatch => {
+    // find a post by id and remove user data from the attendance list
     axios
         .post(`/api/posts/unattend/${id}`)
         .then(res => dispatch(getPost(id)))

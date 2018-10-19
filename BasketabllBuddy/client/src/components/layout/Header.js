@@ -8,9 +8,9 @@ import PropTypes from 'prop-types';
 class Header extends Component{
 
     onLogoutClick(e){
-
         e.preventDefault();
 
+        // Clear user token and user information from redux
         this.props.logoutUser();
     }
 
@@ -22,7 +22,12 @@ class Header extends Component{
             <ul className = "navbar-nav ml-auto sm-auto xs-auto lg-auto">
 
                 <li className = "nav-item">
-                    <Link className = "nav-link navlinks" to="/profile-view">
+                    <Link className = "nav-link navlinks" to = "/post" name="post">
+                        Post
+                    </Link>
+                </li>
+                <li className = "nav-item">
+                    <Link className = "nav-link navlinks" to="/profile-view" name="profile-view">
                         <img className="rounded-circle"
                              src={user.avatar}
                              style={{width:'28px',marginRight:'5px'}}
@@ -32,13 +37,8 @@ class Header extends Component{
                         Profile
                     </Link>
                 </li>
-                <li className = "nav-item">
-                    <Link className = "nav-link navlinks" to = "/post">
-                        Post
-                    </Link>
-                </li>
                 <li className = "nav-item" >
-                    <Link to="" className = "nav-link navlinks" onClick={this.onLogoutClick.bind(this)}>
+                    <Link to="" className = "nav-link navlinks" onClick={this.onLogoutClick.bind(this)} name="logout">
                         <i className="fa fa-sign-out-alt" />Logout
                     </Link>
                 </li>
@@ -78,7 +78,7 @@ class Header extends Component{
                     <div className = "collapse navbar-collapse" id = "mobile-nav">
                         <ul className = "navbar-nav mr-auto">
                             <li className = "nav-item">
-                                <Link className = "nav-link navlinks" to = "/event/1">
+                                <Link className = "nav-link navlinks" to = "/event/1" name="Event">
                                     Event
                                 </Link>
                             </li>

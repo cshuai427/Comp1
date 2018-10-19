@@ -8,19 +8,16 @@ import moment from 'moment';
 class UserPost extends Component {
 
 
-    onDeletePostClick(postId)
-    {
+    onDeletePostClick(postId) {
         this.props.deletePost(postId);
     }
 
     render() {
 
         const { posts, auth } = this.props;
-
         let number = 0;
-       let postedEvent = posts.map(post=>(
-            auth.user.id === post.user
-                ?
+        let postedEvent = posts.map(post=>(
+            auth.user.id === post.user ?
                 <tr key={post._id}>
                     <th>{++number}</th>
                     <td><Link to={`/post/${post._id}`} >{post.eventTitle}</Link></td>

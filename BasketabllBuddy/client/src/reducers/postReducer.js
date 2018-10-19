@@ -8,6 +8,7 @@ const initialState = {
     totalPages: null
 };
 
+// Save post or posts state to redux
 export default function (state = initialState, action) {
     switch (action.type) {
         case POST_LOADING:

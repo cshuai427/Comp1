@@ -2,6 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
+// This is a reuse components
 
 const TextFieldGroup = ({
                             name,
@@ -17,8 +18,7 @@ const TextFieldGroup = ({
     return (
         <div className = "form-group">
             <input type ={type}
-                   className = {classnames('form-control form-control-lg',
-                       {
+                   className = {classnames('form-control form-control-lg', {
                            'is-invalid': error
 
                        })}

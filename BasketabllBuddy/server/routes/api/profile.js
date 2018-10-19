@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const passport = require('passport');
 
 // Load Validation
@@ -10,23 +9,17 @@ const validateProfileInput = require('../../validation/profile');
 // Load Profile Model
 const Profile = require('../../models/Profile');
 
-// Load User Model
-const User = require('../../models/User');
 
-
-//  @route  GET api/profile/test
-//  @desc   Test profile route
-//  @access Public
-
-router.get('/test', (req, res)=> res.json({msg: "profile works"}));
-
-//  @route  GET api/profile/test
+//  @route  GET api/profile/
 //  @desc   Test users route
 //  @access Private
 
-router.get('/', passport.authenticate('jwt',
-    {session: false}), (req, res) => {
+router.get('/', passport.authenticate('jwt', {session: false}),
+    (req, res) => {
+
     const errors = {};
+    // find a user and extract profile data
+    // if exist, send info to front-end ( not including password)
     Profile.findOne({user: req.user.id})
         .populate('user', ['name', 'avatar'])
         .then(profile => {
@@ -39,28 +32,6 @@ router.get('/', passport.authenticate('jwt',
         .catch(err => res.status(404).json(err));
 });
 
-//  @route  GET api/profile/all
-//  @desc   Get all profile
-//  @access Public
-
-
-router.get('/all', (req, res) =>
-{
-    const errors = {};
-    Profile.find()
-        .populate('user',['name', 'avatar'])
-        .then(profiles => {
-            if(!profiles){
-                errors.noprofile = 'There are no profiles';
-                return res.status(404).json(errors);
-            }
-            res.json(profiles);
-        })
-        .catch(err => res.status(404).json({profiles: 'There are no profiles'}));
-});
-
-
-
 
 //  @route  GET api/profile/:nickName
 //  @desc   Get profile by nickname
@@ -69,7 +40,7 @@ router.get('/all', (req, res) =>
 router.get('/nickname/:nickName', (req, res) => {
     const errors = {};
 
-    // param can grab the url variable
+    // get user nickname from route and send info back to front-end
     Profile.findOne({ nickName: req.params.nickName})
 
         .populate('user', ['name', 'avatar'])
@@ -84,32 +55,6 @@ router.get('/nickname/:nickName', (req, res) => {
 
 
 });
-
-//  @route  GET api/profile/user/:user_id
-//  @desc   Get profile by user ID
-//  @access Public
-
-router.get('/user/:user_id', (req, res) => {
-    const errors = {};
-
-    // param can grab the url variable
-    Profile.findOne({ user: req.params.user_id})
-
-        .populate('user', ['name', 'avatar'])
-        .then(profile => {
-            if(!profile){
-                errors.noprofile = 'There is no profile for this user';
-                res.status(404).json(errors);
-            }
-
-            res.json(profile);
-        })
-        .catch(err => res.status(404).json({ profile: 'There is no profile for this user'}));
-
-
-});
-
-
 
 
 //  @route  POST api/profile
@@ -152,6 +97,8 @@ router.post ('/', passport.authenticate('jwt', {session: false}),
         if(req.body.instagram) profileFields.social.instagram = req.body.instagram;
 
 
+        // find a user profile and create new profile
+        // if exist, update profile value
         Profile.findOne({ user: req.user.id})
             .then(profile => {
                 if(profile){
@@ -161,7 +108,6 @@ router.post ('/', passport.authenticate('jwt', {session: false}),
                             { $set: profileFields},
                             { new: true}
                         ).then(profile => res.json(profile));
-
                 }
                 else {
                     // Create
@@ -180,20 +126,6 @@ router.post ('/', passport.authenticate('jwt', {session: false}),
             });
     });
 
-
-//  @route  DELETE api/profile
-//  @desc   Delete user and profile
-//  @access Private
-
-router.delete('/', passport.authenticate('jwt', {session: false}),
-    (req, res) =>{
-
-        Profile.findOneAndRemove({user: req.user.id})
-            .then(() =>{
-                User.findOneAndRemove({_id: req.user.id})
-                    .then(() => res.json({success: true}))
-            });
-    });
 
 
 

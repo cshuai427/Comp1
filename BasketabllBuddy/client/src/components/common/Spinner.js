@@ -1,6 +1,8 @@
 import React from 'react';
 import spinner from './spinner.gif';
 
+
+// Loading page
 export default () => {
     return (
         <div>

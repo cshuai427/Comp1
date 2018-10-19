@@ -1,7 +1,7 @@
 import React, { Component }  from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {loginUser} from'../../actions/authActions';
+import {loginUser} from '../../actions/authActions';
 import classnames from 'classnames';
 
 
@@ -18,13 +18,17 @@ class Login extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
     componentDidMount(){
+        // This will prevent logged in user view the login page
         if(this.props.auth.isAuthenticated){
             this.props.history.push('/profile-view');
         }}
     componentWillReceiveProps(nextProps){
+
+        // This will redirect login user to profile
         if (nextProps.auth.isAuthenticated){
             this.props.history.push('/profile-view');
         }
+        // Receive error of the validation from api
         if(nextProps.errors){
             this.setState({errors:nextProps.errors});
         }
@@ -33,11 +37,13 @@ class Login extends Component {
     onSubmit(e) {
         e.preventDefault();
 
+        // Login data
         const userData = {
             email: this.state.email,
             password: this.state.password
         };
 
+        // pass the value to the action which connect to back-end api
         this.props.loginUser(userData);
     }
 
@@ -90,12 +96,14 @@ class Login extends Component {
         );
     }
 }
-Login.propTypes={
+
+Login.propTypes = {
     loginUser:PropTypes.func.isRequired,
     auth:PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };
-const mapStateToProps=state=>({
+
+const mapStateToProps = state => ({
     auth:state.auth,
     errors: state.errors
 });

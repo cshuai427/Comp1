@@ -11,8 +11,7 @@ import isEmpty from '../../validation/is-empty';
 import Spinner from '../common/Spinner';
 
 class EditProfile extends Component {
-    constructor(props)
-    {
+    constructor(props) {
         super(props);
         this.state = {
             displaySocialInputs: false,
@@ -39,12 +38,10 @@ class EditProfile extends Component {
         this.props.getCurrentProfile();
     }
 
-    componentWillReceiveProps(nextProps)
-    {
+    componentWillReceiveProps(nextProps) {
         const { profile } = nextProps.profile;
 
-        if(profile !== null)
-        {
+        if(profile !== null) {
             
             // Bring interests array back to CSV
             const interestsCSV = profile.interests.join(',');
@@ -74,8 +71,7 @@ class EditProfile extends Component {
         }
     }
 
-    onSubmit(e)
-    {
+    onSubmit(e) {
         e.preventDefault();
 
         const profileData = {
@@ -93,8 +89,7 @@ class EditProfile extends Component {
         this.props.createProfile(profileData, this.props.history);
     }
 
-    onChange(e)
-    {
+    onChange(e) {
         this.setState({[e.target.name]: e.target.value});
     }
 
@@ -102,12 +97,9 @@ class EditProfile extends Component {
         const { profile, loading } = this.props.profile;
         const { displaySocialInputs } = this.state;
 
-        if(profile === null || loading )
-        {
+        if(profile === null || loading ) {
             return <Spinner />
-        }
-        else
-        {
+        } else {
             if(isEmpty(profile.nickName))
                 return  <Redirect to='/create-profile' />
         }

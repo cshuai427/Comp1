@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 class CommentItem extends Component {
 
-    onDeleteClick(postId, commentId){
+    onDeleteClick(postId, commentId) {
         this.props.deleteComment(postId,commentId);
     }
 
@@ -19,7 +19,7 @@ class CommentItem extends Component {
 
                 <div className="container m-3 py-3 pl-0 row border rounded shadow-sm bg-light">
                     <div className="col-2">
-                        <Link to={`/profile/nickname${comment.nickName}`}>
+                        <Link to={`/profile/nickname/${comment.nickName}`}>
                             <img
                                 src={comment.avatar}
                                 className="rounded-circle w-100 shadow"

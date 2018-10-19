@@ -8,8 +8,7 @@ import classnames from "classnames";
 
 
 class CommentForm extends Component {
-    constructor(props)
-    {
+    constructor(props) {
         super(props);
         this.state = {
             text: '',
@@ -43,10 +42,10 @@ class CommentForm extends Component {
 
     };
 
-    onChange(e)
-    {
+    onChange(e) {
         this.setState({[e.target.name]: e.target.value})
     };
+
     render() {
 
         const { errors } = this.state;
@@ -55,19 +54,12 @@ class CommentForm extends Component {
         const { profile, loading } = this.props.profile;
         let profileAuth = false;
 
-        if(profile === null || loading )
-        {
+        if(profile === null || loading ) {
             return <Spinner />
-        }
-        else
-        {
-            if(!isEmpty(profile.nickName))
-            {
+        } else {
+            if(!isEmpty(profile.nickName)) {
                 profileAuth = true;
-
             }
-
-
         }
 
         return (

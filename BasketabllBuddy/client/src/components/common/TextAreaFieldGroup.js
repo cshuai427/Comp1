@@ -2,8 +2,13 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
+
+// This is a reuse components
+
 const TextAreaFieldGroup = (props) => {
+
     const {name, placeholder, value, error, info, onChange} = props;
+
     return (
         <div className="form-group">
       <textarea
@@ -24,7 +29,6 @@ const TextAreaFieldGroup = (props) => {
 TextAreaFieldGroup.propTypes = {
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
-    // value: PropTypes.string.isRequired,
     info: PropTypes.string,
     error: PropTypes.string,
     onChange: PropTypes.func.isRequired,

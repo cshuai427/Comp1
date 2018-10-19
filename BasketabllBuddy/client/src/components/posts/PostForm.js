@@ -61,9 +61,12 @@ class PostForm extends Component{
         const { user } = this.props.auth;
         const { profile } = this.props.profile;
         const newPost = {
+
             eventTitle: this.state.eventTitle,
             eventText: this.state.eventText,
-            photo: this.state.photo,
+            photo: this.state.photo.toString().includes('http://')
+                || this.state.photo.toString().includes('https://')
+                ? this.state.photo : 'http://' + this.state.photo,
             eventPeopleNumber: this.state.eventPeopleNumber,
             eventLocation: this.state.eventLocation,
             haveBall: this.state.haveBall,
@@ -86,12 +89,9 @@ class PostForm extends Component{
 
         const { profile, loading } = this.props.profile;
 
-        if(profile === null || loading )
-        {
+        if(profile === null || loading ) {
             return <Spinner />
-        }
-        else
-        {
+        } else {
             if(isEmpty(profile.nickName))
                 return  <Redirect to='/create-profile' />
         }
@@ -168,14 +168,15 @@ class PostForm extends Component{
                                 />
 
                                 <InputGroup
-                                    placeholder="Title Photo"
+                                    placeholder="Photo URL"
                                     onChange={this.onChange}
                                     value={this.state.photo}
                                     error={errors.photo}
                                     name="photo"
-                                    icon="far fa-calendar-alt"
+                                    icon="fas fa-image"
                                     info="You can upload a image for attract people to join your event"
                                 />
+                                <br/>
 
 
                                 <DatePicker  className='form-control form-control-lg'

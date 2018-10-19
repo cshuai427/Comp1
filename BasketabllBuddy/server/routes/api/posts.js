@@ -41,8 +41,8 @@ router.get('/page/:pages', (req, res) => {
 //  @route  GET api/posts/:id
 //  @desc   Get post
 //  @access Public
-router.get('/:id', (req, res) =>
-{
+
+router.get('/:id', (req, res) => {
     // get user post by id
     Post.findById(req.params.id)
         .then(posts => res.json(posts))
@@ -52,8 +52,8 @@ router.get('/:id', (req, res) =>
 //  @route  Posts api/posts
 //  @desc   Create post
 //  @access Private
-router.post('/',
-    passport.authenticate('jwt', { session: false}),
+
+router.post('/', passport.authenticate('jwt', { session: false}),
     (req, res) => {
         const {errors, isValid} = validationPost(req.body);
 
@@ -82,17 +82,11 @@ router.post('/',
         newPost.save().then(post => res.json(post));
     });
 
-//////////////////////////////
-//////////////////////////////
-//////////////////////////////
-// ////////////////////////////
-//////////////////////////////
 //  @route  Delete api/posts/:id
 //  @desc   Delete post
 //  @access Private
 router.delete('/:id', passport.authenticate('jwt', { session: false}),
-    (req, res)=>
-    {
+    (req, res)=> {
         // find a user profile bu user id and
         Profile.findOne({ user: req.user.id })
             .then(profile => {
@@ -109,13 +103,6 @@ router.delete('/:id', passport.authenticate('jwt', { session: false}),
                     .catch(err => res.status(404).json({ postnotfound: 'No post found'}));
             });
     });
-
-//////////////////////////////
-//////////////////////////////
-//////////////////////////////
-//////////////////////////////
-// ////////////////////////////
-//////////////////////////////
 
 //  @route  Posts api/posts/like/:id
 //  @desc   Like post
@@ -149,8 +136,7 @@ router.post('/like/:id', passport.authenticate('jwt', { session: false}),
 //  @access Private
 
 router.post('/unlike/:id', passport.authenticate('jwt', { session: false}),
-    (req, res)=>
-    {
+    (req, res)=> {
         Profile.findOne({ user: req.user.id })
             .then( profile => {
                 Post.findById(req.params.id)
@@ -243,19 +229,19 @@ router.delete('/comment/:id/:comment_id', passport.authenticate('jwt', { session
             .catch(err => res.status(404).json({ postnotfound: 'No post found'}));
     });
 
-//eventAttendPeople
+
 //  @route  Post api/posts/attend/:post_id
 //  @desc   Attend post
 //  @access Private
 
 
 router.post('/attend/:post_id', passport.authenticate('jwt', { session: false}),
-    (req, res)=>
-    {
+    (req, res)=> {
         Profile.findOne({ user: req.user.id })
             .then( profile => {
                 Post.findById(req.params.post_id)
                     .then(post => {
+                        // Create new attend user data
                         const newAttendUser = {
                             user: req.user.id,
                             nickName: req.body.nickName,
@@ -265,13 +251,11 @@ router.post('/attend/:post_id', passport.authenticate('jwt', { session: false}),
                         if(post.eventAttendPeople.filter(attend => attend.user.toString() === req.user.id).length > 0){
                             return res.status(400).json({ alreadyselected: 'User already select attend this event'});
                         }
-                        if(post.user.toString() === req.user.id)
-                        {
+                        if(post.user.toString() === req.user.id) {
                             return res.status(400).json({ ownerselected: 'You can not use this function for you own event'})
                         }
 
-                        if(post.eventPeopleNumber < post.eventAttendPeople.length)
-                        {
+                        if(post.eventPeopleNumber < post.eventAttendPeople.length) {
                             return res.status(400).json({ overflow: 'Full'})
                         }
                             // Add user id to eventAttendPeople array
@@ -289,8 +273,7 @@ router.post('/attend/:post_id', passport.authenticate('jwt', { session: false}),
 //  @access Private
 
 router.post('/unattend/:post_id', passport.authenticate('jwt', { session: false}),
-    (req, res)=>
-    {
+    (req, res)=> {
         Profile.findOne({ user: req.user.id })
             .then( profile => {
                 Post.findById(req.params.post_id)

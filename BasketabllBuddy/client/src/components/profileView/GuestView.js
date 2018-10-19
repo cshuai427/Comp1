@@ -10,15 +10,18 @@ class GuestView extends Component {
 
 
     componentDidMount(){
+
         if(this.props.match.params.nickName)
+            // Get the value from url
         this.props.getProfileByNickname(this.props.match.params.nickName);
     }
 
     componentWillReceiveProps(nextProps)
     {
 
-        if(nextProps.profile.profile === null && this.props.profile.loading)
-        {
+        // This is check the user data status
+        // if it is null, page will redirect to not found
+        if(nextProps.profile.profile === null && this.props.profile.loading) {
             this.props.history.push('/not-found');
         }
     }
@@ -27,19 +30,18 @@ class GuestView extends Component {
 
         const { profile, loading } = this.props.profile;
 
-        if(profile === null || loading )
-        {
+        // Check profile state from redux is not null
+        // If it null, this component will invoke loading page until receive data
+        if(profile === null || loading ) {
             return <Spinner />
-        }
-        else
-        {
+        } else {
 
             if(isEmpty(profile.nickName) || isEmpty(profile.user))
                 return  <Redirect to='/not-found' />;
         }
 
 
-        // Interested List
+        // Interested List and render each of it
 
         const interests = profile.interests.map((interest, index) =>
             (

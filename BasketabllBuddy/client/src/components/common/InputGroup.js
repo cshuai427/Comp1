@@ -2,6 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
+// This is a reuse components
 
 const InputGroup = ({
                         name,
@@ -11,7 +12,7 @@ const InputGroup = ({
                         icon,
                         type,
                         onChange
-                    }) =>{
+                    }) => {
     return (
         <div className = "input-group mb-3">
             <div className="input-group-prepend">
@@ -19,9 +20,9 @@ const InputGroup = ({
                     <i className={icon} />
                 </span>
             </div>
+
             <input
-                className = {classnames('form-control form-control-lg',
-                    {
+                className = {classnames('form-control form-control-lg', {
                         'is-invalid': error
 
                     })}

@@ -6,12 +6,12 @@ import Spinner from '../common/Spinner';
 import { getCurrentProfile } from '../../actions/profileActions';
 import Profile from './Profile';
 
+
 class ProfileView extends Component {
 
-    componentDidMount()
-    {
+    componentDidMount() {
+        // get the logged in user profile
         this.props.getCurrentProfile();
-
     }
 
 
@@ -23,20 +23,17 @@ class ProfileView extends Component {
         let profileBasic;
         let profileContent;
 
-        if(profile === null || loading)
-        {
+        // Check profile state from redux is not null
+        // If it null, this component will invoke loading page until receive data
+        if(profile === null || loading) {
             profileBasic = <Spinner />
-        }
-        else
-        {
+        } else {
             // Check if logged in user has profile data
-            if(Object.keys(profile).length > 0)
-            {
+            if(Object.keys(profile).length > 0) {
                 profileBasic = (
                     <div className="profileView">
                         <p className="lead text-muted">
                             Welcome{' '}
-                            {/*<Link to={`{profile-view/${user.name}`}>{user.name}</Link>*/}
                         </p >
                         <Link to="/edit-profile" className="btn btn-light" >
                             <i className="fas fa-user-circle text-info mr-1" />
@@ -63,8 +60,7 @@ class ProfileView extends Component {
             else
             {
                 // User is logged in has no profile
-                profileBasic =
-                    (
+                profileBasic = (
                         <div className="profileView">
                             <p className="lead text-muted">Welcome {user.name} </p >
                             <p>You have not yet setup a profile, please add some info</p >

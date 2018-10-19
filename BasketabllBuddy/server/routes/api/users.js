@@ -14,16 +14,11 @@ const validationLoginInput = require('../../validation/login');
 // Load User model
 const User = require('../../models/User');
 
-//  @route  GET api/users/test
-//  @desc   Test users route
-//  @access Public
-router.get('/test', (req, res)=> res.json({msg: "users works"}));
-
 //  @route  GET api/users/register
 //  @desc   Register user
 //  @access Public
 
-router.post('/register', (req, res)=> {
+router.post('/register', (req, res) => {
 
     // check the isvalid (true or false)
     const {errors, isValid} = validationRegisterInput(req.body);
@@ -41,14 +36,14 @@ router.post('/register', (req, res)=> {
                 errors.email = 'Email already exists';
                 return res.status(400).json(errors);
             } else {
-                // get the avatar from the email (Example: gmail have avatar)
+                // Get the avatar from the email (Example: gmail have avatar)
                 const avatar = gravatar.url(req.body.email,{
                     s: '200',   // Size
                     r: 'pg',    // Rating
                     d: 'mm'     // Default
                 });
 
-                // create a new user
+                // Create a new user
                 const newUser = new User({
                     name: req.body.name,
                     email: req.body.email,
@@ -57,17 +52,17 @@ router.post('/register', (req, res)=> {
                 });
 
                 let payload = {};
-                bcrypt.genSalt(10, (err, salt) =>{
-                    // use 'sal' Create randomly string into the hash
+                bcrypt.genSalt(10, (err, salt) => {
+                    // Use 'salt' create randomly string into the hash
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         if(err) throw err;
                         newUser.password = hash;
-                        // hash user password
+                        // Hash user password
                         newUser.save()
-                            // return user data to front-end and store data in redux
+                            // Return user data to front-end and store data in redux
                             .then(user => {
                                 res.json(user);
-                                // send info back for email confirmation
+                                // Send info back for email confirmation
                                 payload ={
                                     id: user._id,
                                     email: user.email,
@@ -85,9 +80,10 @@ router.post('/register', (req, res)=> {
 //  @desc   Login user / Returning JWT Token
 //  @access Public
 router.post('/login', (req, res) => {
+
     const {errors, isValid} = validationLoginInput(req.body);
 
-    // check validation
+    // Check validation
     if(!isValid){
         return res.status(400).json(errors);
     }
@@ -106,29 +102,26 @@ router.post('/login', (req, res) => {
             }
             // Check password
             bcrypt.compare(password, user.password)
-                .then(isMatch =>{
+                .then(isMatch => {
                     if(isMatch){
-                        //  res.json({msg: 'Success'});
                         //  User Matched
-                        if(user.confirmed === true)
-                        {
-                            const payload = { id: user.id, name: user.name, avatar: user.avatar }; //   Create JWT payload
+                        if(user.confirmed === true){
+                            //   Create JWT payload
+                            const payload = { id: user.id, name: user.name, avatar: user.avatar };
 
                             //  Sign Token
                             jwt.sign(
                                 payload,
                                 keys.secretOrKey,
-                                { expiresIn: 7200},
+                                {expiresIn: 7200},
                                 (err, token) => {
-                                    // send expire time and token(including user detail=> payload) to front-end
+                                    // Send expire time and token(including user detail=> payload) to front-end
                                     res.json({
                                         success: true,
                                         token: 'Bearer ' + token
                                     });
                                 });
-                        }
-                        else
-                        {
+                        } else {
                             errors.confirmed = 'Please confirm your email';
                             return res.status(400).json(errors);
                         }
@@ -145,9 +138,7 @@ router.post('/login', (req, res) => {
 //  @desc   Return current user
 //  @access Private
 
-router.get(
-    '/current',
-    passport.authenticate('jwt', {session: false}),
+router.get('/current', passport.authenticate('jwt', {session: false}),
     (req, res) => {
         res.json({
             id: req.user.id,
@@ -163,29 +154,30 @@ router.get(
 //  @desc   Confirm user email
 //  @access Private
 
-router.get('/email/confirm/:token',
-    (req, res) => {
+router.get('/email/confirm/:token', (req, res) => {
 
-    // validate token send back from email
+    // Validate token send back from email
         jwt.verify(
             req.params.token,
             keys.secretOrKey,
             (err, user) => {
                 if (err) return next(err);
-                // find a user and update user data
-                User.findOne({_id: user.id})
+                // Find a user and update user data
+               User.findOne({_id: user.id})
                     .then(user =>
                     {
+                        // Find the user and Update
                         if(user){
                             User.findOneAndUpdate(
                                 {_id: user.id},
                                 {confirmed: true }
                             )
                                 .then(res => res.json('Email confirmed'));
-                            res.redirect('https://basketballbuddaip.herokuapp.com');
+
+                            res.redirect(`${keys.clientURL}/login`);
                         }
                     })
-                    .catch(err => res.status(400).json('errors'))
+                    .catch(err => res.status(400).json('User not found'))
             });
     });
 

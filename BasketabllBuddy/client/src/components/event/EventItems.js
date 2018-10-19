@@ -6,8 +6,7 @@ import moment from 'moment';
 
 class EventItems extends Component {
 
-
-
+    // Render each post in this page
     render() {
 
         const { post } = this.props;

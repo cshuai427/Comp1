@@ -1,10 +1,10 @@
 const validator = require('validator');
 const isEmpty = require('./is-empty');
 
-//validate user input when register
+// Validate user input when register
 module.exports = function validationRegisterInput(data) {
-    let errors = {};
 
+    let errors = {};
     data.name = !isEmpty(data.name) ? data.name : '';
     data.email = !isEmpty(data.email) ? data.email : '';
     data.password = !isEmpty(data.password) ? data.password : '';
@@ -26,8 +26,8 @@ module.exports = function validationRegisterInput(data) {
         errors.email = 'Email field is required';
     }
 
-    //use regex to ensure user password contains number, uppercase and lowercase character, and special chracter
-    var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*?[#?!@$%^&*-])/;
+    // Use regex to ensure user password contains number, uppercase and lowercase character, and special chracter
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*?[#?!@$%^&*-])/;
     if(!regex.exec(data.password)) {
         errors.password = 'Your password should include one Uppercase,Lowercase,number and Symbol'
     }

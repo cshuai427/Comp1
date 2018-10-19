@@ -2,16 +2,15 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from '../../validation/is-empty';
 
+
 class Profile extends Component {
 
     render() {
 
         const { profile } = this.props;
 
-        // Interested List
-
-        const interests = profile.interests.map((interest, index) =>
-            (
+        // Interested List and render each of them
+        const interests = profile.interests.map((interest, index) => (
                 interest !== "" ?
                     <div key={index} className="p-3">
                         <i className="fa fa-heart" />

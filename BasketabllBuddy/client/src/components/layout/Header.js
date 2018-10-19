@@ -8,9 +8,9 @@ import PropTypes from 'prop-types';
 class Header extends Component{
 
     onLogoutClick(e){
-
         e.preventDefault();
 
+        // Clear user token and user information from redux
         this.props.logoutUser();
     }
 

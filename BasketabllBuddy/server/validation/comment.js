@@ -1,8 +1,9 @@
 const validator = require('validator');
 const isEmpty = require('./is-empty');
 
-//validate user comment
+// validate user comment
 module.exports = function validationPostComment(data) {
+
     let errors = {};
     data.text = !isEmpty(data.text) ? data.text : '';
 

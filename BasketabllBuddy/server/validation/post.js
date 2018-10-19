@@ -1,10 +1,10 @@
 const validator = require('validator');
 const isEmpty = require('./is-empty');
 
-//validate ???
+// Validate user post field
 module.exports = function validationPost(data) {
-    let errors = {};
 
+    let errors = {};
     data.eventText = !isEmpty(data.eventText) ? data.eventText : '';
     data.eventTitle = !isEmpty(data.eventTitle) ? data.eventTitle : '';
     data.eventPeopleNumber = !isEmpty(data.eventPeopleNumber) ? data.eventPeopleNumber : '';
@@ -24,7 +24,6 @@ module.exports = function validationPost(data) {
         errors.eventTitle = 'Title field is required';
     }
 
-    //mark: need be test
     if(!validator.isInt(data.eventPeopleNumber)){
         errors.eventPeopleNumber = 'People number field should be number';
     }
@@ -37,7 +36,6 @@ module.exports = function validationPost(data) {
         errors.eventLocation = 'Location field is required';
     }
 
-    //mark: need be test
     if(!validator.isBoolean(data.haveBall)){
         errors.haveBall = 'HaveBall field should be boolean';
     }

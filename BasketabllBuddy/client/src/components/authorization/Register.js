@@ -22,9 +22,12 @@ class Register extends Component {
  }
     componentDidMount(){
         if(this.props.auth.isAuthenticated){
-            this.props.history.push('/dashboard');
+            // // This prevent the logged in user open the register page
+            this.props.history.push('/profile-view');
         }}
  componentWillReceiveProps(nextProps){
+
+     // Receive error of the validation from api
      if(nextProps.errors){
          this.setState({errors:nextProps.errors});
      }
@@ -34,12 +37,16 @@ class Register extends Component {
  }
  onSubmit(e){
      e.preventDefault();
+
+     // Create new user form
      const  newUser={
          name: this.state.name,
          email:this.state.email,
          password:this.state.password,
          password2:this.state.password2
      };
+
+     // pass the value to the action which connect to back-end api
 this.props.registerUser(newUser,this.props.history);
 
 
@@ -120,11 +127,13 @@ this.props.registerUser(newUser,this.props.history);
         );
     }
 }
+
 Register.propTypes={
     registerUser:PropTypes.func.isRequired,
     auth:PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };
+
 const mapStateToProps=state=>({
     auth:state.auth,
     errors: state.errors

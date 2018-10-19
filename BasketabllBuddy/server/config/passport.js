@@ -9,13 +9,13 @@ jwtOption.secretOrKey = keys.secretOrKey;
 jwtOption.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 
 module.exports = passport => {
-    // validate the token sent from front-end
+    // Validate the token sent from front-end
     passport.use(
-        // send value to function
+        // Send value to function
         new JwtStrategy(jwtOption, (jwt_payload, done)=>{
 
-            // find a user by id (extracted from token payload)
-            // check if user exists in database to validate token
+            // Find a user by id (extracted from token payload)
+            // Check if user exists in database to validate token
             User.findById(jwt_payload.id)
                 .then(user => {
                     if(user){

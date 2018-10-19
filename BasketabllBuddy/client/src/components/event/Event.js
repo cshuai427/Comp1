@@ -17,20 +17,25 @@ import basketballBanner from '../../Img/basketballBanner.jpg';
 class Event extends Component {
 
     componentDidMount() {
+        // Get the page from the action which connect to back-end api
         if (this.props.page) {
             this.props.getPosts(this.props.page);
         }
     }
 
     render() {
+
         const { posts, loading, totalPages } = this.props.post;
+
+        // Check the posts value get from the redux by actions
         let postContent;
-        if(isEmpty(posts) || loading)
+        if(isEmpty(posts) || loading){
             postContent = <Spinner/>;
-        else
+        } else {
             postContent = <EventFeed posts={posts}/>;
+        }
 
-
+        // Get the page number from the redux by actions
         let pagination = null;
         if (totalPages > 1) {
             let currentPage = this.props.page;

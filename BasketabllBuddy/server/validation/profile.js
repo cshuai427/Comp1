@@ -1,10 +1,10 @@
 const validator = require('validator');
 const isEmpty = require('./is-empty');
 
-//validate user profile text field
+// Validate user profile text field
 module.exports = function validationProfileInput(data) {
-    let errors = {};
 
+    let errors = {};
     data.nickName = !isEmpty(data.nickName) ? data.nickName : '';
     data.playerRole = !isEmpty(data.playerRole) ? data.playerRole : '';
 

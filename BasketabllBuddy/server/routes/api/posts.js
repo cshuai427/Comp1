@@ -13,6 +13,7 @@ const validationPostComment = require('../../validation/comment');
 //  @route  GET api/posts/page/:pages
 //  @desc   Get post
 //  @access Public
+
 router.get('/page/:pages', (req, res) => {
     // for pagination
     // set limit of items displayed on each page to 5

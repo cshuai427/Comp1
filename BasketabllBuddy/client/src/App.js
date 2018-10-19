@@ -10,9 +10,9 @@ import store from './store';
 import PrivateRoute from './components/common/PrivateRoute';
 
 //import components
-import Header from './components/header/Header';
+import Header from './components/layout/Header';
 import Event from './components/event/Event';
-import Footer from './components/footer/Footer';
+import Footer from './components/layout/Footer';
 import PostForm from './components/posts/PostForm';
 import Login from './components/authorization/Login';
 import Register from './components/authorization/Register';
@@ -57,42 +57,39 @@ class App extends Component {
                         </div>
 
                         <div className="container-fluid text-center">
-                            {/*<div className="row content">*/}
-                                {/*<PrivateRoute component={Account}/>*/}
 
                                 <div className="container-fluid text-center col-sm-12 col-lg-12 col-md-12 col-xs-12 col-auto nopadding" style={{backgroundColor:'#DCDCDC'}} >
                                     <Switch>
-                                        {/* force redirect homepage to /event/1 */}
+
                                         <Route
                                             exact
                                             path="/"
-                                            render={ () => ( <Redirect to="/event/1" /> )}
+                                            render={()=>( <Redirect to="/event/1" /> )}
                                         />
 
                                         <Route path="/event/:page"
-                                               render = { props => (
-                                                <Event
-                                                    {...props.match.params}
-                                                    key={props.match.params.page}
-                                                />)}
+                                               render = {
+                                                   props => (
+                                                       <Event
+                                                           {...props.match.params}
+                                                           key={props.match.params.page}
+                                                       />)}
                                         />
 
-                                        <Route exact path="/login" component={Login}/>
-                                        <Route exact path="/register" component={Register}/>
-                                        <Route exact path="/post/:id" component={Post}/>
+                                        <Route exact path="/login" component={Login} />
+                                        <Route exact path="/register" component={Register} />
+                                        <Route exact path="/post/:id" component={Post} />
 
                                         <PrivateRoute exact path = { '/profile-view' } component = {ProfileView} />
                                         <PrivateRoute exact path = { '/create-profile' } component = {CreateProfile} />
                                         <PrivateRoute exact path = { '/edit-profile' } component = {EditProfile} />
-                                        <PrivateRoute exact path="/post" component={PostForm}/>
+                                        <PrivateRoute exact path="/post" component={PostForm} />
                                         <PrivateRoute exact path = { '/manage-post' } component = {ManagePost} />
                                         <PrivateRoute exact path = { '/profile/nickname/:nickName' } component = {GuestView} />
-                                        <Route component={NotFound}/>
+                                        <Route component={NotFound} />
+
                                     </Switch>
                                 </div>
-
-                                {/*<PrivateRoute component={FriendList} />*/}
-                                {/*</div>*/}
                                 </div>
                         <div className="App-footer"><Footer/></div>
                     </div>

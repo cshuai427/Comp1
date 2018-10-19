@@ -1,12 +1,30 @@
 # Comp1
-exercise for Comp1
+This is a project for assessment of the course AIP in UTS.
+The project is build with React & Node.js.
 <br>
+The website is a social networks for basketball fans to find buddies and basketball playing events.
+<br>
+## Getting started
+## Front End
+<br>
+
 ```jsx
 Front-end URL:http://local:3000/
 ```
 <br>
 
-Run react fron-end in client 
+## Back end
+
+<br>
+
+```jsx
+Back-end URL:http://local:5000/
+```
+<br>
+
+## Run react fron-end in client 
+
+<br>
 
 ```jsx
 cd BasketballBuddy/client
@@ -14,12 +32,9 @@ npm start
 ```
 <br>
 
-```jsx
-Back-end URL:http://local:5000/
-```
+## Run whole website 
 
-<br>
-Run whole website 
+<br> 
 
 ```jsx
 cd BasketballBuddy/server
@@ -27,9 +42,10 @@ npm run dev
 ```
 
 <br>
-# React/JSX Style Guide
-## Table of Contents
 
+# React/JSX Style Guide
+
+## Table of Contents
   1. [Basic Rules](#basic-rules)
   1. [Mixins](#mixins)
   1. [Naming](#naming)
